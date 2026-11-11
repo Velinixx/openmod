@@ -1,1 +1,16 @@
+# rust
 /target
+
+# .NET / Avalonia
+**/bin/
+**/obj/
+*.user
+*.suo
+.vs/
+
+# editor / OS
+.idea/
+.DS_Store
+
+# local captures
+/tmp/

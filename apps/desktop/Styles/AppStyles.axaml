@@ -1,0 +1,226 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================ type ============================ -->
+    <Style Selector="TextBlock">
+        <Setter Property="FontFamily" Value="{DynamicResource UiFont}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.h1">
+        <Setter Property="FontSize" Value="25" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
+    <Style Selector="TextBlock.h2">
+        <Setter Property="FontSize" Value="19" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
+    <Style Selector="TextBlock.section">
+        <Setter Property="FontSize" Value="9" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="LetterSpacing" Value="1.4" />
+        <Setter Property="Foreground" Value="{DynamicResource MutedBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.soft">
+        <Setter Property="Foreground" Value="{DynamicResource SoftBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.muted">
+        <Setter Property="Foreground" Value="{DynamicResource MutedBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.faint">
+        <Setter Property="Foreground" Value="{DynamicResource FaintBrush}" />
+    </Style>
+
+    <Style Selector="TextBlock.mono">
+        <Setter Property="FontFamily" Value="{DynamicResource MonoFont}" />
+    </Style>
+
+    <Style Selector="TextBlock.accent">
+        <Setter Property="Foreground" Value="{DynamicResource AccentTextBrush}" />
+    </Style>
+
+    <!-- =========================== buttons ========================== -->
+    <Style Selector="Button">
+        <Setter Property="FontFamily" Value="{DynamicResource UiFont}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="CornerRadius" Value="9" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <!-- square icon button -->
+    <Style Selector="Button.icon">
+        <Setter Property="Width" Value="32" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="CornerRadius" Value="8" />
+    </Style>
+    <Style Selector="Button.icon:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource DeepBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style Selector="Button.icon:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource CardBrush}" />
+    </Style>
+
+    <!-- outlined accent button ("+ New", "+ Add") -->
+    <Style Selector="Button.outline">
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentTextBrush}" />
+        <Setter Property="FontSize" Value="11.5" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="Button.outline:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource AccentTextBrush}" />
+    </Style>
+    <Style Selector="Button.outline:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentSoftStrongBrush}" />
+    </Style>
+
+    <!-- neutral raised button -->
+    <Style Selector="Button.ghost">
+        <Setter Property="Background" Value="{DynamicResource CardBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource SoftBrush}" />
+        <Setter Property="FontSize" Value="10.5" />
+        <Setter Property="FontWeight" Value="Medium" />
+    </Style>
+    <Style Selector="Button.ghost:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource DeepBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+
+    <!-- solid accent button ("primary" — NOT "accent", which Avalonia's Fluent
+         theme already defines as its blue system-accent button) -->
+    <Style Selector="Button.primary">
+        <Setter Property="Background" Value="{DynamicResource AccentDeepBrush}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="11.5" />
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+    <Style Selector="Button.primary:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentDeepBrush}" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="Opacity" Value="0.88" />
+    </Style>
+
+    <!-- voice on/off pill -->
+    <Style Selector="Button.voice-toggle">
+        <Setter Property="Background" Value="{DynamicResource TrackBrush}" />
+        <Setter Property="CornerRadius" Value="17" />
+    </Style>
+    <Style Selector="Button.voice-toggle.on">
+        <Setter Property="Background" Value="{DynamicResource AccentGradientBrush}" />
+    </Style>
+    <Style Selector="Button.voice-toggle:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentGradientBrush}" />
+    </Style>
+    <Style Selector="Button.voice-toggle TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource SoftBrush}" />
+    </Style>
+    <Style Selector="Button.voice-toggle Ellipse">
+        <Setter Property="Fill" Value="{DynamicResource SoftBrush}" />
+    </Style>
+    <Style Selector="Button.voice-toggle.on TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+    </Style>
+    <Style Selector="Button.voice-toggle.on Ellipse">
+        <Setter Property="Fill" Value="{DynamicResource OnAccentBrush}" />
+    </Style>
+
+    <!-- =========================== surfaces ========================= -->
+    <Style Selector="Border.card">
+        <Setter Property="Background" Value="{DynamicResource CardBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <!-- voice card -->
+    <Style Selector="Border.voicecard">
+        <Setter Property="Background" Value="{DynamicResource CardBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+    <Style Selector="Border.voicecard:pointerover">
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBorderBrush}" />
+    </Style>
+    <Style Selector="Border.voicecard.on">
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
+        <Setter Property="BorderThickness" Value="1.5" />
+        <Setter Property="BoxShadow" Value="{DynamicResource GlowShadow}" />
+    </Style>
+    <Style Selector="Border.voicecard Border.badge">
+        <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
+    </Style>
+    <Style Selector="Border.voicecard.on Border.badge">
+        <Setter Property="Background" Value="{DynamicResource AccentSoftStrongBrush}" />
+    </Style>
+    <Style Selector="Border.voicecard Border.livepill">
+        <Setter Property="Background" Value="{DynamicResource AccentSoftStrongBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+    </Style>
+
+    <!-- sidebar nav -->
+    <Style Selector="Border.nav">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+    <Style Selector="Border.nav:pointerover">
+        <Setter Property="Background" Value="{DynamicResource DeepBrush}" />
+    </Style>
+    <Style Selector="Border.nav.on">
+        <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
+    </Style>
+    <Style Selector="Border.nav.on:pointerover">
+        <Setter Property="Background" Value="{DynamicResource AccentSoftStrongBrush}" />
+    </Style>
+    <Style Selector="Border.nav Path">
+        <Setter Property="Stroke" Value="{DynamicResource SoftBrush}" />
+    </Style>
+    <Style Selector="Border.nav.on Path">
+        <Setter Property="Stroke" Value="{DynamicResource AccentTextBrush}" />
+    </Style>
+    <Style Selector="Border.nav TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource SoftBrush}" />
+    </Style>
+    <Style Selector="Border.nav.on TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <Style Selector="Border.nav Border.accentbar">
+        <Setter Property="IsVisible" Value="False" />
+    </Style>
+    <Style Selector="Border.nav.on Border.accentbar">
+        <Setter Property="IsVisible" Value="True" />
+    </Style>
+
+    <!-- effect registry rows -->
+    <Style Selector="Border.reg Ellipse">
+        <Setter Property="Fill" Value="{DynamicResource TrackBrush}" />
+    </Style>
+    <Style Selector="Border.reg.on Ellipse">
+        <Setter Property="Fill" Value="{DynamicResource AccentBrush}" />
+    </Style>
+    <Style Selector="Border.reg TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource MutedBrush}" />
+    </Style>
+    <Style Selector="Border.reg.on TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource SoftBrush}" />
+    </Style>
+
+</Styles>

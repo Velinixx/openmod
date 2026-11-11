@@ -1,0 +1,16 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- AMOLED palette: true black, minimal elevation -->
+    <SolidColorBrush x:Key="BgBrush" Color="#000000" />
+    <SolidColorBrush x:Key="PanelBrush" Color="#000000" />
+    <SolidColorBrush x:Key="CardBrush" Color="#0C0C0C" />
+    <SolidColorBrush x:Key="DeepBrush" Color="#141414" />
+    <SolidColorBrush x:Key="TrackBrush" Color="#262626" />
+    <SolidColorBrush x:Key="BorderBrush" Color="#1E1E1E" />
+    <SolidColorBrush x:Key="TextBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="SoftBrush" Color="#B4B4B4" />
+    <SolidColorBrush x:Key="MutedBrush" Color="#6E6E6E" />
+    <SolidColorBrush x:Key="FaintBrush" Color="#3D3D3D" />
+    <SolidColorBrush x:Key="OnAccentBrush" Color="#12060C" />
+    <SolidColorBrush x:Key="KnobBrush" Color="#FFFFFF" />
+</ResourceDictionary>

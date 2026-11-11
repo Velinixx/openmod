@@ -1,0 +1,35 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="OpenMod.Desktop.App"
+             RequestedThemeVariant="Default">
+    <!-- "Default" = follow the OS light/dark variant. ThemeManager swaps the
+         palette dictionary at runtime, so views only bind to token keys. -->
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- [0] is replaced by ThemeManager when the theme changes -->
+                <ResourceInclude Source="avares://OpenMod.Desktop/Themes/Dark.axaml" />
+                <ResourceInclude Source="avares://OpenMod.Desktop/Themes/Accent.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <FontFamily x:Key="UiFont">Cantarell, Inter, DejaVu Sans</FontFamily>
+            <FontFamily x:Key="MonoFont">DejaVu Sans Mono, monospace</FontFamily>
+
+            <!-- 16x16 icon geometries -->
+            <StreamGeometry x:Key="IconMic">M8,1.2 A2.2,2.2 0 0 1 10.2,3.4 V7.2 A2.2,2.2 0 0 1 5.8,7.2 V3.4 A2.2,2.2 0 0 1 8,1.2 Z M3.2,7.2 Q3.2,12.6 8,12.6 Q12.8,12.6 12.8,7.2 M8,12.6 V15</StreamGeometry>
+            <StreamGeometry x:Key="IconHeadphones">M2,12.5 V9.6 A6,6 0 0 1 14,9.6 V12.5</StreamGeometry>
+            <StreamGeometry x:Key="IconPlus">M0,7 H14 M7,0 V14</StreamGeometry>
+            <StreamGeometry x:Key="IconClose">M0,0 L8,8 M8,0 L0,8</StreamGeometry>
+            <StreamGeometry x:Key="IconChevron">M0,0 L4,4 L8,0</StreamGeometry>
+            <StreamGeometry x:Key="IconSearch">M7,7 L13,13</StreamGeometry>
+            <StreamGeometry x:Key="IconThemeHalf">M8,1.5 A6.5,6.5 0 0 1 8,14.5 Z</StreamGeometry>
+            <StreamGeometry x:Key="IconBolt">M9,0 L2,9 H7 L6,15 L13,6 H8 Z</StreamGeometry>
+        </ResourceDictionary>
+    </Application.Resources>
+
+    <Application.Styles>
+        <FluentTheme />
+        <StyleInclude Source="avares://OpenMod.Desktop/Styles/AppStyles.axaml" />
+    </Application.Styles>
+</Application>

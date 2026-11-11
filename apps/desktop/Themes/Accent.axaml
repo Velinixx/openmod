@@ -1,0 +1,20 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- Accent defaults (blush). ThemeManager overrides these at runtime when
+         the user picks another accent — every screen binds to these keys only. -->
+    <SolidColorBrush x:Key="AccentBrush" Color="#FF99CC" />
+    <SolidColorBrush x:Key="AccentDeepBrush" Color="#E91E63" />
+    <SolidColorBrush x:Key="AccentTextBrush" Color="#FF99CC" />
+    <SolidColorBrush x:Key="AccentSoftBrush" Color="#1AFF99CC" />
+    <SolidColorBrush x:Key="AccentSoftStrongBrush" Color="#33FF99CC" />
+    <SolidColorBrush x:Key="AccentBorderBrush" Color="#66E91E63" />
+    <LinearGradientBrush x:Key="AccentGradientBrush" StartPoint="0%,0%" EndPoint="100%,100%">
+        <GradientStop Color="#FFB8DC" Offset="0" />
+        <GradientStop Color="#E91E63" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="AccentMeterBrush" StartPoint="0%,0%" EndPoint="100%,0%">
+        <GradientStop Color="#FF99CC" Offset="0" />
+        <GradientStop Color="#E91E63" Offset="1" />
+    </LinearGradientBrush>
+    <BoxShadows x:Key="GlowShadow">0 0 26 0 #55FF99CC</BoxShadows>
+</ResourceDictionary>
