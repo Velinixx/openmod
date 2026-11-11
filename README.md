@@ -6,8 +6,8 @@ openmod is a Voicemod alternative built in the open: real-time voice effects,
 a soundboard, and virtual audio routing — with effects, presets, and themes
 that anyone can add by forking this repo.
 
-> **Status: foundation** — the real-time audio engine works on Linux.
-> Roadmap below. Windows port comes after the core is solid.
+> **Status: early alpha** — the real-time audio engine and the desktop UI both
+> run on Linux. Roadmap below. Windows port comes after the core is solid.
 
 ## Why?
 
@@ -27,8 +27,9 @@ mic ──▶ [ mono ring buffer ] ──▶ [ effect pipeline ] ──▶ outpu
               └── presets (JSON) ────────┘                    └──▶ (--vmic) openmod_vmic ──▶ games
 ```
 
-- **`openmod-core`** — audio engine: ring buffer, effect pipeline, pitch shifter, presets
-- **`openmod-cli`** — test harness (the UI comes later)
+- **`openmod-core`** — audio engine: ring buffer, effect pipeline, pitch shifter, presets, soundboard
+- **`openmod-cli`** — test harness for the engine
+- **`apps/desktop`** — the real UI (Avalonia / C#), themed with swappable palette + accent tokens
 
 ## Building
 
@@ -38,7 +39,25 @@ cargo build
 ./target/debug/openmod presets      # list bundled presets
 ./target/debug/openmod run effects/chipmunk.json
 ./target/debug/openmod run --vmic effects/chipmunk.json   # publish to a virtual mic
+
+./target/debug/openmod soundboard list                   # clips (file names only)
+./target/debug/openmod soundboard list --probe           # + durations from headers
+./target/debug/openmod soundboard play airhorn --vmic    # decode one clip -> virtual mic
 ```
+
+The desktop app:
+
+```bash
+export DOTNET_ROOT="$HOME/.dotnet" PATH="$HOME/.dotnet:$PATH"
+cd apps/desktop && dotnet run
+```
+
+## Soundboard
+
+Audio files in `soundboards/` (`.wav` `.mp3` `.ogg` `.flac` `.m4a` `.aac`).
+Metadata is **lazy**: startup does one directory listing, durations come from
+container headers, and a clip is only decoded when it actually plays. See
+[soundboards/README.md](soundboards/README.md).
 
 ### The virtual mic (`--vmic`)
 
@@ -74,9 +93,11 @@ Bundled: `passthrough`, `chipmunk`, `deep-voice`.
 
 - [x] **Foundation** — real-time pipeline, pitch shifter, presets, CLI harness
 - [ ] **Effects v0.2** — formant shift, reverb, distortion, ring mod, voice vault (saved voices)
-- [ ] **Soundboard** — clips mixed into the output chain, hotkeys
+- [x] **Soundboard library** — lazy scan (names only), header-only duration probe, decode-on-play, `play --vmic`
+- [ ] **Soundboard mixing** — clips mixed into the live output chain + global hotkeys
 - [x] **Virtual device** — `openmod run --vmic` (PipeWire null-sink fake mic, auto-created + routed); Windows virtual cable later
-- [ ] **UI** — effect browser, presets, soundboard grid (Rust core stays, UI on top)
+- [x] **UI foundation** — Avalonia main window: voice grid, effect chain, virtual-mic status, theme + accent tokens (dark / light / AMOLED, 6 accent presets, custom)
+- [ ] **UI** — Settings page (theme/accent picker), Soundboard page, module system, Zen-style first-launch wizard
 - [ ] **Windows port** — cpal already supports WASAPI; same core, new backend
 - [ ] **Voicemod import** — bring your soundboard + effect chains with you
 

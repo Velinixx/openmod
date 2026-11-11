@@ -4,6 +4,7 @@ use std::time::Duration;
 use anyhow::{bail, Context, Result};
 use cpal::traits::{DeviceTrait, HostTrait, StreamTrait};
 use cpal::{Stream, StreamConfig};
+use openmod_core::soundboard::{format_duration, Clip, Soundboard, SUPPORTED_EXTENSIONS};
 use openmod_core::{ring::Ring, Pipeline, Preset};
 
 fn main() -> Result<()> {
@@ -12,6 +13,7 @@ fn main() -> Result<()> {
         Some("devices") => list_devices(),
         Some("run") => run(&args[1..]),
         Some("presets") => list_presets(),
+        Some("soundboard") => soundboard(&args[1..]),
         _ => {
             eprintln!("openmod — open-source voice changer (foundation test harness)");
             eprintln!();
@@ -20,6 +22,14 @@ fn main() -> Result<()> {
             eprintln!("  openmod presets          list bundled presets");
             eprintln!("  openmod run [preset]     mic -> effects -> output (default: passthrough)");
             eprintln!("      --vmic               route output to an auto-created virtual mic");
+            eprintln!();
+            eprintln!("  openmod soundboard list [--dir soundboards]");
+            eprintln!("                           list clips (file names only — no decoding)");
+            eprintln!("      --probe              also read durations from the container headers");
+            eprintln!("  openmod soundboard probe [--dir soundboards]");
+            eprintln!("                           fill in every clip duration");
+            eprintln!("  openmod soundboard play <name|index> [--dir soundboards] [--vmic]");
+            eprintln!("                           decode one clip and play it");
             std::process::exit(2);
         }
     }
@@ -72,6 +82,201 @@ fn list_presets() -> Result<()> {
             Err(e) => eprintln!("  {} — INVALID: {e}", path.display()),
         }
     }
+    Ok(())
+}
+
+// --- soundboard ------------------------------------------------------------
+//
+// Deliberately mirrors the UI's lazy-loading rule:
+//   list  = directory listing only (no file opened)
+//   probe = container header only (duration, no decode)
+//   play  = full decode, then stream it out
+
+const SOUNDBOARD_DIR: &str = "soundboards";
+
+fn soundboard(args: &[String]) -> Result<()> {
+    let mut action: &str = "list";
+    let mut dir = SOUNDBOARD_DIR.to_string();
+    let mut want_durations = false;
+    let mut vmic = false;
+    let mut query: Option<String> = None;
+
+    let mut i = 0;
+    while i < args.len() {
+        match args[i].as_str() {
+            "list" | "probe" | "play" => action = args[i].as_str(),
+            "--dir" => {
+                i += 1;
+                dir = args
+                    .get(i)
+                    .with_context(|| "--dir needs a path")?
+                    .to_string();
+            }
+            "--probe" => want_durations = true,
+            "--vmic" => vmic = true,
+            other if other.starts_with('-') => bail!("unknown flag: {other}"),
+            other => query = Some(other.to_string()),
+        }
+        i += 1;
+    }
+
+    let mut board = Soundboard::scan(&dir);
+
+    if board.is_empty() {
+        println!("no clips in {}/", board.dir().display());
+        println!("supported formats: {}", SUPPORTED_EXTENSIONS.join(", "));
+        println!("(drop audio files in there, then: openmod soundboard list)");
+        return Ok(());
+    }
+
+    match action {
+        "probe" => {
+            let resolved = board.probe_all();
+            for meta in board.clips() {
+                println!(
+                    "  {:<24} {:<5} {:>8}",
+                    meta.name,
+                    meta.format,
+                    meta.duration_label()
+                );
+            }
+            println!(
+                "probed {resolved}/{} clips ({} not stored in their container)",
+                board.len(),
+                board.len() - resolved
+            );
+            Ok(())
+        }
+        "play" => {
+            let query = query.context("play needs a clip name or index")?;
+            let index = board
+                .index_of(&query)
+                .with_context(|| format!("no clip named '{query}'"))?;
+            let meta = &board.clips()[index];
+            let clip = board.load(index)?;
+
+            // "horn" exists as both .flac and .mp3 — say which one we picked
+            let same = board.same_name(&meta.name);
+            let query_was_exact = meta.file_name().eq_ignore_ascii_case(&query);
+            if same.len() > 1 && !query_was_exact {
+                let names: Vec<String> = same.iter().map(|c| c.file_name()).collect();
+                println!(
+                    "note:  {} clips named '{}' ({}) — using {}; pass the full file name to pick another",
+                    same.len(),
+                    meta.name,
+                    names.join(", "),
+                    meta.file_name()
+                );
+            }
+
+            println!(
+                "clip:  {} ({}, {} -> {} Hz)",
+                clip.name,
+                format_duration(clip.duration()),
+                meta.format,
+                clip.sample_rate
+            );
+            if clip.samples.is_empty() {
+                bail!("clip decoded to zero samples");
+            }
+            play_clip(&clip, vmic)
+        }
+        _ => {
+            if want_durations {
+                board.probe_all();
+            }
+            println!(
+                "{} clips in {}/  ({})",
+                board.len(),
+                board.dir().display(),
+                human_bytes(board.total_bytes())
+            );
+            for meta in board.clips() {
+                println!(
+                    "  {:<24} {:<5} {:>8} {:>9}",
+                    meta.name,
+                    meta.format,
+                    meta.duration_label(),
+                    meta.size_label()
+                );
+            }
+            if !want_durations {
+                println!("durations are lazy — add --probe (or run `openmod soundboard probe`)");
+            }
+            Ok(())
+        }
+    }
+}
+
+fn human_bytes(bytes: u64) -> String {
+    const KB: f64 = 1024.0;
+    let b = bytes as f64;
+    if b >= KB * KB {
+        format!("{:.1} MB", b / (KB * KB))
+    } else {
+        format!("{:.0} KB", (b / KB).max(1.0))
+    }
+}
+
+/// Stream a decoded clip to the default output. With `vmic`, the stream is
+/// moved onto the virtual mic like `run --vmic` does.
+fn play_clip(clip: &Clip, vmic: bool) -> Result<()> {
+    use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
+
+    let host = cpal::default_host();
+    let device = host
+        .default_output_device()
+        .context("no default output device")?;
+    let supported = device.default_output_config()?;
+    let rate = supported.sample_rate().0;
+    let channels = supported.channels() as usize;
+    let config: StreamConfig = supported.into();
+
+    let samples = Arc::new(clip.resampled(rate));
+    let pos = Arc::new(AtomicUsize::new(0));
+    let done = Arc::new(AtomicBool::new(false));
+
+    let (pos_cb, done_cb, samples_cb) = (
+        Arc::clone(&pos),
+        Arc::clone(&done),
+        Arc::clone(&samples),
+    );
+
+    let stream = device.build_output_stream(
+        &config,
+        move |data: &mut [f32], _| {
+            let mut p = pos_cb.load(Ordering::Relaxed);
+            for frame in data.chunks_mut(channels.max(1)) {
+                let sample = samples_cb.get(p).copied().unwrap_or(0.0);
+                p += 1;
+                for slot in frame.iter_mut() {
+                    *slot = sample;
+                }
+            }
+            pos_cb.store(p, Ordering::Relaxed);
+            if p >= samples_cb.len() {
+                done_cb.store(true, Ordering::Relaxed);
+            }
+        },
+        |err| eprintln!("[output stream error] {err}"),
+        None,
+    )?;
+
+    stream.play()?;
+
+    if vmic {
+        ensure_vmic()?;
+        // routing polls the pulse graph, so do it while the clip is playing
+        route_output_to_vmic()?;
+    }
+
+    println!("playing {:.1}s ...", clip.duration().as_secs_f64());
+    let deadline = std::time::Instant::now() + clip.duration() + Duration::from_secs(5);
+    while !done.load(Ordering::Relaxed) && std::time::Instant::now() < deadline {
+        std::thread::sleep(Duration::from_millis(20));
+    }
+    // small tail so the final buffer isn't cut off
+    std::thread::sleep(Duration::from_millis(150));
     Ok(())
 }
 

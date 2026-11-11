@@ -12,7 +12,9 @@ pub mod effects;
 pub mod pipeline;
 pub mod preset;
 pub mod ring;
+pub mod soundboard;
 
 pub use effect::Effect;
 pub use pipeline::Pipeline;
 pub use preset::Preset;
+pub use soundboard::{Clip, ClipMeta, Soundboard};
