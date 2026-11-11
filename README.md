@@ -23,8 +23,8 @@ and treat your soundboard like rented land. openmod is:
 
 ```
 mic ──▶ [ mono ring buffer ] ──▶ [ effect pipeline ] ──▶ output device
-              ▲                          │
-              └── presets (JSON) ────────┘
+              ▲                          │                    │
+              └── presets (JSON) ────────┘                    └──▶ (--vmic) openmod_vmic ──▶ games
 ```
 
 - **`openmod-core`** — audio engine: ring buffer, effect pipeline, pitch shifter, presets
@@ -37,6 +37,20 @@ cargo build
 ./target/debug/openmod devices      # list audio devices
 ./target/debug/openmod presets      # list bundled presets
 ./target/debug/openmod run effects/chipmunk.json
+./target/debug/openmod run --vmic effects/chipmunk.json   # publish to a virtual mic
+```
+
+### The virtual mic (`--vmic`)
+
+`--vmic` creates (or reuses) a PipeWire/PulseAudio null sink called `openmod_vmic`
+and routes openmod's processed output into it. Any app — games, VRChat, Discord —
+that selects **"Monitor of openmod_Virtual_Mic"** as its microphone hears your
+processed voice. No cables, no extra software:
+
+```bash
+openmod run --vmic effects/deep-voice.json
+# output routed -> openmod_vmic
+#   set your mic to "Monitor of openmod_Virtual_Mic" in games/apps
 ```
 
 ## Presets
@@ -61,7 +75,7 @@ Bundled: `passthrough`, `chipmunk`, `deep-voice`.
 - [x] **Foundation** — real-time pipeline, pitch shifter, presets, CLI harness
 - [ ] **Effects v0.2** — formant shift, reverb, distortion, ring mod, voice vault (saved voices)
 - [ ] **Soundboard** — clips mixed into the output chain, hotkeys
-- [ ] **Virtual device** — one-click fake mic (PipeWire null-sink / Windows virtual cable) so games see *you*
+- [x] **Virtual device** — `openmod run --vmic` (PipeWire null-sink fake mic, auto-created + routed); Windows virtual cable later
 - [ ] **UI** — effect browser, presets, soundboard grid (Rust core stays, UI on top)
 - [ ] **Windows port** — cpal already supports WASAPI; same core, new backend
 - [ ] **Voicemod import** — bring your soundboard + effect chains with you

@@ -19,6 +19,7 @@ fn main() -> Result<()> {
             eprintln!("  openmod devices          list audio devices");
             eprintln!("  openmod presets          list bundled presets");
             eprintln!("  openmod run [preset]     mic -> effects -> output (default: passthrough)");
+            eprintln!("      --vmic               route output to an auto-created virtual mic");
             std::process::exit(2);
         }
     }
@@ -75,8 +76,24 @@ fn list_presets() -> Result<()> {
 }
 
 fn run(args: &[String]) -> Result<()> {
+    // --- flags ----------------------------------------------------------
+    let mut vmic = false;
+    let mut preset_path: Option<&str> = None;
+    for arg in args {
+        match arg.as_str() {
+            "--vmic" => vmic = true,
+            other if other.starts_with('-') => bail!("unknown flag: {other}"),
+            other => {
+                if preset_path.is_some() {
+                    bail!("unexpected argument: {other}");
+                }
+                preset_path = Some(other);
+            }
+        }
+    }
+
     // --- pipeline setup -------------------------------------------------
-    let pipeline = match args.first() {
+    let pipeline = match preset_path {
         Some(path) => {
             let preset = Preset::load(path)?;
             println!(
@@ -123,6 +140,10 @@ fn run(args: &[String]) -> Result<()> {
     println!("input:  {in_name} ({in_channels} ch @ {sample_rate} Hz)");
     println!("output: {out_name} ({out_channels} ch @ {sample_rate} Hz)");
     println!("algorithmic latency: {latency_ms:.1} ms");
+    if vmic {
+        ensure_vmic()?;
+        println!("virtual mic: {VMIC_SINK} ({VMIC_DESC})");
+    }
     println!("--- speak into your mic, Ctrl+C to stop ---");
 
     // --- shared ring ----------------------------------------------------
@@ -150,6 +171,10 @@ fn run(args: &[String]) -> Result<()> {
 
     in_stream.play()?;
     out_stream.play()?;
+
+    if vmic {
+        route_output_to_vmic()?;
+    }
 
     // --- stats ticker ---------------------------------------------------
     loop {
@@ -222,4 +247,83 @@ fn build_output_stream(
     )?;
     let _ = sample_rate;
     Ok(stream)
+}
+
+// --- virtual mic (PulseAudio / PipeWire null sink) -------------------------
+
+const VMIC_SINK: &str = "openmod_vmic";
+const VMIC_DESC: &str = "openmod_Virtual_Mic";
+
+fn pactl(args: &[&str]) -> Result<String> {
+    let out = std::process::Command::new("pactl")
+        .args(args)
+        .output()
+        .context("pactl not found — install PulseAudio or PipeWire's pulse layer")?;
+    if !out.status.success() {
+        bail!(
+            "pactl {} failed: {}",
+            args.join(" "),
+            String::from_utf8_lossy(&out.stderr).trim()
+        );
+    }
+    Ok(String::from_utf8_lossy(&out.stdout).into_owned())
+}
+
+/// Create the null sink if missing and make sure it is NOT muted.
+/// (PipeWire creates null sinks muted on some systems — learned the hard way.)
+fn ensure_vmic() -> Result<()> {
+    let sinks = pactl(&["list", "short", "sinks"])?;
+    let exists = sinks
+        .lines()
+        .any(|l| l.split_whitespace().nth(1) == Some(VMIC_SINK));
+    if !exists {
+        println!("creating virtual mic sink '{VMIC_SINK}'...");
+        let props = format!("device.description={VMIC_DESC}");
+        pactl(&[
+            "load-module",
+            "module-null-sink",
+            "sink_name",
+            VMIC_SINK,
+            "sink_properties",
+            props.as_str(),
+        ])?;
+    }
+    pactl(&["set-sink-mute", VMIC_SINK, "false"])?;
+    Ok(())
+}
+
+/// Find our output stream's sink-input id in the pulse graph.
+fn find_openmod_sink_input() -> Result<Option<String>> {
+    let list = pactl(&["list", "sink-inputs"])?;
+    for block in list.split("Sink Input #") {
+        let id = block.split_whitespace().next().unwrap_or("");
+        if !id.chars().all(|c| c.is_ascii_digit()) {
+            continue; // preamble chunk before the first entry
+        }
+        let ours = block.lines().any(|line| {
+            let line = line.trim();
+            (line.starts_with("application.name")
+                || line.starts_with("application.process.binary"))
+                && line.contains("openmod")
+        });
+        if ours {
+            return Ok(Some(id.to_string()));
+        }
+    }
+    Ok(None)
+}
+
+/// Move our output stream onto the virtual mic. Retries briefly — the stream
+/// takes a moment to appear in the pulse graph after play().
+fn route_output_to_vmic() -> Result<()> {
+    for _ in 0..20 {
+        if let Some(id) = find_openmod_sink_input()? {
+            pactl(&["move-sink-input", id.as_str(), VMIC_SINK])?;
+            println!("output routed -> {VMIC_SINK}");
+            println!("  set your mic to \"Monitor of {VMIC_DESC}\" in games/apps");
+            return Ok(());
+        }
+        std::thread::sleep(Duration::from_millis(250));
+    }
+    bail!("could not locate openmod's output stream for routing (pactl working?)");
 }
