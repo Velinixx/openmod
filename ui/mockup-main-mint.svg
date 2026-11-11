@@ -1,0 +1,283 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+<defs>
+    <linearGradient id="u5-accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7FE0C3"/><stop offset="1" stop-color="#0FA97F"/>
+    </linearGradient>
+    <linearGradient id="u5-meter" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7FE0C3"/><stop offset="1" stop-color="#0FA97F"/>
+    </linearGradient>
+    <filter id="u5-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="u5-win"><rect x="0" y="0" width="1280" height="800" rx="12"/></clipPath>
+    
+  </defs>
+<g clip-path="url(#u5-win)">
+<rect x="0" y="0" width="1280" height="800" rx="0" fill="#23272F"/>
+<rect x="0" y="0" width="1280" height="56" rx="0" fill="#1B1F26"/>
+<line x1="0" y1="56" x2="1280" y2="56" stroke="#333B47" stroke-width="1"/>
+<rect x="20" y="14" width="28" height="28" rx="8" fill="url(#u5-accent)"/>
+<rect x="27.0" y="24.0" width="2.6" height="8" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<rect x="32.5" y="21.0" width="2.6" height="14" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<rect x="38.0" y="23.0" width="2.6" height="10" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<text x="58" y="35" font-size="17" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600"><tspan fill="#ECEFF4">open</tspan><tspan fill="#7FE0C3">mod</tspan></text>
+<rect x="536" y="11" width="208" height="34" rx="17" fill="#7FE0C3" stroke="#7FE0C3" stroke-width="1" fill-opacity="0.1" stroke-opacity="0.35"/>
+<rect x="542" y="14" width="196" height="28" rx="14" fill="url(#u5-accent)" opacity="0.95" filter="url(#u5-glow)"/>
+<circle cx="578" cy="28" r="4" fill="#2A0E1A"/>
+<text x="592" y="32" fill="#2A0E1A" font-size="11.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="start" letter-spacing="1.3">VOICE ON</text>
+<rect x="1010" y="14" width="88" height="28" rx="14.0" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<text x="1054" y="32.5" fill="#AEB8C6" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="middle">34.8 ms</text>
+<circle cx="1134.0" cy="28.0" r="6.72" fill="none" stroke="#6E7A8A" stroke-width="1.4"/>
+<path d="M 1134.0 21.28 a 6.72 6.72 0 0 1 0 13.44 z" fill="#6E7A8A" stroke="#6E7A8A" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="1184.0" cy="28.0" r="4.16" fill="none" stroke="#6E7A8A" stroke-width="1.4"/>
+<circle cx="1184.0" cy="28.0" r="1.4144" fill="none" stroke="#6E7A8A" stroke-width="1.4"/>
+<line x1="1189.66" y1="28.0" x2="1192.16" y2="28.0" stroke="#6E7A8A" stroke-width="1.4"/>
+<line x1="1188.0022243815158" y1="32.00222438151586" x2="1189.7699913344823" y2="33.76999133448223" stroke="#6E7A8A" stroke-width="1.4"/>
+<line x1="1184.0" y1="33.66" x2="1184.0" y2="36.16" stroke="#6E7A8A" stroke-width="1.4"/>
+<line x1="1179.9977756184842" y1="32.00222438151586" x2="1178.2300086655177" y2="33.76999133448223" stroke="#6E7A8A" stroke-width="1.4"/>
+<line x1="1178.34" y1="28.0" x2="1175.84" y2="28.0" stroke="#6E7A8A" stroke-width="1.4"/>
+<line x1="1179.9977756184842" y1="23.99777561848414" x2="1178.2300086655177" y2="22.230008665517772" stroke="#6E7A8A" stroke-width="1.4"/>
+<line x1="1184.0" y1="22.34" x2="1184.0" y2="19.84" stroke="#6E7A8A" stroke-width="1.4"/>
+<line x1="1188.0022243815158" y1="23.99777561848414" x2="1189.7699913344823" y2="22.230008665517772" stroke="#6E7A8A" stroke-width="1.4"/>
+<circle cx="1236" cy="28" r="12" fill="none" stroke="#333B47" stroke-width="1"/>
+<rect x="1230" y="22" width="4.5600000000000005" height="4.5600000000000005" rx="1.5" fill="none" stroke="#6E7A8A" stroke-width="1.4"/>
+<rect x="1237.44" y="22" width="4.5600000000000005" height="4.5600000000000005" rx="1.5" fill="none" stroke="#6E7A8A" stroke-width="1.4"/>
+<rect x="1230" y="29.439999999999998" width="4.5600000000000005" height="4.5600000000000005" rx="1.5" fill="none" stroke="#6E7A8A" stroke-width="1.4"/>
+<rect x="1237.44" y="29.439999999999998" width="4.5600000000000005" height="4.5600000000000005" rx="1.5" fill="none" stroke="#6E7A8A" stroke-width="1.4"/>
+<rect x="0" y="56" width="208" height="744" rx="0" fill="#1B1F26"/>
+<line x1="208" y1="56" x2="208" y2="800" stroke="#333B47" stroke-width="1"/>
+<text x="20" y="88" fill="#6E7A8A" font-size="9" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start" letter-spacing="1.4">WORKSPACE</text>
+<rect x="12" y="100" width="184" height="38" rx="9" fill="#7FE0C3" fill-opacity="0.1"/>
+<rect x="12" y="106" width="3" height="26" rx="1.5" fill="#7FE0C3"/>
+<rect x="28" y="111" width="6.08" height="6.08" rx="1.5" fill="none" stroke="#7FE0C3" stroke-width="1.4"/>
+<rect x="37.92" y="111" width="6.08" height="6.08" rx="1.5" fill="none" stroke="#7FE0C3" stroke-width="1.4"/>
+<rect x="28" y="120.92" width="6.08" height="6.08" rx="1.5" fill="none" stroke="#7FE0C3" stroke-width="1.4"/>
+<rect x="37.92" y="120.92" width="6.08" height="6.08" rx="1.5" fill="none" stroke="#7FE0C3" stroke-width="1.4"/>
+<text x="54" y="124" fill="#ECEFF4" font-size="12.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start">Voices</text>
+<line x1="28" y1="159.0" x2="44.0" y2="159.0" stroke="#AEB8C6" stroke-width="1.8"/>
+<line x1="28" y1="165.15384615384616" x2="37.92" y2="165.15384615384616" stroke="#AEB8C6" stroke-width="1.8"/>
+<line x1="28" y1="171.30769230769232" x2="41.6" y2="171.30769230769232" stroke="#AEB8C6" stroke-width="1.8"/>
+<text x="54" y="170" fill="#AEB8C6" font-size="12.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="start">Soundboard</text>
+<circle cx="36.0" cy="211.0" r="4.16" fill="none" stroke="#AEB8C6" stroke-width="1.4"/>
+<circle cx="36.0" cy="211.0" r="1.4144" fill="none" stroke="#AEB8C6" stroke-width="1.4"/>
+<line x1="41.66" y1="211.0" x2="44.16" y2="211.0" stroke="#AEB8C6" stroke-width="1.4"/>
+<line x1="40.00222438151586" y1="215.00222438151587" x2="41.76999133448223" y2="216.76999133448223" stroke="#AEB8C6" stroke-width="1.4"/>
+<line x1="36.0" y1="216.66" x2="36.0" y2="219.16" stroke="#AEB8C6" stroke-width="1.4"/>
+<line x1="31.99777561848414" y1="215.00222438151587" x2="30.230008665517772" y2="216.76999133448223" stroke="#AEB8C6" stroke-width="1.4"/>
+<line x1="30.34" y1="211.0" x2="27.84" y2="211.0" stroke="#AEB8C6" stroke-width="1.4"/>
+<line x1="31.99777561848414" y1="206.99777561848413" x2="30.230008665517772" y2="205.23000866551777" stroke="#AEB8C6" stroke-width="1.4"/>
+<line x1="36.0" y1="205.34" x2="36.0" y2="202.84" stroke="#AEB8C6" stroke-width="1.4"/>
+<line x1="40.00222438151586" y1="206.99777561848413" x2="41.76999133448223" y2="205.23000866551777" stroke="#AEB8C6" stroke-width="1.4"/>
+<text x="54" y="216" fill="#AEB8C6" font-size="12.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="start">Settings</text>
+<line x1="20" y1="240" x2="188" y2="240" stroke="#333B47" stroke-width="1"/>
+<text x="20" y="266" fill="#6E7A8A" font-size="9" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start" letter-spacing="1.4">EFFECTS</text>
+<circle cx="24" cy="284.5" r="2.6" fill="#7FE0C3"/>
+<text x="36" y="288" fill="#AEB8C6" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">pitch_shift</text>
+<circle cx="24" cy="304.5" r="2.6" fill="#7FE0C3"/>
+<text x="36" y="308" fill="#AEB8C6" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">gain</text>
+<circle cx="24" cy="324.5" r="2.6" fill="#3A4250"/>
+<text x="36" y="328" fill="#6E7A8A" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">formant</text>
+<circle cx="24" cy="344.5" r="2.6" fill="#3A4250"/>
+<text x="36" y="348" fill="#6E7A8A" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">reverb</text>
+<circle cx="24" cy="364.5" r="2.6" fill="#3A4250"/>
+<text x="36" y="368" fill="#6E7A8A" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">distortion</text>
+<line x1="20" y1="396" x2="188" y2="396" stroke="#333B47" stroke-width="1"/>
+<text x="20" y="422" fill="#6E7A8A" font-size="9" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start" letter-spacing="1.4">FOLDERS</text>
+<text x="24" y="444" fill="#AEB8C6" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">effects/</text>
+<text x="188" y="444" fill="#6E7A8A" font-size="9.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="end">5 files</text>
+<text x="24" y="464" fill="#AEB8C6" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">soundboards/</text>
+<text x="188" y="464" fill="#6E7A8A" font-size="9.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="end">0 clips</text>
+<text x="24" y="484" fill="#AEB8C6" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">themes/</text>
+<text x="188" y="484" fill="#6E7A8A" font-size="9.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="end">soon</text>
+<line x1="20" y1="500" x2="188" y2="500" stroke="#333B47" stroke-width="1"/>
+<rect x="12" y="586" width="184" height="86" rx="10" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<text x="24" y="606" fill="#6E7A8A" font-size="8.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start" letter-spacing="1.2">VIRTUAL MIC</text>
+<circle cx="28" cy="624" r="3.4" fill="#7FE0C3"/>
+<text x="38" y="628" fill="#ECEFF4" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">openmod_vmic</text>
+<text x="24" y="646" fill="#6E7A8A" font-size="9" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">pick as mic in games</text>
+<rect x="146" y="596" width="38" height="16" rx="8.0" fill="#7FE0C3" stroke="#7FE0C3" stroke-width="1" fill-opacity="0.14" stroke-opacity="0.4"/>
+<text x="165" y="607.5" fill="#7FE0C3" font-size="8" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="middle" letter-spacing="0.8">LIVE</text>
+<text x="24" y="702" fill="#6E7A8A" font-size="9.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">Velinixx/openmod</text>
+<text x="24" y="720" fill="#4E5764" font-size="9" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">MIT · v0.1.0</text>
+<text x="236" y="112" fill="#ECEFF4" font-size="25" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="start">My Voices</text>
+<text x="236" y="134" fill="#6E7A8A" font-size="11.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">5 presets · JSON files in effects/</text>
+<rect x="660" y="88" width="196" height="34" rx="9" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<circle cx="676" cy="103" r="5.5" fill="none" stroke="#6E7A8A" stroke-width="1.4"/>
+<line x1="679.85" y1="106.85" x2="684.8" y2="111.8" stroke="#6E7A8A" stroke-width="1.4"/>
+<text x="694" y="109.5" fill="#6E7A8A" font-size="11" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">Search voices…</text>
+<rect x="868" y="88" width="80" height="34" rx="9" fill="none" stroke="#7FE0C3" stroke-width="1" stroke-opacity="0.55"/>
+<text x="908" y="109.5" fill="#7FE0C3" font-size="11.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="middle">+ New</text>
+<rect x="236" y="160" width="224" height="152" rx="12" fill="#2C323C" stroke="#7FE0C3" stroke-width="1.5" stroke-opacity="0.9" filter="url(#u5-glow)"/>
+<rect x="252" y="176" width="36" height="36" rx="10" fill="#7FE0C3" fill-opacity="0.2"/>
+<line x1="264.0" y1="189.95" x2="264.0" y2="198.05" stroke="#7FE0C3" stroke-width="2"/>
+<line x1="270.0" y1="185.0" x2="270.0" y2="203.0" stroke="#7FE0C3" stroke-width="2"/>
+<line x1="276.0" y1="188.15" x2="276.0" y2="199.85" stroke="#7FE0C3" stroke-width="2"/>
+<rect x="398" y="176" width="46" height="18" rx="9.0" fill="#7FE0C3" stroke="#7FE0C3" stroke-width="1" fill-opacity="0.16" stroke-opacity="0.45"/>
+<text x="421" y="189" fill="#7FE0C3" font-size="8" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="middle" letter-spacing="0.6">● LIVE</text>
+<text x="252" y="240" fill="#ECEFF4" font-size="14.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start">chipmunk</text>
+<rect x="252" y="252" width="65.0" height="17" rx="8.5" fill="#262B34" stroke="#333B47" stroke-width="1"/>
+<text x="284.5" y="264" fill="#AEB8C6" font-size="9" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="middle">pitch +7.0</text>
+<rect x="323.0" y="252" width="53.8" height="17" rx="8.5" fill="#262B34" stroke="#333B47" stroke-width="1"/>
+<text x="349.9" y="264" fill="#AEB8C6" font-size="9" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="middle">gain 0.0</text>
+<text x="252" y="300" fill="#6E7A8A" font-size="8.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">34.8 ms</text>
+<text x="444" y="300" fill="#6E7A8A" font-size="9" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="end">edit ›</text>
+<rect x="480" y="160" width="224" height="152" rx="12" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<rect x="496" y="176" width="36" height="36" rx="10" fill="#7FE0C3" fill-opacity="0.1"/>
+<line x1="508.0" y1="189.95" x2="508.0" y2="198.05" stroke="#7FE0C3" stroke-width="2"/>
+<line x1="514.0" y1="185.0" x2="514.0" y2="203.0" stroke="#7FE0C3" stroke-width="2"/>
+<line x1="520.0" y1="188.15" x2="520.0" y2="199.85" stroke="#7FE0C3" stroke-width="2"/>
+<text x="496" y="240" fill="#ECEFF4" font-size="14.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start">deep-voice</text>
+<rect x="496" y="252" width="65.0" height="17" rx="8.5" fill="#262B34" stroke="#333B47" stroke-width="1"/>
+<text x="528.5" y="264" fill="#AEB8C6" font-size="9" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="middle">pitch -5.0</text>
+<rect x="567.0" y="252" width="53.8" height="17" rx="8.5" fill="#262B34" stroke="#333B47" stroke-width="1"/>
+<text x="593.9" y="264" fill="#AEB8C6" font-size="9" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="middle">gain 0.0</text>
+<text x="496" y="300" fill="#6E7A8A" font-size="8.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">33.6 ms</text>
+<text x="688" y="300" fill="#6E7A8A" font-size="9" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="end">edit ›</text>
+<rect x="724" y="160" width="224" height="152" rx="12" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<rect x="740" y="176" width="36" height="36" rx="10" fill="#7FE0C3" fill-opacity="0.1"/>
+<line x1="749" y1="187.25" x2="767.0" y2="187.25" stroke="#7FE0C3" stroke-width="1.8"/>
+<line x1="749" y1="194.17307692307693" x2="760.16" y2="194.17307692307693" stroke="#7FE0C3" stroke-width="1.8"/>
+<line x1="749" y1="201.09615384615384" x2="764.3" y2="201.09615384615384" stroke="#7FE0C3" stroke-width="1.8"/>
+<text x="740" y="240" fill="#ECEFF4" font-size="14.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start">passthrough</text>
+<rect x="740" y="252" width="65.0" height="17" rx="8.5" fill="#262B34" stroke="#333B47" stroke-width="1"/>
+<text x="772.5" y="264" fill="#AEB8C6" font-size="9" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="middle">no effects</text>
+<text x="740" y="300" fill="#6E7A8A" font-size="8.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">0.0 ms</text>
+<text x="932" y="300" fill="#6E7A8A" font-size="9" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="end">edit ›</text>
+<rect x="236" y="332" width="224" height="152" rx="12" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<rect x="252" y="348" width="36" height="36" rx="10" fill="#7FE0C3" fill-opacity="0.1"/>
+<line x1="264.0" y1="361.95" x2="264.0" y2="370.05" stroke="#7FE0C3" stroke-width="2"/>
+<line x1="270.0" y1="357.0" x2="270.0" y2="375.0" stroke="#7FE0C3" stroke-width="2"/>
+<line x1="276.0" y1="360.15" x2="276.0" y2="371.85" stroke="#7FE0C3" stroke-width="2"/>
+<text x="252" y="412" fill="#ECEFF4" font-size="14.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start">robot</text>
+<rect x="252" y="424" width="70.6" height="17" rx="8.5" fill="#262B34" stroke="#333B47" stroke-width="1"/>
+<text x="287.3" y="436" fill="#AEB8C6" font-size="9" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="middle">ring_mod 60</text>
+<rect x="328.6" y="424" width="48.199999999999996" height="17" rx="8.5" fill="#262B34" stroke="#333B47" stroke-width="1"/>
+<text x="352.70000000000005" y="436" fill="#AEB8C6" font-size="9" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="middle">gain -2</text>
+<text x="252" y="472" fill="#6E7A8A" font-size="8.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">12.1 ms</text>
+<text x="444" y="472" fill="#6E7A8A" font-size="9" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="end">edit ›</text>
+<rect x="480" y="332" width="224" height="152" rx="12" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<rect x="496" y="348" width="36" height="36" rx="10" fill="#7FE0C3" fill-opacity="0.1"/>
+<line x1="508.0" y1="361.95" x2="508.0" y2="370.05" stroke="#7FE0C3" stroke-width="2"/>
+<line x1="514.0" y1="357.0" x2="514.0" y2="375.0" stroke="#7FE0C3" stroke-width="2"/>
+<line x1="520.0" y1="360.15" x2="520.0" y2="371.85" stroke="#7FE0C3" stroke-width="2"/>
+<text x="496" y="412" fill="#ECEFF4" font-size="14.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start">whisper</text>
+<rect x="496" y="424" width="53.8" height="17" rx="8.5" fill="#262B34" stroke="#333B47" stroke-width="1"/>
+<text x="522.9" y="436" fill="#AEB8C6" font-size="9" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="middle">gain -12</text>
+<rect x="555.8" y="424" width="65.0" height="17" rx="8.5" fill="#262B34" stroke="#333B47" stroke-width="1"/>
+<text x="588.3" y="436" fill="#AEB8C6" font-size="9" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="middle">reverb 0.3</text>
+<text x="496" y="472" fill="#6E7A8A" font-size="8.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">48.9 ms</text>
+<text x="688" y="472" fill="#6E7A8A" font-size="9" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="end">edit ›</text>
+<rect x="724" y="332" width="224" height="152" rx="12" fill="none" stroke="#333B47" stroke-width="1" stroke-dasharray="5 5"/>
+<circle cx="836.0" cy="390" r="20" fill="none" stroke="#6E7A8A" stroke-width="1.2" opacity="0.8"/>
+<line x1="829.0" y1="390" x2="843.0" y2="390" stroke="#6E7A8A" stroke-width="1.6"/>
+<line x1="836.0" y1="383.0" x2="836.0" y2="397.0" stroke="#6E7A8A" stroke-width="1.6"/>
+<text x="836.0" y="434" fill="#AEB8C6" font-size="13" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="middle">New voice</text>
+<text x="836.0" y="452" fill="#6E7A8A" font-size="9.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="middle">JSON or code</text>
+<text x="236" y="520" fill="#6E7A8A" font-size="9" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start" letter-spacing="1.4">COMMUNITY PRESETS</text>
+<text x="948" y="520" fill="#7FE0C3" font-size="9.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="end">browse on GitHub ↗</text>
+<rect x="236" y="536" width="712" height="46" rx="10" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<text x="252" y="556" fill="#ECEFF4" font-size="11.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">anime-girl</text>
+<text x="252" y="572" fill="#6E7A8A" font-size="9.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">pitch +9.0 · formant +2.0  —  @mika</text>
+<rect x="886" y="546" width="48" height="26" rx="8" fill="none" stroke="#7FE0C3" stroke-width="1.1" stroke-opacity="0.45"/>
+<text x="910" y="563" fill="#7FE0C3" font-size="9.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="middle">+ Add</text>
+<rect x="236" y="590" width="712" height="46" rx="10" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<text x="252" y="610" fill="#ECEFF4" font-size="11.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">radio-static</text>
+<text x="252" y="626" fill="#6E7A8A" font-size="9.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">distortion 0.4 · bandpass 300–3k  —  @kuro</text>
+<rect x="886" y="600" width="48" height="26" rx="8" fill="none" stroke="#7FE0C3" stroke-width="1.1" stroke-opacity="0.45"/>
+<text x="910" y="617" fill="#7FE0C3" font-size="9.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="middle">+ Add</text>
+<rect x="236" y="644" width="712" height="46" rx="10" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<text x="252" y="664" fill="#ECEFF4" font-size="11.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">demon-lord</text>
+<text x="252" y="680" fill="#6E7A8A" font-size="9.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">pitch -8.0 · reverb 0.6 · gain +2  —  @vel</text>
+<rect x="886" y="654" width="48" height="26" rx="8" fill="none" stroke="#7FE0C3" stroke-width="1.1" stroke-opacity="0.45"/>
+<text x="910" y="671" fill="#7FE0C3" font-size="9.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="middle">+ Add</text>
+<rect x="968" y="56" width="312" height="744" rx="0" fill="#1B1F26"/>
+<line x1="968" y1="56" x2="968" y2="800" stroke="#333B47" stroke-width="1"/>
+<text x="992" y="92" fill="#6E7A8A" font-size="9" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start" letter-spacing="1.4">ACTIVE CHAIN</text>
+<text x="992" y="120" fill="#ECEFF4" font-size="19" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="start">chipmunk</text>
+<rect x="1216" y="98" width="44" height="24" rx="12" fill="#7FE0C3"/>
+<circle cx="1248" cy="110" r="8" fill="#2A0E1A" opacity="0.9"/>
+<rect x="992" y="142" width="264" height="112" rx="10" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<circle cx="1006" cy="160" r="1.1" fill="#6E7A8A"/>
+<circle cx="1010" cy="160" r="1.1" fill="#6E7A8A"/>
+<circle cx="1006" cy="165" r="1.1" fill="#6E7A8A"/>
+<circle cx="1010" cy="165" r="1.1" fill="#6E7A8A"/>
+<circle cx="1006" cy="170" r="1.1" fill="#6E7A8A"/>
+<circle cx="1010" cy="170" r="1.1" fill="#6E7A8A"/>
+<text x="1024" y="164" fill="#ECEFF4" font-size="11.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">pitch_shift</text>
+<line x1="1236.0" y1="156.0" x2="1244.0" y2="164.0" stroke="#6E7A8A" stroke-width="1.4"/>
+<line x1="1244.0" y1="156.0" x2="1236.0" y2="164.0" stroke="#6E7A8A" stroke-width="1.4"/>
+<text x="1008" y="192" fill="#6E7A8A" font-size="9.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">semitones</text>
+<text x="1240" y="192" fill="#7FE0C3" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="end">+7.0</text>
+<rect x="1008" y="208" width="232" height="4" rx="2" fill="#3A4250"/>
+<rect x="1008" y="208" width="143.84" height="4" rx="2" fill="url(#u5-meter)"/>
+<circle cx="1151.84" cy="210" r="6.5" fill="#FFFFFF" stroke="#7FE0C3" stroke-width="1.5"/>
+<text x="1008" y="238" fill="#4E5764" font-size="8" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">drag to reorder · remove</text>
+<rect x="992" y="266" width="264" height="112" rx="10" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<circle cx="1006" cy="284" r="1.1" fill="#6E7A8A"/>
+<circle cx="1010" cy="284" r="1.1" fill="#6E7A8A"/>
+<circle cx="1006" cy="289" r="1.1" fill="#6E7A8A"/>
+<circle cx="1010" cy="289" r="1.1" fill="#6E7A8A"/>
+<circle cx="1006" cy="294" r="1.1" fill="#6E7A8A"/>
+<circle cx="1010" cy="294" r="1.1" fill="#6E7A8A"/>
+<text x="1024" y="288" fill="#ECEFF4" font-size="11.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">gain</text>
+<line x1="1236.0" y1="280.0" x2="1244.0" y2="288.0" stroke="#6E7A8A" stroke-width="1.4"/>
+<line x1="1244.0" y1="280.0" x2="1236.0" y2="288.0" stroke="#6E7A8A" stroke-width="1.4"/>
+<text x="1008" y="316" fill="#6E7A8A" font-size="9.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">gain_db</text>
+<text x="1240" y="316" fill="#7FE0C3" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="end">+0.0</text>
+<rect x="1008" y="332" width="232" height="4" rx="2" fill="#3A4250"/>
+<rect x="1008" y="332" width="127.60000000000001" height="4" rx="2" fill="url(#u5-meter)"/>
+<circle cx="1135.6" cy="334" r="6.5" fill="#FFFFFF" stroke="#7FE0C3" stroke-width="1.5"/>
+<text x="1008" y="362" fill="#4E5764" font-size="8" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">drag to reorder · remove</text>
+<rect x="992" y="392" width="264" height="40" rx="10" fill="none" stroke="#333B47" stroke-width="1" stroke-dasharray="5 5"/>
+<text x="1124" y="417" fill="#6E7A8A" font-size="10.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="middle">+ add effect</text>
+<line x1="992" y1="452" x2="1256" y2="452" stroke="#333B47" stroke-width="1"/>
+<text x="992" y="478" fill="#6E7A8A" font-size="9" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start" letter-spacing="1.4">STATS</text>
+<text x="992" y="504" fill="#6E7A8A" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">algorithmic latency</text>
+<text x="1256" y="504" fill="#AEB8C6" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="end">34.8 ms</text>
+<text x="992" y="528" fill="#6E7A8A" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">queued</text>
+<text x="1256" y="528" fill="#AEB8C6" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="end">42 ms</text>
+<text x="992" y="552" fill="#6E7A8A" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">underruns</text>
+<text x="1256" y="552" fill="#AEB8C6" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="end">2</text>
+<text x="992" y="576" fill="#6E7A8A" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">overruns</text>
+<text x="1256" y="576" fill="#AEB8C6" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="end">0</text>
+<line x1="992" y1="604" x2="1256" y2="604" stroke="#333B47" stroke-width="1"/>
+<rect x="992" y="620" width="128" height="34" rx="9" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<text x="1056" y="642" fill="#AEB8C6" font-size="10.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="middle">Save preset</text>
+<rect x="1128" y="620" width="128" height="34" rx="9" fill="#7FE0C3" stroke="#7FE0C3" stroke-width="1" fill-opacity="0.12" stroke-opacity="0.4"/>
+<text x="1192" y="642" fill="#7FE0C3" font-size="10.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="middle">Export JSON</text>
+<text x="992" y="676" fill="#4E5764" font-size="9" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">effects/chipmunk.json</text>
+<rect x="0" y="736" width="1280" height="64" rx="0" fill="#1B1F26"/>
+<line x1="0" y1="736" x2="1280" y2="736" stroke="#333B47" stroke-width="1"/>
+<rect x="31.28" y="754" width="5.44" height="8.32" rx="2.72" fill="none" stroke="#AEB8C6" stroke-width="1.4"/>
+<path d="M 28.56 761.36 Q 34.00 767.76 39.44 761.36" fill="none" stroke="#AEB8C6" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="34.0" y1="766.48" x2="34.0" y2="769.04" stroke="#AEB8C6" stroke-width="1.4"/>
+<text x="52" y="756" fill="#6E7A8A" font-size="8.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start" letter-spacing="1.2">INPUT</text>
+<text x="52" y="774" fill="#ECEFF4" font-size="10.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">default · 2ch 44.1kHz</text>
+<rect x="260" y="748" width="232" height="40" rx="10" fill="#7FE0C3" stroke="#7FE0C3" stroke-width="1" fill-opacity="0.1" stroke-opacity="0.35"/>
+<line x1="278.6666666666667" y1="764.4" x2="278.6666666666667" y2="771.6" stroke="#7FE0C3" stroke-width="2"/>
+<line x1="284.0" y1="760.0" x2="284.0" y2="776.0" stroke="#7FE0C3" stroke-width="2"/>
+<line x1="289.33333333333337" y1="762.8" x2="289.33333333333337" y2="773.2" stroke="#7FE0C3" stroke-width="2"/>
+<text x="300" y="758" fill="#7FE0C3" font-size="8.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start" letter-spacing="1.2">OUTPUT</text>
+<text x="300" y="775" fill="#ECEFF4" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">openmod_vmic</text>
+<text x="540" y="756" fill="#6E7A8A" font-size="8.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="end">IN</text>
+<rect x="550" y="752" width="120" height="5" rx="2.5" fill="#3A4250"/>
+<rect x="550" y="752" width="74.4" height="5" rx="2.5" fill="url(#u5-meter)"/>
+<text x="540" y="774" fill="#6E7A8A" font-size="8.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="end">OUT</text>
+<rect x="550" y="770" width="120" height="5" rx="2.5" fill="#3A4250"/>
+<rect x="550" y="770" width="57.599999999999994" height="5" rx="2.5" fill="url(#u5-meter)"/>
+<text x="712" y="774" fill="#6E7A8A" font-size="8.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="end">VOL</text>
+<rect x="722" y="766" width="120" height="5" rx="2.5" fill="#3A4250"/>
+<rect x="722" y="766" width="90.0" height="5" rx="2.5" fill="#AEB8C6"/>
+<circle cx="812.0" cy="768.5" r="6" fill="#FFFFFF" stroke="#3A4250" stroke-width="1.2"/>
+<rect x="862" y="748" width="124" height="40" rx="10" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<path d="M 877.92 769.52 v -3.52 a 6.08 6.08 0 0 1 12.16 0 v 3.52" fill="none" stroke="#AEB8C6" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="877.28" y="767.6" width="2.88" height="5.44" rx="2" fill="none" stroke="#AEB8C6" stroke-width="1.3"/>
+<rect x="887.84" y="767.6" width="2.88" height="5.44" rx="2" fill="none" stroke="#AEB8C6" stroke-width="1.3"/>
+<text x="902" y="758" fill="#6E7A8A" font-size="8.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start" letter-spacing="1.1">MONITOR</text>
+<text x="902" y="775" fill="#AEB8C6" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">off</text>
+<rect x="1152" y="748" width="104" height="40" rx="10" fill="#0FA97F"/>
+<rect x="1170" y="762" width="12" height="12" rx="2" fill="#FFFFFF" opacity="0.95"/>
+<text x="1190" y="772" fill="#FFFFFF" font-size="11.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="start">Stop</text>
+</g>
+</svg>
