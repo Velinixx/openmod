@@ -1,0 +1,8 @@
+{
+  "name": "chipmunk",
+  "description": "Classic high-pitch voice",
+  "effects": [
+    { "type": "pitch_shift", "params": { "semitones": 7.0 } },
+    { "type": "gain", "params": { "gain_db": 0.0 } }
+  ]
+}

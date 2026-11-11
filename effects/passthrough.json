@@ -1,0 +1,5 @@
+{
+  "name": "passthrough",
+  "description": "No effects, just routes audio through the pipeline",
+  "effects": []
+}

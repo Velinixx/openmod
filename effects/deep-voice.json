@@ -1,0 +1,7 @@
+{
+  "name": "deep-voice",
+  "description": "Lower, deeper voice",
+  "effects": [
+    { "type": "pitch_shift", "params": { "semitones": -5.0 } }
+  ]
+}
