@@ -4,6 +4,7 @@ using System.Threading;
 using Avalonia;
 using Avalonia.Headless;
 using Avalonia.Threading;
+using OpenMod.Desktop.Services;
 using OpenMod.Desktop.ViewModels;
 using OpenMod.Desktop.Views;
 
@@ -11,11 +12,11 @@ namespace OpenMod.Desktop;
 
 /// <summary>
 /// Renders the app offscreen to a PNG — used for design iteration and CI.
-/// `openmod-ui --screenshot out.png [system|light|dark|amoled] [blush|mint|sky|violet|amber|coral]`
+/// `openmod-ui --screenshot out.png [system|light|dark|amoled] [blush|mint|sky|violet|amber|coral] [voices|soundboard|settings]`
 /// </summary>
 static class Screenshot
 {
-    public static void Capture(string path, string? theme = null, string? accent = null)
+    public static void Capture(string path, string? theme = null, string? accent = null, string? page = null)
     {
         AppBuilder.Configure<App>()
             .UseHeadless(new AvaloniaHeadlessPlatformOptions { UseHeadlessDrawing = false })
@@ -23,12 +24,23 @@ static class Screenshot
             .WithInterFont()
             .SetupWithoutStarting();
 
-        if (!string.IsNullOrEmpty(theme))
+        // Captures always start from defaults (never the user's real settings),
+        // so a render is reproducible on any machine.
+        ThemeManager.ApplySettings(new AppSettings());
+
+        if (!string.IsNullOrEmpty(theme) || !string.IsNullOrEmpty(accent))
         {
             ThemeManager.Apply(theme, accent);
         }
 
-        var vm = new MainViewModel();
+        var vm = new MainViewModel(new AppSettings());
+
+        if (!string.IsNullOrEmpty(page)
+            && Enum.TryParse<AppPage>(page, true, out var target))
+        {
+            vm.ShowPage(target);
+        }
+
         var window = new MainWindow { DataContext = vm, Width = 1280, Height = 800 };
         window.Show();
 

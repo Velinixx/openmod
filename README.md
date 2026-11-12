@@ -50,6 +50,9 @@ The desktop app:
 ```bash
 export DOTNET_ROOT="$HOME/.dotnet" PATH="$HOME/.dotnet:$PATH"
 cd apps/desktop && dotnet run
+
+dotnet run -- --selftest                                   # 35 headless checks
+dotnet run -- --screenshot out.png dark mint settings       # theme + accent + page
 ```
 
 ## Soundboard
@@ -97,7 +100,8 @@ Bundled: `passthrough`, `chipmunk`, `deep-voice`.
 - [ ] **Soundboard mixing** — clips mixed into the live output chain + global hotkeys
 - [x] **Virtual device** — `openmod run --vmic` (PipeWire null-sink fake mic, auto-created + routed); Windows virtual cable later
 - [x] **UI foundation** — Avalonia main window: voice grid, effect chain, virtual-mic status, theme + accent tokens (dark / light / AMOLED, 6 accent presets, custom)
-- [ ] **UI** — Settings page (theme/accent picker), Soundboard page, module system, Zen-style first-launch wizard
+- [x] **Settings page** — theme picker (System / Light / Dark / AMOLED), 6 accent presets + custom hex, follow-desktop-accent via the XDG portal, audio rows, live preview column; every change writes `~/.config/openmod/settings.json` immediately
+- [ ] **UI** — Soundboard page (library is ready), module system, Zen-style first-launch wizard
 - [ ] **Windows port** — cpal already supports WASAPI; same core, new backend
 - [ ] **Voicemod import** — bring your soundboard + effect chains with you
 

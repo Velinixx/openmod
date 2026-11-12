@@ -1,0 +1,156 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:OpenMod.Desktop.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="760" d:DesignHeight="680"
+             x:Class="OpenMod.Desktop.Views.VoicesView"
+             x:DataType="vm:MainViewModel">
+
+    <ScrollViewer Padding="28,28,0,20"
+                  HorizontalScrollBarVisibility="Disabled"
+                  VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+
+            <Grid ColumnDefinitions="*,Auto,Auto">
+                <StackPanel>
+                    <TextBlock Text="My Voices" Classes="h1" />
+                    <TextBlock Text="{Binding VoicesSubtitle}" FontSize="11.5" Classes="muted" Margin="0,4,0,0" />
+                </StackPanel>
+
+                <Border Grid.Column="1" Width="196" Height="34" CornerRadius="9" Margin="0,4,12,0"
+                        VerticalAlignment="Top"
+                        Background="{DynamicResource CardBrush}"
+                        BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
+                    <Grid ColumnDefinitions="Auto,*" Margin="14,0">
+                        <Grid Width="16" Height="16" VerticalAlignment="Center">
+                            <Ellipse Width="10" Height="10" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                     Margin="1,1,0,0" Stroke="{DynamicResource MutedBrush}" StrokeThickness="1.4" />
+                            <Path Data="{DynamicResource IconSearch}" Width="16" Height="16"
+                                  Stroke="{DynamicResource MutedBrush}" StrokeThickness="1.4" StrokeLineCap="Round" />
+                        </Grid>
+                        <TextBlock Grid.Column="1" Text="Search voices…" FontSize="11" Classes="muted"
+                                   Margin="10,0,0,0" VerticalAlignment="Center" />
+                    </Grid>
+                </Border>
+
+                <Button Grid.Column="2" Classes="outline" Content="+ New" Height="34" Padding="18,0"
+                        Margin="0,4,20,0" VerticalAlignment="Top" />
+            </Grid>
+
+            <!-- voice cards (metadata-only until hydrated) -->
+            <ItemsControl ItemsSource="{Binding Voices}" Margin="0,22,0,0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.DataTemplates>
+
+                    <DataTemplate DataType="vm:VoiceCardViewModel" x:DataType="vm:VoiceCardViewModel">
+                        <Border Classes="voicecard" Classes.on="{Binding IsActive}"
+                                Width="224" Height="152" CornerRadius="12" Margin="0,0,20,16">
+                            <Grid RowDefinitions="36,Auto,Auto,*" Margin="16,14,16,12">
+
+                                <Grid ColumnDefinitions="Auto,*,Auto">
+                                    <Border Classes="badge" Width="36" Height="36" CornerRadius="10">
+                                        <StackPanel Orientation="Horizontal" Spacing="2.5"
+                                                    HorizontalAlignment="Center" VerticalAlignment="Center">
+                                            <Border Width="2.5" Height="8" CornerRadius="1.2" Background="{DynamicResource AccentTextBrush}" />
+                                            <Border Width="2.5" Height="14" CornerRadius="1.2" Background="{DynamicResource AccentTextBrush}" />
+                                            <Border Width="2.5" Height="10" CornerRadius="1.2" Background="{DynamicResource AccentTextBrush}" />
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Column="2" Classes="livepill" Height="18" CornerRadius="9"
+                                            Padding="9,0" VerticalAlignment="Top"
+                                            IsVisible="{Binding IsActive}">
+                                        <TextBlock Text="● LIVE" FontSize="8" FontWeight="Bold" LetterSpacing="0.6"
+                                                   Classes="accent" VerticalAlignment="Center" />
+                                    </Border>
+                                </Grid>
+
+                                <TextBlock Grid.Row="1" Text="{Binding Name}" FontSize="14.5" FontWeight="SemiBold"
+                                           Margin="0,12,0,0" TextTrimming="CharacterEllipsis" />
+
+                                <ItemsControl Grid.Row="2" ItemsSource="{Binding Chips}" Margin="0,9,0,0">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" Spacing="6" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border CornerRadius="8.5" Padding="8,3"
+                                                    Background="{DynamicResource DeepBrush}"
+                                                    BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
+                                                <TextBlock Text="{Binding}" Classes="mono" FontSize="9"
+                                                           Foreground="{DynamicResource SoftBrush}" />
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                                <Grid Grid.Row="3" VerticalAlignment="Bottom">
+                                    <TextBlock Text="{Binding LatencyText}" Classes="mono" FontSize="8.5"
+                                               Classes.muted="True" />
+                                    <TextBlock Text="edit ›" FontSize="9" Classes="muted"
+                                               HorizontalAlignment="Right" />
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+
+                    <DataTemplate DataType="vm:NewVoiceCardViewModel">
+                        <Grid Width="224" Height="152" Margin="0,0,20,16" Cursor="Hand">
+                            <Rectangle RadiusX="12" RadiusY="12"
+                                       Stroke="{DynamicResource BorderBrush}" StrokeThickness="1"
+                                       StrokeDashArray="5,5" />
+                            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="12">
+                                <Border Width="40" Height="40" CornerRadius="20" HorizontalAlignment="Center"
+                                        BorderBrush="{DynamicResource MutedBrush}" BorderThickness="1.2" Opacity="0.85">
+                                    <Path Data="{DynamicResource IconPlus}" Width="14" Height="14"
+                                          Stroke="{DynamicResource MutedBrush}" StrokeThickness="1.6"
+                                          StrokeLineCap="Round" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                                <StackPanel Spacing="3">
+                                    <TextBlock Text="New voice" FontSize="13" FontWeight="SemiBold"
+                                               Classes="soft" HorizontalAlignment="Center" />
+                                    <TextBlock Text="JSON or code" Classes="mono" FontSize="9.5"
+                                               Classes.muted="True" HorizontalAlignment="Center" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+
+                </ItemsControl.DataTemplates>
+            </ItemsControl>
+
+            <!-- community -->
+            <Grid ColumnDefinitions="*,Auto" Margin="0,6,20,10">
+                <TextBlock Text="COMMUNITY PRESETS" Classes="section" />
+                <TextBlock Grid.Column="1" Text="browse on GitHub ↗" FontSize="9.5" Classes="accent" />
+            </Grid>
+
+            <ItemsControl ItemsSource="{Binding Community}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:CommunityPresetViewModel">
+                        <Border CornerRadius="10" Height="46" Margin="0,0,20,8" Padding="16,0"
+                                Background="{DynamicResource CardBrush}"
+                                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
+                            <Grid ColumnDefinitions="*,Auto">
+                                <StackPanel VerticalAlignment="Center" Spacing="3">
+                                    <TextBlock Text="{Binding Name}" Classes="mono" FontSize="11.5" />
+                                    <TextBlock Text="{Binding Detail}" FontSize="9.5" Classes="muted" />
+                                </StackPanel>
+                                <Button Grid.Column="1" Classes="outline" Content="+ Add" Height="26" Padding="12,0"
+                                        CornerRadius="8" FontSize="9.5" VerticalAlignment="Center" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+        </StackPanel>
+    
+    </ScrollViewer>
+</UserControl>

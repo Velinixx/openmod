@@ -4,6 +4,7 @@ using Avalonia;
 using Avalonia.Markup.Xaml.Styling;
 using Avalonia.Media;
 using Avalonia.Styling;
+using OpenMod.Desktop.Services;
 
 namespace OpenMod.Desktop;
 
@@ -18,6 +19,10 @@ public enum ThemeMode
 /// <summary>
 /// Applies palettes and accent tokens at runtime. Screens only ever bind to
 /// resource keys (BgBrush, AccentBrush, ...) so a theme switch is one swap.
+///
+/// Accent state lives here (not in the view model) because the palette swap and
+/// the accent override have to happen together: accent-colored *text* uses the
+/// deep tone on light backgrounds and the bright tone on dark ones.
 /// </summary>
 public static class ThemeManager
 {
@@ -34,12 +39,53 @@ public static class ThemeManager
     ];
 
     public static ThemeMode Mode { get; private set; } = ThemeMode.System;
-    public static AccentPreset Accent { get; private set; } = Accents[0];
 
+    /// <summary>Preset name, <c>"custom"</c>, or <c>"system"</c>.</summary>
+    public static string AccentName { get; private set; } = "blush";
+
+    public static Color AccentBright { get; private set; } = Accents[0].Bright;
+    public static Color AccentDeep { get; private set; } = Accents[0].Deep;
+    public static bool MatchSystemAccent { get; private set; }
+
+    /// <summary>Raised after a palette/accent swap so views can refresh selection state.</summary>
     public static event Action? Changed;
 
     private static bool _watchingSystem;
 
+    // ---------------------------------------------------------------- startup
+
+    /// <summary>Apply a saved settings file.</summary>
+    public static void ApplySettings(AppSettings settings)
+    {
+        Mode = Enum.TryParse<ThemeMode>(settings.Theme, true, out var parsed) ? parsed : ThemeMode.System;
+        MatchSystemAccent = settings.MatchSystemAccent;
+
+        if (MatchSystemAccent && SystemAccent.TryRead(out var sysBright, out var sysDeep))
+        {
+            AccentName = "system";
+            AccentBright = sysBright;
+            AccentDeep = sysDeep;
+        }
+        else if (string.Equals(settings.Accent, "custom", StringComparison.OrdinalIgnoreCase)
+                 && TryParse(settings.AccentBright, out var customBright)
+                 && TryParse(settings.AccentDeep, out var customDeep))
+        {
+            AccentName = "custom";
+            AccentBright = customBright;
+            AccentDeep = customDeep;
+        }
+        else if (Accents.FirstOrDefault(a => a.Name.Equals(settings.Accent, StringComparison.OrdinalIgnoreCase)) is { } preset)
+        {
+            AccentName = preset.Name;
+            AccentBright = preset.Bright;
+            AccentDeep = preset.Deep;
+        }
+
+        WatchSystemTheme();
+        ApplyInternal();
+    }
+
+    /// <summary>Quick apply for the screenshot harness: mode and/or accent name.</summary>
     public static void Apply(string? mode = null, string? accent = null)
     {
         if (mode is not null)
@@ -47,18 +93,110 @@ public static class ThemeManager
             Mode = Enum.TryParse<ThemeMode>(mode, true, out var parsed) ? parsed : ThemeMode.System;
         }
 
-        if (accent is not null)
+        if (accent is not null
+            && Accents.FirstOrDefault(a => a.Name.Equals(accent, StringComparison.OrdinalIgnoreCase)) is { } preset)
         {
-            var match = Accents.FirstOrDefault(a => a.Name.Equals(accent, StringComparison.OrdinalIgnoreCase));
-            if (match is not null)
-            {
-                Accent = match;
-            }
+            AccentName = preset.Name;
+            AccentBright = preset.Bright;
+            AccentDeep = preset.Deep;
+            MatchSystemAccent = false;
         }
 
         WatchSystemTheme();
         ApplyInternal();
     }
+
+    // ----------------------------------------------------------------- setters
+
+    public static void SetMode(ThemeMode mode)
+    {
+        Mode = mode;
+        ApplyInternal();
+    }
+
+    public static void SetAccentPreset(string name)
+    {
+        if (Accents.FirstOrDefault(a => a.Name.Equals(name, StringComparison.OrdinalIgnoreCase)) is not { } preset)
+        {
+            return;
+        }
+
+        AccentName = preset.Name;
+        AccentBright = preset.Bright;
+        AccentDeep = preset.Deep;
+        MatchSystemAccent = false;
+        ApplyInternal();
+    }
+
+    /// <summary>Custom colour: the "bright" tone is derived from the picked colour.</summary>
+    public static void SetCustomAccent(Color picked)
+    {
+        AccentName = "custom";
+        AccentBright = SystemAccent.Lighten(picked, 0.25);
+        AccentDeep = SystemAccent.Darken(picked, 0.15);
+        MatchSystemAccent = false;
+        ApplyInternal();
+    }
+
+    public static bool SetMatchSystemAccent(bool enabled)
+    {
+        if (enabled)
+        {
+            if (!SystemAccent.TryRead(out var bright, out var deep))
+            {
+                // portal not available — don't pretend we're following it
+                MatchSystemAccent = false;
+                ApplyInternal();
+                return false;
+            }
+
+            MatchSystemAccent = true;
+            AccentName = "system";
+            AccentBright = bright;
+            AccentDeep = deep;
+        }
+        else
+        {
+            MatchSystemAccent = false;
+        }
+
+        ApplyInternal();
+        return true;
+    }
+
+    /// <summary>Snapshot for persistence.</summary>
+    public static void WriteTo(AppSettings settings)
+    {
+        settings.Theme = Mode.ToString();
+        settings.MatchSystemAccent = MatchSystemAccent;
+        settings.Accent = AccentName;
+
+        if (AccentName == "custom")
+        {
+            settings.AccentBright = ToHex(AccentBright);
+            settings.AccentDeep = ToHex(AccentDeep);
+        }
+        else
+        {
+            settings.AccentBright = null;
+            settings.AccentDeep = null;
+        }
+    }
+
+    // ------------------------------------------------------------------ internals
+
+    private static bool TryParse(string? hex, out Color color)
+    {
+        color = default;
+        if (string.IsNullOrWhiteSpace(hex))
+        {
+            return false;
+        }
+
+        return Color.TryParse(hex, out color);
+    }
+
+    public static string ToHex(Color color) => $"#{color.R:X2}{color.G:X2}{color.B:X2}";
 
     private static void WatchSystemTheme()
     {
@@ -111,7 +249,7 @@ public static class ThemeManager
 
     private static void ApplyAccent(Application app, bool isLight)
     {
-        var (bright, deep) = (Accent.Bright, Accent.Deep);
+        var (bright, deep) = (AccentBright, AccentDeep);
         var r = app.Resources;
 
         r["AccentBrush"] = new SolidColorBrush(bright);

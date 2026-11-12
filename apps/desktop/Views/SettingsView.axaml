@@ -1,0 +1,299 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:OpenMod.Desktop.ViewModels"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1072" d:DesignHeight="680"
+             x:Class="OpenMod.Desktop.Views.SettingsView"
+             x:DataType="vm:SettingsViewModel">
+
+    <!-- The settings page owns columns 1+2 (the chain panel is hidden while it's
+         open), so it can show its own preview column on the right. -->
+    <Grid ColumnDefinitions="*,312">
+
+        <ScrollViewer Grid.Column="0"
+                      Padding="28,28,20,20"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+
+                <TextBlock Text="Settings" Classes="h1" />
+                <TextBlock Text="Appearance, audio and hotkeys" FontSize="11.5" Classes="muted" Margin="0,4,0,0" />
+
+                <!-- ======================= APPEARANCE ======================= -->
+                <Border CornerRadius="12" Margin="0,24,0,0" Padding="22,18,22,18"
+                        Background="{DynamicResource CardBrush}"
+                        BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="APPEARANCE" Classes="section" />
+
+                        <!-- theme -->
+                        <Grid ColumnDefinitions="*,Auto" Margin="0,20,0,0">
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="Theme" FontSize="13.5" FontWeight="SemiBold" />
+                                <TextBlock Text="System follows your OS light/dark mode"
+                                           FontSize="10.5" Classes="muted" Margin="0,4,0,0" />
+                            </StackPanel>
+
+                            <Border Grid.Column="1" Height="42" CornerRadius="10" Padding="4"
+                                    VerticalAlignment="Center"
+                                    Background="{DynamicResource DeepBrush}"
+                                    BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
+                                <ItemsControl ItemsSource="{Binding Themes}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:ThemeOptionViewModel">
+                                            <Button Classes="seg" Classes.on="{Binding IsSelected}"
+                                                    Command="{Binding SelectCommand}"
+                                                    Content="{Binding Label}"
+                                                    Width="102" Height="32" />
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </Border>
+                        </Grid>
+
+                        <Border Height="1" Background="{DynamicResource BorderBrush}" Margin="0,20,0,20" />
+
+                        <!-- accent -->
+                        <Grid ColumnDefinitions="*,Auto">
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="Accent color" FontSize="13.5" FontWeight="SemiBold" />
+                                <TextBlock Text="Drives active states, meters and the voice toggle"
+                                           FontSize="10.5" Classes="muted" Margin="0,4,0,0" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                                <ItemsControl ItemsSource="{Binding Accents}">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" Spacing="6" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate x:DataType="vm:AccentSwatchViewModel">
+                                            <Button Classes="swatch" Command="{Binding SelectCommand}"
+                                                    ToolTip.Tip="{Binding Name}">
+                                                <Grid Width="34" Height="34">
+                                                    <!-- selection ring in the swatch's own deep tone -->
+                                                    <Ellipse Width="33" Height="33" Stroke="{Binding DeepBrush}"
+                                                             StrokeThickness="1.6"
+                                                             IsVisible="{Binding IsSelected}" />
+                                                    <Ellipse Width="23" Height="23" Fill="{Binding Swatch}" />
+                                                </Grid>
+                                            </Button>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+
+                                <TextBox Width="104" Height="34" Watermark="#FF99CC"
+                                         Text="{Binding CustomHex, Mode=TwoWay}" />
+                                <Button Classes="outline" Content="Set" Height="34" Padding="14,0" CornerRadius="8"
+                                        Command="{Binding UseCustomAccentCommand}" />
+                            </StackPanel>
+                        </Grid>
+
+                        <TextBlock Text="{Binding StatusMessage}" FontSize="10" Classes="accent"
+                                   IsVisible="{Binding HasStatus}" Margin="0,14,0,0" />
+
+                        <Border Height="1" Background="{DynamicResource BorderBrush}" Margin="0,20,0,20" />
+
+                        <!-- system accent -->
+                        <Grid ColumnDefinitions="*,Auto">
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="Match system accent" FontSize="13.5" FontWeight="SemiBold" />
+                                <TextBlock Text="Use your desktop's accent color automatically"
+                                           FontSize="10.5" Classes="muted" Margin="0,4,0,0" />
+                            </StackPanel>
+
+                            <Button Grid.Column="1" Classes="toggle" Classes.on="{Binding MatchSystemAccent}"
+                                    Command="{Binding ToggleMatchSystemAccentCommand}"
+                                    VerticalAlignment="Center" ToolTip.Tip="reads org.freedesktop.appearance accent-color">
+                                <Ellipse Width="16" Height="16" />
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- ========================== AUDIO ========================== -->
+                <Border CornerRadius="12" Margin="0,16,0,0" Padding="22,18,22,18"
+                        Background="{DynamicResource CardBrush}"
+                        BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="AUDIO" Classes="section" />
+
+                        <!-- microphone -->
+                        <Grid ColumnDefinitions="*,Auto" Margin="0,20,0,0">
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="Microphone" FontSize="13.5" FontWeight="SemiBold" />
+                                <TextBlock Text="capture device" FontSize="10.5" Classes="muted" Margin="0,4,0,0" />
+                            </StackPanel>
+
+                            <Button Grid.Column="1" Classes="ghost" Height="36" Width="296" CornerRadius="9"
+                                    Padding="14,0" HorizontalContentAlignment="Stretch"
+                                    ToolTip.Tip="device picker lands with the audio-engine wiring">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <TextBlock Text="{Binding InputDevice}" Classes="mono" FontSize="10.5"
+                                               VerticalAlignment="Center" />
+                                    <Path Grid.Column="1" Data="{DynamicResource IconChevron}" Width="9" Height="5"
+                                          Stroke="{DynamicResource MutedBrush}" StrokeThickness="1.4"
+                                          VerticalAlignment="Center" />
+                                </Grid>
+                            </Button>
+                        </Grid>
+
+                        <Border Height="1" Background="{DynamicResource BorderBrush}" Margin="0,20,0,20" />
+
+                        <!-- virtual mic -->
+                        <Grid ColumnDefinitions="*,Auto">
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="Virtual mic" FontSize="13.5" FontWeight="SemiBold" />
+                                <TextBlock Text="auto-created null sink" FontSize="10.5" Classes="muted" Margin="0,4,0,0" />
+                            </StackPanel>
+
+                            <Border Grid.Column="1" Height="36" Width="296" CornerRadius="9" Padding="14,0"
+                                    Background="{DynamicResource AccentSoftBrush}"
+                                    BorderBrush="{DynamicResource AccentBorderBrush}" BorderThickness="1">
+                                <Grid ColumnDefinitions="Auto,*,Auto">
+                                    <Ellipse Width="6.5" Height="6.5" Fill="{DynamicResource AccentBrush}"
+                                             VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="{Binding OutputDevice}" Classes="mono"
+                                               FontSize="10.5" Margin="10,0,0,0" VerticalAlignment="Center" />
+                                    <TextBlock Grid.Column="2" Text="monitor" FontSize="9.5" Classes="faint"
+                                               VerticalAlignment="Center" />
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                        <Border Height="1" Background="{DynamicResource BorderBrush}" Margin="0,20,0,20" />
+
+                        <!-- monitor -->
+                        <Grid ColumnDefinitions="*,Auto">
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="Monitor processed voice" FontSize="13.5" FontWeight="SemiBold" />
+                                <TextBlock Text="hear yourself (adds latency)" FontSize="10.5" Classes="muted"
+                                           Margin="0,4,0,0" />
+                            </StackPanel>
+
+                            <Button Grid.Column="1" Classes="toggle" Classes.on="{Binding Monitor}"
+                                    Command="{Binding ToggleMonitorCommand}" VerticalAlignment="Center">
+                                <Ellipse Width="16" Height="16" />
+                            </Button>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <TextBlock Text="{Binding SettingsPath}" Classes="mono" FontSize="9" Classes.faint="True"
+                           Margin="4,16,0,0" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- ========================= PREVIEW ========================= -->
+        <Border Grid.Column="1"
+                Background="{DynamicResource PanelBrush}"
+                BorderBrush="{DynamicResource BorderBrush}"
+                BorderThickness="1,0,0,0">
+            <ScrollViewer Padding="24,32,24,24" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel>
+
+                    <TextBlock Text="PREVIEW" Classes="section" />
+                    <TextBlock Text="{Binding PreviewCaption}" Classes="mono" FontSize="10.5"
+                               Foreground="{DynamicResource SoftBrush}" Margin="0,10,0,0" />
+
+                    <!-- what a voice card looks like with this accent -->
+                    <Border CornerRadius="12" Height="164" Margin="0,14,0,0" Padding="16"
+                            Background="{DynamicResource CardBrush}"
+                            BorderBrush="{DynamicResource AccentBrush}" BorderThickness="1.5"
+                            BoxShadow="{DynamicResource GlowShadow}">
+                        <Grid RowDefinitions="Auto,*,Auto">
+                            <Border Width="34" Height="34" CornerRadius="9" HorizontalAlignment="Left"
+                                    Background="{DynamicResource AccentSoftStrongBrush}">
+                                <StackPanel Orientation="Horizontal" Spacing="2" HorizontalAlignment="Center"
+                                            VerticalAlignment="Center">
+                                    <Border Width="2" Height="6" CornerRadius="1" Background="{DynamicResource AccentBrush}" />
+                                    <Border Width="2" Height="12" CornerRadius="1" Background="{DynamicResource AccentBrush}" />
+                                    <Border Width="2" Height="8" CornerRadius="1" Background="{DynamicResource AccentBrush}" />
+                                </StackPanel>
+                            </Border>
+
+                            <StackPanel Grid.Row="1" Spacing="8" VerticalAlignment="Bottom">
+                                <TextBlock Text="chipmunk" FontSize="13.5" FontWeight="SemiBold" />
+                                <Border Height="18" CornerRadius="5" Padding="7,0" HorizontalAlignment="Left"
+                                        Background="{DynamicResource AccentSoftBrush}">
+                                    <TextBlock Classes="mono accent" Text="pitch +7.0" FontSize="9"
+                                               VerticalAlignment="Center" />
+                                </Border>
+                            </StackPanel>
+
+                            <TextBlock Classes="mono faint" Grid.Row="2" Text="34.8 ms" FontSize="9.5"
+                                       Margin="0,10,0,0" />
+                        </Grid>
+                    </Border>
+
+                    <Button Classes="voice-toggle" Classes.on="True" Height="40" Margin="0,14,0,0"
+                            HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <Ellipse Width="8" Height="8" VerticalAlignment="Center" />
+                            <TextBlock Text="VOICE ON" FontSize="11.5" FontWeight="Bold" LetterSpacing="1.3"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+
+                    <Grid ColumnDefinitions="Auto,*" Margin="0,16,0,0">
+                        <TextBlock Text="OUT" FontSize="8.5" FontWeight="SemiBold" Classes="muted"
+                                   Width="34" VerticalAlignment="Center" />
+                        <Grid Grid.Column="1" Height="6" VerticalAlignment="Center">
+                            <Border Background="{DynamicResource TrackBrush}" CornerRadius="3" />
+                            <Border Width="196" HorizontalAlignment="Left" CornerRadius="3"
+                                    Background="{DynamicResource AccentMeterBrush}" />
+                        </Grid>
+                    </Grid>
+
+                    <Border Height="1" Background="{DynamicResource BorderBrush}" Margin="0,22,0,20" />
+
+                    <TextBlock Text="ACCENT TOKENS" Classes="section" />
+
+                    <StackPanel Spacing="10" Margin="0,14,0,0">
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Ellipse Width="9" Height="9" Fill="{Binding AccentSwatchBrush}" VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" Text="accent" Classes="mono" FontSize="10.5"
+                                       Margin="10,0,0,0" Foreground="{DynamicResource SoftBrush}"
+                                       VerticalAlignment="Center" />
+                            <TextBlock Classes="mono faint" Grid.Column="2" Text="{Binding AccentBrightHex}" FontSize="9.5"
+                                       VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Ellipse Width="9" Height="9" Fill="{Binding AccentDeepSwatchBrush}" VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" Text="accentDeep" Classes="mono" FontSize="10.5"
+                                       Margin="10,0,0,0" Foreground="{DynamicResource SoftBrush}"
+                                       VerticalAlignment="Center" />
+                            <TextBlock Classes="mono faint" Grid.Column="2" Text="{Binding AccentDeepHex}" FontSize="9.5"
+                                       VerticalAlignment="Center" />
+                        </Grid>
+                        <Grid ColumnDefinitions="Auto,*,Auto">
+                            <Ellipse Width="9" Height="9" Fill="{Binding OnAccentSwatchBrush}" VerticalAlignment="Center" />
+                            <TextBlock Grid.Column="1" Text="onAccent" Classes="mono" FontSize="10.5"
+                                       Margin="10,0,0,0" Foreground="{DynamicResource SoftBrush}"
+                                       VerticalAlignment="Center" />
+                            <TextBlock Classes="mono faint" Grid.Column="2" Text="{Binding OnAccentHex}" FontSize="9.5"
+                                       VerticalAlignment="Center" />
+                        </Grid>
+                    </StackPanel>
+
+                    <Border Height="1" Background="{DynamicResource BorderBrush}" Margin="0,22,0,20" />
+
+                    <TextBlock Text="Themes are pure tokens — no per-screen overrides. Everything here writes straight to settings.json, so there's no Apply button to forget."
+                               FontSize="9.5" Classes="muted" TextWrapping="Wrap" LineHeight="15" />
+
+                    <TextBlock Classes="mono faint" Text="{Binding AccentNameLabel}" FontSize="9"
+                               Margin="0,14,0,0" />
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

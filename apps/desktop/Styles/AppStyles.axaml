@@ -118,8 +118,7 @@
     </Style>
 
     <!-- voice on/off pill -->
-    <Style Selector="Button.voice-toggle">
-        <Setter Property="Background" Value="{DynamicResource TrackBrush}" />
+    <Style Selector="Button.voice-toggle">        <Setter Property="Background" Value="{DynamicResource TrackBrush}" />
         <Setter Property="CornerRadius" Value="17" />
     </Style>
     <Style Selector="Button.voice-toggle.on">
@@ -175,37 +174,42 @@
         <Setter Property="BorderThickness" Value="1" />
     </Style>
 
-    <!-- sidebar nav -->
-    <Style Selector="Border.nav">
+    <!-- sidebar nav (a Button, so it's keyboard-reachable and has a command) -->
+    <Style Selector="Button.nav">
         <Setter Property="Background" Value="Transparent" />
+        <Setter Property="CornerRadius" Value="9" />
         <Setter Property="Cursor" Value="Hand" />
     </Style>
-    <Style Selector="Border.nav:pointerover">
+    <Style Selector="Button.nav:pointerover /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource DeepBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
     </Style>
-    <Style Selector="Border.nav.on">
+    <Style Selector="Button.nav.on">
         <Setter Property="Background" Value="{DynamicResource AccentSoftBrush}" />
     </Style>
-    <Style Selector="Border.nav.on:pointerover">
+    <Style Selector="Button.nav.on:pointerover /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource AccentSoftStrongBrush}" />
     </Style>
-    <Style Selector="Border.nav Path">
+    <Style Selector="Button.nav:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentSoftStrongBrush}" />
+    </Style>
+    <Style Selector="Button.nav Path">
         <Setter Property="Stroke" Value="{DynamicResource SoftBrush}" />
     </Style>
-    <Style Selector="Border.nav.on Path">
+    <Style Selector="Button.nav.on Path">
         <Setter Property="Stroke" Value="{DynamicResource AccentTextBrush}" />
     </Style>
-    <Style Selector="Border.nav TextBlock">
+    <Style Selector="Button.nav TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource SoftBrush}" />
     </Style>
-    <Style Selector="Border.nav.on TextBlock">
+    <Style Selector="Button.nav.on TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="FontWeight" Value="SemiBold" />
     </Style>
-    <Style Selector="Border.nav Border.accentbar">
+    <Style Selector="Button.nav Border.accentbar">
         <Setter Property="IsVisible" Value="False" />
     </Style>
-    <Style Selector="Border.nav.on Border.accentbar">
+    <Style Selector="Button.nav.on Border.accentbar">
         <Setter Property="IsVisible" Value="True" />
     </Style>
 
@@ -221,6 +225,101 @@
     </Style>
     <Style Selector="Border.reg.on TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource SoftBrush}" />
+    </Style>
+    <!-- ========================== settings ========================== -->
+
+    <!-- segmented control item (System / Light / Dark / AMOLED) -->
+    <Style Selector="Button.seg">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource SoftBrush}" />
+        <Setter Property="FontSize" Value="11.5" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="CornerRadius" Value="7" />
+    </Style>
+    <Style Selector="Button.seg.on">
+        <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+    </Style>
+    <!-- Fluent's pointerover/pressed brushes would erase the selection, so pin
+         them: hover only lifts the unselected item, never repaints the active one -->
+    <Style Selector="Button.seg:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+    </Style>
+    <Style Selector="Button.seg.on:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+    </Style>
+    <Style Selector="Button.seg:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentSoftStrongBrush}" />
+    </Style>
+    <Style Selector="Button.seg.on:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource OnAccentBrush}" />
+    </Style>
+
+    <!-- round accent swatch: the ring is drawn in the view so it can use each
+         swatch's own deep tone instead of the currently applied accent -->
+    <Style Selector="Button.swatch">
+        <Setter Property="Width" Value="34" />
+        <Setter Property="Height" Value="34" />
+        <Setter Property="CornerRadius" Value="17" />
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+    <Style Selector="Button.swatch:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="Button.swatch:pressed /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="Transparent" />
+    </Style>
+
+    <!-- pill toggle: the knob is the button's content, so alignment is the state -->
+    <Style Selector="Button.toggle">
+        <Setter Property="Width" Value="46" />
+        <Setter Property="Height" Value="26" />
+        <Setter Property="CornerRadius" Value="13" />
+        <Setter Property="Padding" Value="5,0" />
+        <Setter Property="Background" Value="{DynamicResource TrackBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+    </Style>
+    <Style Selector="Button.toggle.on">
+        <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Right" />
+    </Style>
+    <Style Selector="Button.toggle Ellipse">
+        <Setter Property="Fill" Value="{DynamicResource KnobBrush}" />
+    </Style>
+    <Style Selector="Button.toggle:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource TrackBrush}" />
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    <Style Selector="Button.toggle.on:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource AccentBrush}" />
+    </Style>
+
+    <!-- hex input -->
+    <Style Selector="TextBox">
+        <Setter Property="Background" Value="{DynamicResource DeepBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="FontFamily" Value="{DynamicResource MonoFont}" />
+        <Setter Property="FontSize" Value="10.5" />
+        <Setter Property="Padding" Value="10,0" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="MinHeight" Value="0" />
+    </Style>
+    <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{DynamicResource DeepBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource BorderBrush}" />
+    </Style>
+    <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+        <Setter Property="Background" Value="{DynamicResource DeepBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource AccentBrush}" />
     </Style>
 
 </Styles>

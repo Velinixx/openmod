@@ -11,10 +11,21 @@ sealed class Program
     [STAThread]
     public static void Main(string[] args)
     {
-        // `--screenshot <path> [theme]` renders offscreen (design iteration / CI)
+        // `--selftest` asserts the settings path headlessly (CI friendly)
+        if (args.Length >= 1 && args[0] == "--selftest")
+        {
+            Environment.ExitCode = SelfTest.Run();
+            return;
+        }
+
+        // `--screenshot <path> [theme] [accent] [page]` renders offscreen
         if (args.Length >= 2 && args[0] == "--screenshot")
         {
-            Screenshot.Capture(args[1], args.Length >= 3 ? args[2] : null, args.Length >= 4 ? args[3] : null);
+            Screenshot.Capture(
+                args[1],
+                args.Length >= 3 ? args[2] : null,
+                args.Length >= 4 ? args[3] : null,
+                args.Length >= 5 ? args[4] : null);
             return;
         }
 

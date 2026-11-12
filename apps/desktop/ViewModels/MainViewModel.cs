@@ -30,7 +30,7 @@ public partial class MainViewModel : ViewModelBase
     private bool _isVoiceOn = true;
 
     [ObservableProperty]
-    private bool _isMonitoring;
+    private AppPage _page = AppPage.Voices;
 
     /// <summary>True once every preset JSON has been parsed (lazy load finished).</summary>
     [ObservableProperty]
@@ -41,6 +41,9 @@ public partial class MainViewModel : ViewModelBase
 
     [ObservableProperty]
     private string _voicesSubtitle = "scanning effects/…";
+
+    [ObservableProperty]
+    private string _soundboardSubtitle = "scanning soundboards/…";
 
     [ObservableProperty]
     private string _latencyText = "—";
@@ -70,10 +73,29 @@ public partial class MainViewModel : ViewModelBase
 
     public string VoiceToggleText => IsVoiceOn ? "VOICE ON" : "VOICE OFF";
 
+    /// <summary>Mirrors <see cref="SettingsViewModel.Monitor"/> so the bottom bar and
+    /// the settings page can never disagree.</summary>
+    public bool IsMonitoring => Settings.Monitor;
+
     public string MonitorText => IsMonitoring ? "on" : "off";
 
-    public MainViewModel()
+    public SettingsViewModel Settings { get; }
+
+    public string SoundboardPath { get; } = Path.Combine(PresetLibrary.RepoRoot, "soundboards");
+
+    public MainViewModel() : this(AppSettings.Load())
     {
+    }
+
+    public MainViewModel(AppSettings settings)
+    {
+        Settings = new SettingsViewModel(settings);
+        Settings.MonitorChanged += _ =>
+        {
+            OnPropertyChanged(nameof(IsMonitoring));
+            OnPropertyChanged(nameof(MonitorText));
+        };
+
         BuildNav();
         BuildRegistry();
         ScanVoices();      // cheap: file names only
@@ -88,9 +110,12 @@ public partial class MainViewModel : ViewModelBase
     private void BuildNav()
     {
         // icon paths are 16x16, stroked
-        Nav.Add(new NavItemViewModel("Voices", "M2,2 H7 V7 H2 Z M9,2 H14 V7 H9 Z M2,9 H7 V14 H2 Z M9,9 H14 V14 H9 Z") { IsActive = true });
-        Nav.Add(new NavItemViewModel("Soundboard", "M1.5,3.5 H14.5 M1.5,8 H9.5 M1.5,12.5 H12.5"));
-        Nav.Add(new NavItemViewModel("Settings", "M1.5,4 H14.5 M1.5,12 H14.5 M5.5,1.5 V6.5 M11,9.5 V14.5"));
+        Nav.Add(new NavItemViewModel("Voices", "M2,2 H7 V7 H2 Z M9,2 H14 V7 H9 Z M2,9 H7 V14 H2 Z M9,9 H14 V14 H9 Z",
+            AppPage.Voices, () => ShowPage(AppPage.Voices)) { IsActive = true });
+        Nav.Add(new NavItemViewModel("Soundboard", "M1.5,3.5 H14.5 M1.5,8 H9.5 M1.5,12.5 H12.5",
+            AppPage.Soundboard, () => ShowPage(AppPage.Soundboard)));
+        Nav.Add(new NavItemViewModel("Settings", "M1.5,4 H14.5 M1.5,12 H14.5 M5.5,1.5 V6.5 M11,9.5 V14.5",
+            AppPage.Settings, () => ShowPage(AppPage.Settings)));
     }
 
     private void BuildRegistry()
@@ -117,10 +142,12 @@ public partial class MainViewModel : ViewModelBase
         {
             ((VoiceCardViewModel)Voices[0]).IsActive = true;
             VoicesSubtitle = $"{paths.Count} presets · JSON files in effects/";
+            SoundboardSubtitle = "clips in soundboards/ · names only until played";
         }
         else
         {
             VoicesSubtitle = "no presets yet · drop a JSON file into effects/";
+            SoundboardSubtitle = "drop audio files in soundboards/";
         }
     }
 
@@ -218,28 +245,40 @@ public partial class MainViewModel : ViewModelBase
         }
     }
 
+    // ------------------------------------------------------------------- pages
+
+    public bool IsVoicesPage => Page == AppPage.Voices;
+    public bool IsSoundboardPage => Page == AppPage.Soundboard;
+    public bool IsSettingsPage => Page == AppPage.Settings;
+
+    /// <summary>The chain panel belongs to the voices/soundboard pages, not settings.</summary>
+    public bool ShowChainPanel => Page != AppPage.Settings;
+
+    public void ShowPage(AppPage page) => Page = page;
+
+    partial void OnPageChanged(AppPage value)
+    {
+        foreach (var item in Nav)
+        {
+            item.IsActive = item.Page == value;
+        }
+
+        OnPropertyChanged(nameof(IsVoicesPage));
+        OnPropertyChanged(nameof(IsSoundboardPage));
+        OnPropertyChanged(nameof(IsSettingsPage));
+        OnPropertyChanged(nameof(ShowChainPanel));
+    }
+
     // --------------------------------------------------------------- commands
 
     [RelayCommand]
     private void ToggleVoice() => IsVoiceOn = !IsVoiceOn;
 
     [RelayCommand]
-    private void ToggleMonitor() => IsMonitoring = !IsMonitoring;
+    private void ToggleMonitor() => Settings.Monitor = !Settings.Monitor;
 
-    /// <summary>Cycles System → Light → Dark → AMOLED (until Settings has a picker).</summary>
     [RelayCommand]
-    private void CycleTheme()
-    {
-        var next = ThemeManager.Mode switch
-        {
-            ThemeMode.System => ThemeMode.Light,
-            ThemeMode.Light => ThemeMode.Dark,
-            ThemeMode.Dark => ThemeMode.Amoled,
-            _ => ThemeMode.System,
-        };
-
-        ThemeManager.Apply(next.ToString());
-    }
+    private void GoToSettings() => ShowPage(AppPage.Settings);
 
     [RelayCommand]
     private static void Stop()
@@ -248,6 +287,4 @@ public partial class MainViewModel : ViewModelBase
     }
 
     partial void OnIsVoiceOnChanged(bool value) => OnPropertyChanged(nameof(VoiceToggleText));
-
-    partial void OnIsMonitoringChanged(bool value) => OnPropertyChanged(nameof(MonitorText));
 }

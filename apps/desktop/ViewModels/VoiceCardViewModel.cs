@@ -2,6 +2,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.IO;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using OpenMod.Desktop.Models;
 using OpenMod.Desktop.Services;
 
@@ -67,6 +68,13 @@ public partial class VoiceCardViewModel : ViewModelBase
     }
 }
 
+public enum AppPage
+{
+    Voices,
+    Soundboard,
+    Settings,
+}
+
 /// <summary>The dashed "new voice" tile that lives at the end of the grid.</summary>
 public sealed class NewVoiceCardViewModel : ViewModelBase;
 
@@ -79,13 +87,16 @@ public sealed class CommunityPresetViewModel(string name, string author, string 
     public string Detail => $"{Meta}  —  {Author}";
 }
 
-public sealed partial class NavItemViewModel(string name, string iconData) : ViewModelBase
+public sealed partial class NavItemViewModel(string name, string iconData, AppPage page, Action select) : ViewModelBase
 {
     public string Name { get; } = name;
     public string IconData { get; } = iconData;
+    public AppPage Page { get; } = page;
 
     [ObservableProperty]
     private bool _isActive;
+
+    public IRelayCommand SelectCommand { get; } = new RelayCommand(select);
 }
 
 public sealed class FolderItemViewModel(string name, string info) : ViewModelBase

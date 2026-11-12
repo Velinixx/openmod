@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using OpenMod.Desktop.Services;
 using OpenMod.Desktop.ViewModels;
 using OpenMod.Desktop.Views;
 
@@ -15,14 +16,16 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        // apply the saved palette before the first frame so there's no flash
-        ThemeManager.Apply();
+        // Load settings and apply the saved palette *before* the first frame so
+        // there's no flash of the default theme.
+        var settings = AppSettings.Load();
+        ThemeManager.ApplySettings(settings);
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainViewModel(),
+                DataContext = new MainViewModel(settings),
             };
         }
 
