@@ -32,8 +32,8 @@
 <rect x="620" y="259.0" width="6" height="18" rx="3" fill="#2A0E1A" opacity="0.88"/>
 <rect x="633" y="252.0" width="6" height="32" rx="3" fill="#2A0E1A" opacity="0.88"/>
 <rect x="646" y="256.0" width="6" height="24" rx="3" fill="#2A0E1A" opacity="0.88"/>
-<text x="640" y="386" fill="#ECEFF4" font-size="38" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="middle">welcome to a calmer voice chat</text>
-<text x="640" y="420" fill="#6E7A8A" font-size="13.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="middle">no subscription · no account · no upsell — just your voice, your rules</text>
+<text x="640" y="388" fill="#ECEFF4" font-size="41" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="middle">welcome to openmod</text>
+<text x="640" y="422" fill="#6E7A8A" font-size="13.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="middle">no hassle · no subscriptions · all freedom</text>
 <rect x="520" y="456" width="240" height="48" rx="24" fill="url(#u6-accent)" filter="url(#u6-glow)"/>
 <text x="628" y="486" fill="#2A0E1A" font-size="13" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="middle">Get started</text>
 <line x1="682" y1="481" x2="694" y2="481" stroke="#2A0E1A" stroke-width="1.6"/>

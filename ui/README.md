@@ -6,7 +6,13 @@ Design-first workspace. Mockups are generated from one palette-driven script —
 ```bash
 python3 ui/mockup.py                                    # regenerate all SVGs
 for f in ui/*.svg; do rsvg-convert -z 2 "$f" -o "${f%.svg}.png"; done
+python3 ui/wizard_sheet.py                              # wizard contact sheet
+rsvg-convert -z 1 ui/mockup-wizard-sheet.svg -o ui/mockup-wizard-sheet.png
 ```
+
+The welcome copy is a parameter of `draw_wizard_welcome(headline, tagline)`.
+Shipped wording is lowercase — it matches every other headline in the flow
+(`you're live`), and the product name is lowercase everywhere else too.
 
 | File | What |
 |------|------|
@@ -22,8 +28,10 @@ for f in ui/*.svg; do rsvg-convert -z 2 "$f" -o "${f%.svg}.png"; done
 | `mockup-wizard-3-vmic-linux.svg` | same step on Linux — already done by PipeWire |
 | `mockup-wizard-4-import.svg` | First launch · step 4 — import existing folders |
 | `mockup-wizard-5-done.svg` | First launch · step 5 — you're live |
+| `mockup-wizard-sheet.svg` | all five wizard steps on one contact sheet |
 | `mockup-themes.svg` | all palettes + accent presets on one sheet |
 | `mockup.py` | generator (edit this, never the SVGs) |
+| `wizard_sheet.py` | composes `mockup-wizard-sheet.svg` from the 2x wizard PNGs |
 
 ## Stack (decided 2026-11-11)
 
@@ -131,7 +139,7 @@ welcome ──▶ appearance ──▶ virtual mic ──▶ import ──▶ yo
 
 | Step | Content | Why it exists |
 |------|---------|---------------|
-| 1 Welcome | logo, "welcome to a calmer voice chat", the three promises (free / offline / your files), one `Get started` | Zen's calm front door. No account, no email, no plan picker — nothing to decline |
+| 1 Welcome | logo, **"welcome to openmod"** / **"no hassle · no subscriptions · all freedom"**, the three promises (free / offline / your files), one `Get started` | Zen's calm front door. No account, no email, no plan picker — nothing to decline |
 | 2 Appearance | 4 theme cards with **live mini previews** + accent swatches + a live preview strip | the wizard recolors itself — it *is* the preview, using the real token swap |
 | 3 Virtual mic | Windows: optional one-press **VB-CABLE** install · Linux: `openmod_vmic` already ready | the only genuinely hard requirement; see below |
 | 4 Import | presets / soundboard / other voice changers, with counts and paths | migrating shouldn't mean re-downloading your library |

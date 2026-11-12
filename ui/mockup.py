@@ -684,7 +684,9 @@ def wizard_head(c, title, subtitle=None, subtitle2=None, x=280):
 
 
 # --- step 1: welcome --------------------------------------------------------
-def draw_wizard_welcome(c):
+def draw_wizard_welcome(c,
+                        headline="welcome to openmod",
+                        tagline="no hassle · no subscriptions · all freedom"):
     p = c.p
     wizard_frame(c, 1, show_back=False, show_skip=False, show_next=False)
 
@@ -697,9 +699,8 @@ def draw_wizard_welcome(c):
     for i, hh in enumerate((18, 32, 24)):
         c.rect(620 + i * 13, 268 - hh / 2, 6, hh, rx=3, fill=p["on_accent"], opacity=0.88)
 
-    c.text(640, 386, "welcome to a calmer voice chat", 38, p["text"], 700, SANS, "middle")
-    c.text(640, 420, "no subscription · no account · no upsell — just your voice, your rules",
-           13.5, p["muted"], 400, SANS, "middle")
+    c.text(640, 388, headline, 41, p["text"], 700, SANS, "middle")
+    c.text(640, 422, tagline, 13.5, p["muted"], 400, SANS, "middle")
 
     c.rect(520, 456, 240, 48, rx=24, fill=c.grad(),
            use_filter=c.filt() if p["glow"] else None)
