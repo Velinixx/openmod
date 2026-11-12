@@ -590,6 +590,367 @@ def draw_settings(c, theme_choice="Dark", accent_name="blush"):
     bottom_bar(c)
 
 
+# --- onboarding wizard (Zen-style first launch) ------------------------------
+# A full-window overlay, not the shell: no sidebar, no chain panel. One idea per
+# step, big calm type, and the only thing that ever asks for a decision is the
+# virtual-mic step (which is where openmod can genuinely help on Windows).
+
+WIZ_STEPS = 5
+
+
+def i_check(c, cx, cy, s, color, sw=2.0):
+    c.path(f"M {cx - s*0.42:.2f} {cy:.2f} l {s*0.30:.2f} {s*0.32:.2f} l {s*0.56:.2f} -{s*0.64:.2f}",
+           stroke=color, sw=sw)
+
+
+def i_arrow(c, x, y, color, sw=1.6):
+    c.line(x, y, x + 12, y, color, sw)
+    c.path(f"M {x + 6:.2f} {y - 5:.2f} l 6 5 l -6 5", stroke=color, sw=sw)
+
+
+def i_download(c, x, y, s, color):
+    c.line(x + s / 2, y, x + s / 2, y + s * 0.58, color, 1.6)
+    c.path(f"M {x + s*0.28:.2f} {y + s*0.38:.2f} l {s*0.22:.2f} {s*0.24:.2f} "
+           f"l {s*0.22:.2f} -{s*0.24:.2f}", stroke=color, sw=1.6)
+    c.path(f"M {x + s*0.14:.2f} {y + s*0.82:.2f} h {s*0.72:.2f}", stroke=color, sw=1.6)
+
+
+def i_folder(c, x, y, s, color):
+    c.path(f"M {x:.2f} {y + s*0.18:.2f} h {s*0.34:.2f} l {s*0.12:.2f} {s*0.16:.2f} "
+           f"h {s*0.40:.2f} v {s*0.50:.2f} h -{s*0.86:.2f} z", stroke=color, sw=1.5)
+
+
+def i_plug(c, x, y, s, color):
+    """virtual cable / plug"""
+    c.rect(x + s * 0.30, y + s * 0.34, s * 0.40, s * 0.40, rx=s * 0.10, stroke=color, sw=1.5)
+    c.line(x + s * 0.40, y + s * 0.34, x + s * 0.40, y + s * 0.10, color, 1.5)
+    c.line(x + s * 0.60, y + s * 0.34, x + s * 0.60, y + s * 0.10, color, 1.5)
+    c.line(x + s * 0.50, y + s * 0.74, x + s * 0.50, y + s * 0.94, color, 1.5)
+
+
+def i_shield(c, x, y, s, color):
+    c.path(f"M {x + s*0.5:.2f} {y:.2f} l {s*0.36:.2f} {s*0.14:.2f} v {s*0.30:.2f} "
+           f"q 0 {s*0.34:.2f} -{s*0.36:.2f} {s*0.46:.2f} "
+           f"q -{s*0.36:.2f} -{s*0.12:.2f} -{s*0.36:.2f} -{s*0.46:.2f} "
+           f"v -{s*0.30:.2f} z", stroke=color, sw=1.5)
+
+
+def wizard_frame(c, step, next_label="Continue", back_label="Back", show_back=True,
+                 show_skip=True, show_next=True, step_note=None):
+    """Shared chrome: logo, skip, progress dots, footer buttons."""
+    p = c.p
+    c.rect(0, 0, W, H, fill=p["bg"])
+
+    # header
+    c.rect(40, 34, 28, 28, rx=8, fill=c.grad())
+    for i, hh in enumerate((8, 14, 10)):
+        c.rect(47 + i * 5.5, 48 - hh / 2, 2.6, hh, rx=1.3, fill=p["on_accent"], opacity=0.85)
+    c.wordmark(78, 55, 16)
+    if show_skip:
+        c.text(1240, 55, "skip for now", 11, p["muted"], 400, SANS, "end")
+
+    # footer
+    c.line(40, 690, 1240, 690, p["border"])
+
+    dots_x = 640 - (WIZ_STEPS - 1) * 9
+    for i in range(WIZ_STEPS):
+        on = i == step - 1
+        if on:
+            c.rect(dots_x + i * 18 - 7, 723, 20, 5, rx=2.5, fill=c.ink)
+        else:
+            c.circle(dots_x + i * 18 + 3, 725.5, 2.6,
+                     fill=c.ink if i < step - 1 else p["track"])
+    if step_note:
+        c.text(640, 754, step_note, 9.5, p["faint"], 400, MONO, "middle")
+
+    # footer buttons
+    if show_back:
+        c.rect(1006, 708, 84, 42, rx=10, fill="none", stroke=p["border"], sw=1)
+        c.text(1048, 734, back_label, 11, p["soft"], 500, SANS, "middle")
+    if show_next:
+        bw = 158
+        c.rect(1240 - bw, 708, bw, 42, rx=10, fill=c.grad())
+        c.text(1240 - bw + bw / 2 - 8, 734, next_label, 11.5, p["on_accent"], 700, SANS, "middle")
+        i_arrow(c, 1240 - 26, 729, p["on_accent"])
+
+
+def wizard_head(c, title, subtitle=None, subtitle2=None, x=280):
+    p = c.p
+    c.text(x, 178, title, 30, p["text"], 700)
+    if subtitle:
+        c.text(x, 206, subtitle, 12.5, p["soft"])
+    if subtitle2:
+        c.text(x, 224, subtitle2, 12.5, p["soft"])
+
+
+# --- step 1: welcome --------------------------------------------------------
+def draw_wizard_welcome(c):
+    p = c.p
+    wizard_frame(c, 1, show_back=False, show_skip=False, show_next=False)
+
+    # calm glow behind the mark
+    c.circle(640, 268, 150, fill=c.a0, opacity=0.05)
+    c.circle(640, 268, 96, fill=c.a0, opacity=0.05)
+
+    c.rect(604, 232, 72, 72, rx=19, fill=c.grad(),
+           use_filter=c.filt() if p["glow"] else None)
+    for i, hh in enumerate((18, 32, 24)):
+        c.rect(620 + i * 13, 268 - hh / 2, 6, hh, rx=3, fill=p["on_accent"], opacity=0.88)
+
+    c.text(640, 386, "welcome to a calmer voice chat", 38, p["text"], 700, SANS, "middle")
+    c.text(640, 420, "no subscription · no account · no upsell — just your voice, your rules",
+           13.5, p["muted"], 400, SANS, "middle")
+
+    c.rect(520, 456, 240, 48, rx=24, fill=c.grad(),
+           use_filter=c.filt() if p["glow"] else None)
+    c.text(628, 486, "Get started", 13, p["on_accent"], 700, SANS, "middle")
+    i_arrow(c, 682, 481, p["on_accent"])
+
+    c.text(640, 536, "used openmod before?  import your presets instead",
+           10.5, p["faint"], 400, SANS, "middle")
+
+    # three promises, evenly spaced
+    for i, label in enumerate(("free forever, MIT licensed", "runs offline, no telemetry",
+                               "your files stay on your disk")):
+        cx = 380 + i * 260
+        c.circle(cx - 78, 606, 7, fill=c.a0, fo=0.16)
+        i_check(c, cx - 78, 606, 8, c.ink, 1.8)
+        c.text(cx - 64, 610, label, 10.5, p["muted"])
+
+
+# --- step 2: appearance -----------------------------------------------------
+def draw_wizard_appearance(c, theme_choice="Dark", accent_name="blush"):
+    p = c.p
+    wizard_frame(c, 2, next_label="Continue")
+    wizard_head(c, "make it yours",
+                "pick a theme and an accent — every screen is built from these tokens,",
+                "so this is the real thing recoloring, not a preview image.")
+
+    # four theme cards with live mini previews
+    order = ["dark", "light", "amoled"]
+    cards = [("System", None)] + [(THEMES[k]["label"], k) for k in order]
+    for i, (label, key) in enumerate(cards):
+        x, y, w, h = 280 + i * 180, 262, 160, 104
+        on = label == theme_choice
+        c.rect(x, y, w, h, rx=10, fill=p["card"],
+               stroke=c.ink if on else p["border"], sw=1.6 if on else 1)
+        tp = THEMES[key] if key else THEMES["dark"]
+        c.rect(x + 10, y + 10, 140, 76, rx=6, fill=tp["bg"])
+        c.rect(x + 10, y + 10, 140, 13, rx=4, fill=tp["panel"])
+        c.circle(x + 19, y + 16.5, 2.6, fill=c.a0)
+        c.text(x + 27, y + 19.5, "openmod", 6.5, tp["text"], 600)
+        c.rect(x + 18, y + 32, 42, 26, rx=4, fill=tp["card"])
+        c.rect(x + 22, y + 38, 15, 3, rx=1.5, fill=c.a0)
+        c.rect(x + 22, y + 46, 28, 3, rx=1.5, fill=tp["track"])
+        c.rect(x + 66, y + 32, 74, 26, rx=4, fill=tp["card"])
+        c.rect(x + 70, y + 38, 22, 3, rx=1.5, fill=tp["track"])
+        c.rect(x + 18, y + 66, 46, 9, rx=4.5, fill=c.grad())
+        if label == "System":
+            c.circle(x + 132, y + 18, 5, fill=tp["track"])
+            c.path(f"M {x + 132} {y + 13} a 5 5 0 0 1 0 10 z", fill=tp["text"])
+        c.text(x + w / 2, y + h + 20, label, 11,
+               p["text"] if on else p["muted"], 600 if on else 500, SANS, "middle")
+        if on:
+            c.circle(x + w - 12, y + 12, 8, fill=c.ink)
+            i_check(c, x + w - 12, y + 12, 8, p["on_accent"], 1.6)
+
+    # accent swatches
+    c.text(280, 434, "ACCENT", 9, p["muted"], 600, ls=1.4)
+    c.extra_defs = "".join(
+        f'<linearGradient id="{c.uid}wz{i}" x1="0" y1="0" x2="1" y2="1">'
+        f'<stop offset="0" stop-color="{a0}"/><stop offset="1" stop-color="{a1}"/>'
+        f'</linearGradient>' for i, (a0, a1) in enumerate(ACCENTS.values()))
+    for i, (name, (a0, a1)) in enumerate(ACCENTS.items()):
+        ax = 294 + i * 42
+        if name == accent_name:
+            c.circle(ax, 472, 17, stroke=a1, sw=1.6, opacity=0.9)
+        c.circle(ax, 472, 13, fill=f"url(#{c.uid}wz{i})")
+    cx = 294 + len(ACCENTS) * 42
+    c.circle(cx, 472, 13, stroke=p["muted"], sw=1.2, dash="3 3")
+    i_plus(c, cx, 472, 9, p["muted"], 1.4)
+    c.text(cx + 28, 476, "or any hex you like", 10, p["faint"])
+
+    c.text(280, 528, "System follows your desktop's light/dark mode — and, if you let it,",
+           10.5, p["muted"])
+    c.text(280, 544, "your desktop's accent colour too. Nothing here is final: it's all in Settings.",
+           10.5, p["muted"])
+
+    # live preview strip — the accent in the places it actually shows up
+    c.text(280, 596, "LIVE PREVIEW", 9, p["muted"], 600, ls=1.4)
+    c.rect(280, 612, 232, 54, rx=10, fill=p["card"], stroke=c.ink, sw=1.4,
+           use_filter=c.filt() if p["glow"] else None)
+    c.rect(294, 624, 26, 26, rx=7, fill=c.a0, fo=0.2)
+    i_wave(c, 300, 630, 14, c.ink)
+    c.text(330, 634, "chipmunk", 10.5, p["text"], 600)
+    c.pill(330, 640, 52, 14, c.a0, c.ink, fo=0.14, so=0.4)
+    c.text(356, 650.5, "pitch +7", 7.5, c.ink, 400, MONO, "middle")
+
+    c.rect(528, 622, 150, 34, rx=17, fill=c.grad())
+    c.text(596, 643, "VOICE ON", 9.5, p["on_accent"], 700, SANS, "middle", ls=1.1)
+    c.circle(546, 639, 3.4, fill=p["on_accent"])
+
+    c.text(700, 632, "OUT", 8.5, p["muted"], 600, SANS, "end")
+    c.rect(708, 626, 272, 6, rx=3, fill=p["track"])
+    c.rect(708, 626, 272 * 0.66, 6, rx=3, fill=c.grad("meter"))
+    c.text(708, 652, "every one of these is the same token pair", 9, p["faint"], 400, MONO)
+
+
+# --- step 3: virtual mic ----------------------------------------------------
+def draw_wizard_vmic_windows(c):
+    p = c.p
+    wizard_frame(c, 3, next_label="Continue", step_note="step 3 of 5 · windows")
+
+    wizard_head(c, "one thing games need: a virtual mic",
+                "Games listen to a microphone, not to an app. openmod needs a virtual",
+                "audio device to show up as one — this is the only extra piece it needs.")
+
+    # the optional add-on card
+    c.rect(280, 252, 700, 178, rx=12, fill=p["card"], stroke=p["border"])
+    c.rect(302, 274, 40, 40, rx=11, fill=c.a0, fo=0.18)
+    i_plug(c, 311, 283, 22, c.ink)
+    c.text(360, 292, "VB-CABLE virtual audio device", 13.5, p["text"], 600)
+    c.text(360, 311, "free · donationware · by VB-Audio — the cable Voicemod and OBS users install",
+           10, p["muted"])
+    c.pill(856, 276, 100, 22, p["deep"], p["border"])
+    c.circle(868, 287, 3.2, fill=p["muted"])
+    c.text(876, 291, "not detected", 9.5, p["soft"], 400, MONO)
+
+    c.text(302, 344, "openmod downloads the official installer from vb-audio.com and runs it",
+           10, p["soft"])
+    c.text(302, 359, "with the flags VB-Audio documents. Nothing is bundled, nothing is patched.",
+           10, p["soft"])
+
+    c.rect(302, 374, 190, 40, rx=10, fill=c.grad())
+    i_download(c, 320, 385, 16, p["on_accent"])
+    c.text(344, 399, "Install it for me", 11, p["on_accent"], 700)
+    c.rect(504, 374, 172, 40, rx=10, fill="none", stroke=p["border"], sw=1)
+    c.text(590, 399, "open vb-audio.com", 10.5, p["soft"], 500, SANS, "middle")
+    c.text(700, 399, "asks for your admin password once", 9.5, p["faint"])
+
+    # alternatives — the whole step is optional
+    opts = [("I already have a virtual cable", "detect it and use that instead", False),
+            ("skip this for now", "openmod still runs; you just won't be a mic yet", True)]
+    for i, (label, note, dashed) in enumerate(opts):
+        y = 448 + i * 56
+        c.rect(280, y, 700, 46, rx=10, fill=p["deep"] if not dashed else "none",
+               stroke=p["border"], sw=1, dash="4 4" if dashed else None)
+        c.circle(306, y + 23, 7, stroke=p["muted"], sw=1.4)
+        c.text(330, y + 21, label, 11.5, p["text"] if not dashed else p["soft"], 500)
+        c.text(330, y + 36, note, 9.5, p["faint"])
+
+    c.line(280, 620, 980, 620, p["border"])
+    c.text(280, 644, "Why not just ship a cable? Because drivers need a signed installer and a",
+           10, p["muted"])
+    c.text(280, 660, "reboot, and openmod has no business doing that behind your back. Opt-in only.",
+           10, p["muted"])
+
+
+def draw_wizard_vmic_linux(c):
+    p = c.p
+    wizard_frame(c, 3, next_label="Continue", step_note="step 3 of 5 · linux")
+
+    wizard_head(c, "your virtual mic is already here",
+                "PipeWire makes this for you, so there's nothing to install on Linux —",
+                "openmod created the sink on first run and will keep it alive.")
+
+    c.rect(280, 252, 700, 178, rx=12, fill=p["card"], stroke=p["border"])
+    c.rect(302, 274, 40, 40, rx=11, fill=c.a0, fo=0.18)
+    i_check(c, 322, 294, 18, c.ink, 2.2)
+    c.text(360, 292, "openmod_vmic", 13.5, p["text"], 600, MONO)
+    c.text(360, 311, "PipeWire null sink — created for you, already running", 10, p["muted"])
+    c.pill(870, 276, 86, 22, c.a0, c.ink, fo=0.16, so=0.4)
+    c.circle(882, 287, 3.2, fill=c.ink)
+    c.text(890, 291, "ready", 9.5, c.ink, 600, MONO)
+
+    c.text(302, 344, "pick this as your microphone:", 10, p["soft"])
+    c.rect(302, 354, 300, 30, rx=8, fill=p["deep"], stroke=p["border"])
+    c.text(316, 373, "openmod_vmic", 10.5, p["text"], 400, MONO)
+    c.text(590, 373, "copy", 9.5, c.ink, 500, MONO, "end")
+
+    c.text(302, 404, "hear yourself (optional):", 10, p["soft"])
+    c.text(452, 404, "openmod_vmic.monitor", 10.5, p["muted"], 400, MONO)
+
+    for i, label in enumerate(("Test it", "Recreate the sink")):
+        x = 280 + i * 132
+        c.rect(x, 448, 120, 38, rx=9, fill="none", stroke=p["border"], sw=1)
+        c.text(x + 60, 472, label, 10.5, p["soft"], 500, SANS, "middle")
+
+    c.line(280, 620, 980, 620, p["border"])
+    c.text(280, 644, "On Windows this same step offers to install VB-CABLE with one button —",
+           10, p["muted"])
+    c.text(280, 660, "Linux gets the equivalent for free from PipeWire, so we skip the install.",
+           10, p["muted"])
+
+
+# --- step 4: import ---------------------------------------------------------
+def draw_wizard_import(c):
+    p = c.p
+    wizard_frame(c, 4, next_label="Import 2 items", step_note="step 4 of 5")
+
+    wizard_head(c, "bring your stuff with you",
+                "openmod only indexes file names up front and reads a file when you use it,",
+                "so pointing at an existing folder is instant — nothing gets copied.")
+
+    rows = [
+        ("Presets", "effects/*.json", "3 found", "pitch, formant and gain — your chains come along", True),
+        ("Soundboard", "soundboards/", "0 clips", "drop .wav .mp3 .ogg .flac files in any time", True),
+        ("Voicemod presets", "AppData/Roaming/Voicemod", "not on this machine",
+         "we read their JSON and map what we can — best effort", False),
+    ]
+    for i, (name, path, count, note, checked) in enumerate(rows):
+        y = 252 + i * 76
+        c.rect(280, y, 700, 64, rx=10, fill=p["card"], stroke=p["border"])
+        c.rect(302, y + 23, 18, 18, rx=5,
+               fill=c.a0 if checked else "none",
+               stroke=c.ink if checked else p["track"], sw=1.4)
+        if checked:
+            i_check(c, 311, y + 32, 11, p["on_accent"], 1.8)
+        i_folder(c, 334, y + 20, 22, c.ink if checked else p["muted"])
+        c.text(368, y + 26, name, 12, p["text"], 600)
+        c.text(368, y + 43, note, 9.5, p["muted"])
+        c.text(940, y + 26, count, 10, p["soft"] if checked else p["faint"], 400, MONO, "end")
+        c.text(940, y + 43, path, 9, p["faint"], 400, MONO, "end")
+
+    c.text(280, 512, "nothing is converted, copied or uploaded — openmod points at the files you already have.",
+           10, p["muted"])
+
+    c.line(280, 620, 980, 620, p["border"])
+    c.text(280, 644, "a fourth row appears if you have another voice changer installed:",
+           10, p["muted"])
+    c.text(280, 660, "presets we can read are imported, the rest are listed and skipped with a reason.",
+           10, p["muted"])
+
+
+# --- step 5: done -----------------------------------------------------------
+def draw_wizard_done(c):
+    p = c.p
+    wizard_frame(c, 5, show_back=False, show_skip=False, show_next=False)
+
+    c.circle(640, 214, 104, fill=c.a0, opacity=0.05)
+    c.rect(608, 182, 64, 64, rx=32, fill=c.grad(),
+           use_filter=c.filt() if p["glow"] else None)
+    i_check(c, 640, 214, 28, p["on_accent"], 3.2)
+
+    c.text(640, 356, "you're live", 38, p["text"], 700, SANS, "middle")
+    c.text(640, 390, "your voice is on openmod_vmic — pick it as the mic wherever you talk.",
+           13, p["muted"], 400, SANS, "middle")
+
+    c.rect(340, 426, 600, 96, rx=12, fill=p["card"], stroke=p["border"])
+    c.text(364, 458, "in games and apps", 9, p["muted"], 600, ls=1.2)
+    c.text(364, 482, "openmod_vmic", 11, p["text"], 400, MONO)
+    c.text(364, 504, "hear yourself (optional)  ·  openmod_vmic.monitor", 9.5, p["faint"], 400, MONO)
+    c.pill(856, 442, 64, 20, c.a0, c.ink, fo=0.16, so=0.4)
+    c.text(888, 456, "LIVE", 8.5, c.ink, 700, SANS, "middle", ls=1)
+
+    c.rect(430, 548, 180, 44, rx=11, fill=c.grad())
+    c.text(520, 576, "Open openmod", 11.5, p["on_accent"], 700, SANS, "middle")
+    c.rect(626, 548, 180, 44, rx=11, fill="none", stroke=p["border"], sw=1)
+    c.text(716, 576, "read the README", 10.5, p["soft"], 500, SANS, "middle")
+
+    c.text(640, 632, "this wizard lives in Settings → setup, and never shows up again unless you ask",
+           9.5, p["faint"], 400, SANS, "middle")
+
+
 # --- write files ------------------------------------------------------------
 def write(name, canvas):
     with open(f"ui/{name}.svg", "w") as f:
@@ -613,6 +974,37 @@ def main():
     c = Canvas(THEMES["dark"], ACCENTS["mint"], uid=5)
     draw_main(c)
     write("mockup-main-mint", c)
+
+    # onboarding wizard — Zen-style first launch
+    c = Canvas(THEMES["dark"], ACCENTS["blush"], uid=6)
+    draw_wizard_welcome(c)
+    write("mockup-wizard-1-welcome", c)
+
+    c = Canvas(THEMES["dark"], ACCENTS["blush"], uid=7)
+    draw_wizard_appearance(c, theme_choice="Dark", accent_name="blush")
+    write("mockup-wizard-2-appearance", c)
+
+    # the virtual-mic step is the only one that differs per platform
+    c = Canvas(THEMES["dark"], ACCENTS["blush"], uid=8)
+    draw_wizard_vmic_windows(c)
+    write("mockup-wizard-3-vmic-windows", c)
+
+    c = Canvas(THEMES["dark"], ACCENTS["blush"], uid=9)
+    draw_wizard_vmic_linux(c)
+    write("mockup-wizard-3-vmic-linux", c)
+
+    c = Canvas(THEMES["dark"], ACCENTS["blush"], uid=10)
+    draw_wizard_import(c)
+    write("mockup-wizard-4-import", c)
+
+    c = Canvas(THEMES["dark"], ACCENTS["blush"], uid=11)
+    draw_wizard_done(c)
+    write("mockup-wizard-5-done", c)
+
+    # the wizard on a light palette, to prove it's the same token set
+    c = Canvas(THEMES["light"], ACCENTS["violet"], uid=12)
+    draw_wizard_appearance(c, theme_choice="Light", accent_name="violet")
+    write("mockup-wizard-2-appearance-light", c)
 
     # theme sheet: 2x2 at 50% + accent row
     panels = [("Dark", THEMES["dark"], draw_main),

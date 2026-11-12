@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+<defs>
+    <linearGradient id="u8-accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF99CC"/><stop offset="1" stop-color="#E91E63"/>
+    </linearGradient>
+    <linearGradient id="u8-meter" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FF99CC"/><stop offset="1" stop-color="#E91E63"/>
+    </linearGradient>
+    <filter id="u8-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="u8-win"><rect x="0" y="0" width="1280" height="800" rx="12"/></clipPath>
+    
+  </defs>
+<g clip-path="url(#u8-win)">
+<rect x="0" y="0" width="1280" height="800" rx="0" fill="#23272F"/>
+<rect x="40" y="34" width="28" height="28" rx="8" fill="url(#u8-accent)"/>
+<rect x="47.0" y="44.0" width="2.6" height="8" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<rect x="52.5" y="41.0" width="2.6" height="14" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<rect x="58.0" y="43.0" width="2.6" height="10" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<text x="78" y="55" font-size="16" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600"><tspan fill="#ECEFF4">open</tspan><tspan fill="#FF99CC">mod</tspan></text>
+<text x="1240" y="55" fill="#6E7A8A" font-size="11" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="end">skip for now</text>
+<line x1="40" y1="690" x2="1240" y2="690" stroke="#333B47" stroke-width="1"/>
+<circle cx="607" cy="725.5" r="2.6" fill="#FF99CC"/>
+<circle cx="625" cy="725.5" r="2.6" fill="#FF99CC"/>
+<rect x="633" y="723" width="20" height="5" rx="2.5" fill="#FF99CC"/>
+<circle cx="661" cy="725.5" r="2.6" fill="#3A4250"/>
+<circle cx="679" cy="725.5" r="2.6" fill="#3A4250"/>
+<text x="640" y="754" fill="#4E5764" font-size="9.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="middle">step 3 of 5 · windows</text>
+<rect x="1006" y="708" width="84" height="42" rx="10" fill="none" stroke="#333B47" stroke-width="1"/>
+<text x="1048" y="734" fill="#AEB8C6" font-size="11" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="middle">Back</text>
+<rect x="1082" y="708" width="158" height="42" rx="10" fill="url(#u8-accent)"/>
+<text x="1153.0" y="734" fill="#2A0E1A" font-size="11.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="middle">Continue</text>
+<line x1="1214" y1="729" x2="1226" y2="729" stroke="#2A0E1A" stroke-width="1.6"/>
+<path d="M 1220.00 724.00 l 6 5 l -6 5" fill="none" stroke="#2A0E1A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="280" y="178" fill="#ECEFF4" font-size="30" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="start">one thing games need: a virtual mic</text>
+<text x="280" y="206" fill="#AEB8C6" font-size="12.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">Games listen to a microphone, not to an app. openmod needs a virtual</text>
+<text x="280" y="224" fill="#AEB8C6" font-size="12.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">audio device to show up as one — this is the only extra piece it needs.</text>
+<rect x="280" y="252" width="700" height="178" rx="12" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<rect x="302" y="274" width="40" height="40" rx="11" fill="#FF99CC" fill-opacity="0.18"/>
+<rect x="317.6" y="290.48" width="8.8" height="8.8" rx="2.2" fill="none" stroke="#FF99CC" stroke-width="1.5"/>
+<line x1="319.8" y1="290.48" x2="319.8" y2="285.2" stroke="#FF99CC" stroke-width="1.5"/>
+<line x1="324.2" y1="290.48" x2="324.2" y2="285.2" stroke="#FF99CC" stroke-width="1.5"/>
+<line x1="322.0" y1="299.28" x2="322.0" y2="303.68" stroke="#FF99CC" stroke-width="1.5"/>
+<text x="360" y="292" fill="#ECEFF4" font-size="13.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start">VB-CABLE virtual audio device</text>
+<text x="360" y="311" fill="#6E7A8A" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">free · donationware · by VB-Audio — the cable Voicemod and OBS users install</text>
+<rect x="856" y="276" width="100" height="22" rx="11.0" fill="#262B34" stroke="#333B47" stroke-width="1"/>
+<circle cx="868" cy="287" r="3.2" fill="#6E7A8A"/>
+<text x="876" y="291" fill="#AEB8C6" font-size="9.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">not detected</text>
+<text x="302" y="344" fill="#AEB8C6" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">openmod downloads the official installer from vb-audio.com and runs it</text>
+<text x="302" y="359" fill="#AEB8C6" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">with the flags VB-Audio documents. Nothing is bundled, nothing is patched.</text>
+<rect x="302" y="374" width="190" height="40" rx="10" fill="url(#u8-accent)"/>
+<line x1="328.0" y1="385" x2="328.0" y2="394.28" stroke="#2A0E1A" stroke-width="1.6"/>
+<path d="M 324.48 391.08 l 3.52 3.84 l 3.52 -3.84" fill="none" stroke="#2A0E1A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 322.24 398.12 h 11.52" fill="none" stroke="#2A0E1A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="344" y="399" fill="#2A0E1A" font-size="11" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="start">Install it for me</text>
+<rect x="504" y="374" width="172" height="40" rx="10" fill="none" stroke="#333B47" stroke-width="1"/>
+<text x="590" y="399" fill="#AEB8C6" font-size="10.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="middle">open vb-audio.com</text>
+<text x="700" y="399" fill="#4E5764" font-size="9.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">asks for your admin password once</text>
+<rect x="280" y="448" width="700" height="46" rx="10" fill="#262B34" stroke="#333B47" stroke-width="1"/>
+<circle cx="306" cy="471" r="7" fill="none" stroke="#6E7A8A" stroke-width="1.4"/>
+<text x="330" y="469" fill="#ECEFF4" font-size="11.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="start">I already have a virtual cable</text>
+<text x="330" y="484" fill="#4E5764" font-size="9.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">detect it and use that instead</text>
+<rect x="280" y="504" width="700" height="46" rx="10" fill="none" stroke="#333B47" stroke-width="1" stroke-dasharray="4 4"/>
+<circle cx="306" cy="527" r="7" fill="none" stroke="#6E7A8A" stroke-width="1.4"/>
+<text x="330" y="525" fill="#AEB8C6" font-size="11.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="start">skip this for now</text>
+<text x="330" y="540" fill="#4E5764" font-size="9.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">openmod still runs; you just won't be a mic yet</text>
+<line x1="280" y1="620" x2="980" y2="620" stroke="#333B47" stroke-width="1"/>
+<text x="280" y="644" fill="#6E7A8A" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">Why not just ship a cable? Because drivers need a signed installer and a</text>
+<text x="280" y="660" fill="#6E7A8A" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">reboot, and openmod has no business doing that behind your back. Opt-in only.</text>
+</g>
+</svg>

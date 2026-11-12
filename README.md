@@ -101,7 +101,11 @@ Bundled: `passthrough`, `chipmunk`, `deep-voice`.
 - [x] **Virtual device** — `openmod run --vmic` (PipeWire null-sink fake mic, auto-created + routed); Windows virtual cable later
 - [x] **UI foundation** — Avalonia main window: voice grid, effect chain, virtual-mic status, theme + accent tokens (dark / light / AMOLED, 6 accent presets, custom)
 - [x] **Settings page** — theme picker (System / Light / Dark / AMOLED), 6 accent presets + custom hex, follow-desktop-accent via the XDG portal, audio rows, live preview column; every change writes `~/.config/openmod/settings.json` immediately
-- [ ] **UI** — Soundboard page (library is ready), module system, Zen-style first-launch wizard
+- [ ] **UI** — Soundboard page (library is ready)
+- [ ] **First-launch wizard** — mockup done (`ui/mockup-wizard-*.svg`): welcome → theme + accent → virtual mic → import → done, with an **optional one-press VB-CABLE install on Windows** (ALVR-style) and nothing to install on Linux
+- [ ] **Community** — browse community sounds/presets and **export them in a format you pick** (wav / mp3 / flac; encoders, not decoders, are the limit)
+- [ ] **Layout** — drag panels around and resize them, with presets (Voicemod-familiar / Zen / Compact)
+- [ ] **Modules** — composable widgets (media player, heart rate, chatbox)
 - [ ] **Windows port** — cpal already supports WASAPI; same core, new backend
 - [ ] **Voicemod import** — bring your soundboard + effect chains with you
 

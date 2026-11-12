@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+<defs>
+    <linearGradient id="u9-accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF99CC"/><stop offset="1" stop-color="#E91E63"/>
+    </linearGradient>
+    <linearGradient id="u9-meter" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FF99CC"/><stop offset="1" stop-color="#E91E63"/>
+    </linearGradient>
+    <filter id="u9-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="u9-win"><rect x="0" y="0" width="1280" height="800" rx="12"/></clipPath>
+    
+  </defs>
+<g clip-path="url(#u9-win)">
+<rect x="0" y="0" width="1280" height="800" rx="0" fill="#23272F"/>
+<rect x="40" y="34" width="28" height="28" rx="8" fill="url(#u9-accent)"/>
+<rect x="47.0" y="44.0" width="2.6" height="8" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<rect x="52.5" y="41.0" width="2.6" height="14" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<rect x="58.0" y="43.0" width="2.6" height="10" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<text x="78" y="55" font-size="16" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600"><tspan fill="#ECEFF4">open</tspan><tspan fill="#FF99CC">mod</tspan></text>
+<text x="1240" y="55" fill="#6E7A8A" font-size="11" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="end">skip for now</text>
+<line x1="40" y1="690" x2="1240" y2="690" stroke="#333B47" stroke-width="1"/>
+<circle cx="607" cy="725.5" r="2.6" fill="#FF99CC"/>
+<circle cx="625" cy="725.5" r="2.6" fill="#FF99CC"/>
+<rect x="633" y="723" width="20" height="5" rx="2.5" fill="#FF99CC"/>
+<circle cx="661" cy="725.5" r="2.6" fill="#3A4250"/>
+<circle cx="679" cy="725.5" r="2.6" fill="#3A4250"/>
+<text x="640" y="754" fill="#4E5764" font-size="9.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="middle">step 3 of 5 · linux</text>
+<rect x="1006" y="708" width="84" height="42" rx="10" fill="none" stroke="#333B47" stroke-width="1"/>
+<text x="1048" y="734" fill="#AEB8C6" font-size="11" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="middle">Back</text>
+<rect x="1082" y="708" width="158" height="42" rx="10" fill="url(#u9-accent)"/>
+<text x="1153.0" y="734" fill="#2A0E1A" font-size="11.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="middle">Continue</text>
+<line x1="1214" y1="729" x2="1226" y2="729" stroke="#2A0E1A" stroke-width="1.6"/>
+<path d="M 1220.00 724.00 l 6 5 l -6 5" fill="none" stroke="#2A0E1A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="280" y="178" fill="#ECEFF4" font-size="30" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="start">your virtual mic is already here</text>
+<text x="280" y="206" fill="#AEB8C6" font-size="12.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">PipeWire makes this for you, so there's nothing to install on Linux —</text>
+<text x="280" y="224" fill="#AEB8C6" font-size="12.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">openmod created the sink on first run and will keep it alive.</text>
+<rect x="280" y="252" width="700" height="178" rx="12" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<rect x="302" y="274" width="40" height="40" rx="11" fill="#FF99CC" fill-opacity="0.18"/>
+<path d="M 314.44 294.00 l 5.40 5.76 l 10.08 -11.52" fill="none" stroke="#FF99CC" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="360" y="292" fill="#ECEFF4" font-size="13.5" font-family="DejaVu Sans Mono, monospace" font-weight="600" text-anchor="start">openmod_vmic</text>
+<text x="360" y="311" fill="#6E7A8A" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">PipeWire null sink — created for you, already running</text>
+<rect x="870" y="276" width="86" height="22" rx="11.0" fill="#FF99CC" stroke="#FF99CC" stroke-width="1" fill-opacity="0.16" stroke-opacity="0.4"/>
+<circle cx="882" cy="287" r="3.2" fill="#FF99CC"/>
+<text x="890" y="291" fill="#FF99CC" font-size="9.5" font-family="DejaVu Sans Mono, monospace" font-weight="600" text-anchor="start">ready</text>
+<text x="302" y="344" fill="#AEB8C6" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">pick this as your microphone:</text>
+<rect x="302" y="354" width="300" height="30" rx="8" fill="#262B34" stroke="#333B47" stroke-width="1"/>
+<text x="316" y="373" fill="#ECEFF4" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">openmod_vmic</text>
+<text x="590" y="373" fill="#FF99CC" font-size="9.5" font-family="DejaVu Sans Mono, monospace" font-weight="500" text-anchor="end">copy</text>
+<text x="302" y="404" fill="#AEB8C6" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">hear yourself (optional):</text>
+<text x="452" y="404" fill="#6E7A8A" font-size="10.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">openmod_vmic.monitor</text>
+<rect x="280" y="448" width="120" height="38" rx="9" fill="none" stroke="#333B47" stroke-width="1"/>
+<text x="340" y="472" fill="#AEB8C6" font-size="10.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="middle">Test it</text>
+<rect x="412" y="448" width="120" height="38" rx="9" fill="none" stroke="#333B47" stroke-width="1"/>
+<text x="472" y="472" fill="#AEB8C6" font-size="10.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="middle">Recreate the sink</text>
+<line x1="280" y1="620" x2="980" y2="620" stroke="#333B47" stroke-width="1"/>
+<text x="280" y="644" fill="#6E7A8A" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">On Windows this same step offers to install VB-CABLE with one button —</text>
+<text x="280" y="660" fill="#6E7A8A" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">Linux gets the equivalent for free from PipeWire, so we skip the install.</text>
+</g>
+</svg>

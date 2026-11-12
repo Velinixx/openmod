@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+<defs>
+    <linearGradient id="u10-accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF99CC"/><stop offset="1" stop-color="#E91E63"/>
+    </linearGradient>
+    <linearGradient id="u10-meter" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FF99CC"/><stop offset="1" stop-color="#E91E63"/>
+    </linearGradient>
+    <filter id="u10-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="u10-win"><rect x="0" y="0" width="1280" height="800" rx="12"/></clipPath>
+    
+  </defs>
+<g clip-path="url(#u10-win)">
+<rect x="0" y="0" width="1280" height="800" rx="0" fill="#23272F"/>
+<rect x="40" y="34" width="28" height="28" rx="8" fill="url(#u10-accent)"/>
+<rect x="47.0" y="44.0" width="2.6" height="8" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<rect x="52.5" y="41.0" width="2.6" height="14" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<rect x="58.0" y="43.0" width="2.6" height="10" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<text x="78" y="55" font-size="16" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600"><tspan fill="#ECEFF4">open</tspan><tspan fill="#FF99CC">mod</tspan></text>
+<text x="1240" y="55" fill="#6E7A8A" font-size="11" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="end">skip for now</text>
+<line x1="40" y1="690" x2="1240" y2="690" stroke="#333B47" stroke-width="1"/>
+<circle cx="607" cy="725.5" r="2.6" fill="#FF99CC"/>
+<circle cx="625" cy="725.5" r="2.6" fill="#FF99CC"/>
+<circle cx="643" cy="725.5" r="2.6" fill="#FF99CC"/>
+<rect x="651" y="723" width="20" height="5" rx="2.5" fill="#FF99CC"/>
+<circle cx="679" cy="725.5" r="2.6" fill="#3A4250"/>
+<text x="640" y="754" fill="#4E5764" font-size="9.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="middle">step 4 of 5</text>
+<rect x="1006" y="708" width="84" height="42" rx="10" fill="none" stroke="#333B47" stroke-width="1"/>
+<text x="1048" y="734" fill="#AEB8C6" font-size="11" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="middle">Back</text>
+<rect x="1082" y="708" width="158" height="42" rx="10" fill="url(#u10-accent)"/>
+<text x="1153.0" y="734" fill="#2A0E1A" font-size="11.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="middle">Import 2 items</text>
+<line x1="1214" y1="729" x2="1226" y2="729" stroke="#2A0E1A" stroke-width="1.6"/>
+<path d="M 1220.00 724.00 l 6 5 l -6 5" fill="none" stroke="#2A0E1A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="280" y="178" fill="#ECEFF4" font-size="30" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="start">bring your stuff with you</text>
+<text x="280" y="206" fill="#AEB8C6" font-size="12.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">openmod only indexes file names up front and reads a file when you use it,</text>
+<text x="280" y="224" fill="#AEB8C6" font-size="12.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">so pointing at an existing folder is instant — nothing gets copied.</text>
+<rect x="280" y="252" width="700" height="64" rx="10" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<rect x="302" y="275" width="18" height="18" rx="5" fill="#FF99CC" stroke="#FF99CC" stroke-width="1.4"/>
+<path d="M 306.38 284.00 l 3.30 3.52 l 6.16 -7.04" fill="none" stroke="#2A0E1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 334.00 275.96 h 7.48 l 2.64 3.52 h 8.80 v 11.00 h -18.92 z" fill="none" stroke="#FF99CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="368" y="278" fill="#ECEFF4" font-size="12" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start">Presets</text>
+<text x="368" y="295" fill="#6E7A8A" font-size="9.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">pitch, formant and gain — your chains come along</text>
+<text x="940" y="278" fill="#AEB8C6" font-size="10" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="end">3 found</text>
+<text x="940" y="295" fill="#4E5764" font-size="9" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="end">effects/*.json</text>
+<rect x="280" y="328" width="700" height="64" rx="10" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<rect x="302" y="351" width="18" height="18" rx="5" fill="#FF99CC" stroke="#FF99CC" stroke-width="1.4"/>
+<path d="M 306.38 360.00 l 3.30 3.52 l 6.16 -7.04" fill="none" stroke="#2A0E1A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 334.00 351.96 h 7.48 l 2.64 3.52 h 8.80 v 11.00 h -18.92 z" fill="none" stroke="#FF99CC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="368" y="354" fill="#ECEFF4" font-size="12" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start">Soundboard</text>
+<text x="368" y="371" fill="#6E7A8A" font-size="9.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">drop .wav .mp3 .ogg .flac files in any time</text>
+<text x="940" y="354" fill="#AEB8C6" font-size="10" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="end">0 clips</text>
+<text x="940" y="371" fill="#4E5764" font-size="9" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="end">soundboards/</text>
+<rect x="280" y="404" width="700" height="64" rx="10" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<rect x="302" y="427" width="18" height="18" rx="5" fill="none" stroke="#3A4250" stroke-width="1.4"/>
+<path d="M 334.00 427.96 h 7.48 l 2.64 3.52 h 8.80 v 11.00 h -18.92 z" fill="none" stroke="#6E7A8A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="368" y="430" fill="#ECEFF4" font-size="12" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start">Voicemod presets</text>
+<text x="368" y="447" fill="#6E7A8A" font-size="9.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">we read their JSON and map what we can — best effort</text>
+<text x="940" y="430" fill="#4E5764" font-size="10" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="end">not on this machine</text>
+<text x="940" y="447" fill="#4E5764" font-size="9" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="end">AppData/Roaming/Voicemod</text>
+<text x="280" y="512" fill="#6E7A8A" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">nothing is converted, copied or uploaded — openmod points at the files you already have.</text>
+<line x1="280" y1="620" x2="980" y2="620" stroke="#333B47" stroke-width="1"/>
+<text x="280" y="644" fill="#6E7A8A" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">a fourth row appears if you have another voice changer installed:</text>
+<text x="280" y="660" fill="#6E7A8A" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">presets we can read are imported, the rest are listed and skipped with a reason.</text>
+</g>
+</svg>

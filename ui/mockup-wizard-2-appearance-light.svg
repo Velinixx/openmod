@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+<defs>
+    <linearGradient id="u12-accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#C3A6FF"/><stop offset="1" stop-color="#7C4DFF"/>
+    </linearGradient>
+    <linearGradient id="u12-meter" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#C3A6FF"/><stop offset="1" stop-color="#7C4DFF"/>
+    </linearGradient>
+    
+    <clipPath id="u12-win"><rect x="0" y="0" width="1280" height="800" rx="12"/></clipPath>
+    <linearGradient id="u12-wz0" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF99CC"/><stop offset="1" stop-color="#E91E63"/></linearGradient><linearGradient id="u12-wz1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7FE0C3"/><stop offset="1" stop-color="#0FA97F"/></linearGradient><linearGradient id="u12-wz2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8CC8FF"/><stop offset="1" stop-color="#2E7DD1"/></linearGradient><linearGradient id="u12-wz3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C3A6FF"/><stop offset="1" stop-color="#7C4DFF"/></linearGradient><linearGradient id="u12-wz4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFCF7A"/><stop offset="1" stop-color="#E08C00"/></linearGradient><linearGradient id="u12-wz5" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFA08C"/><stop offset="1" stop-color="#E05A3F"/></linearGradient>
+  </defs>
+<g clip-path="url(#u12-win)">
+<rect x="0" y="0" width="1280" height="800" rx="0" fill="#F2F5F9"/>
+<rect x="40" y="34" width="28" height="28" rx="8" fill="url(#u12-accent)"/>
+<rect x="47.0" y="44.0" width="2.6" height="8" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<rect x="52.5" y="41.0" width="2.6" height="14" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<rect x="58.0" y="43.0" width="2.6" height="10" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<text x="78" y="55" font-size="16" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600"><tspan fill="#161B22">open</tspan><tspan fill="#7C4DFF">mod</tspan></text>
+<text x="1240" y="55" fill="#7B8794" font-size="11" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="end">skip for now</text>
+<line x1="40" y1="690" x2="1240" y2="690" stroke="#E1E7EF" stroke-width="1"/>
+<circle cx="607" cy="725.5" r="2.6" fill="#7C4DFF"/>
+<rect x="615" y="723" width="20" height="5" rx="2.5" fill="#7C4DFF"/>
+<circle cx="643" cy="725.5" r="2.6" fill="#DCE3EC"/>
+<circle cx="661" cy="725.5" r="2.6" fill="#DCE3EC"/>
+<circle cx="679" cy="725.5" r="2.6" fill="#DCE3EC"/>
+<rect x="1006" y="708" width="84" height="42" rx="10" fill="none" stroke="#E1E7EF" stroke-width="1"/>
+<text x="1048" y="734" fill="#4A5563" font-size="11" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="middle">Back</text>
+<rect x="1082" y="708" width="158" height="42" rx="10" fill="url(#u12-accent)"/>
+<text x="1153.0" y="734" fill="#2A0E1A" font-size="11.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="middle">Continue</text>
+<line x1="1214" y1="729" x2="1226" y2="729" stroke="#2A0E1A" stroke-width="1.6"/>
+<path d="M 1220.00 724.00 l 6 5 l -6 5" fill="none" stroke="#2A0E1A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="280" y="178" fill="#161B22" font-size="30" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="start">make it yours</text>
+<text x="280" y="206" fill="#4A5563" font-size="12.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">pick a theme and an accent — every screen is built from these tokens,</text>
+<text x="280" y="224" fill="#4A5563" font-size="12.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">so this is the real thing recoloring, not a preview image.</text>
+<rect x="280" y="262" width="160" height="104" rx="10" fill="#FFFFFF" stroke="#E1E7EF" stroke-width="1"/>
+<rect x="290" y="272" width="140" height="76" rx="6" fill="#23272F"/>
+<rect x="290" y="272" width="140" height="13" rx="4" fill="#1B1F26"/>
+<circle cx="299" cy="278.5" r="2.6" fill="#C3A6FF"/>
+<text x="307" y="281.5" fill="#ECEFF4" font-size="6.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start">openmod</text>
+<rect x="298" y="294" width="42" height="26" rx="4" fill="#2C323C"/>
+<rect x="302" y="300" width="15" height="3" rx="1.5" fill="#C3A6FF"/>
+<rect x="302" y="308" width="28" height="3" rx="1.5" fill="#3A4250"/>
+<rect x="346" y="294" width="74" height="26" rx="4" fill="#2C323C"/>
+<rect x="350" y="300" width="22" height="3" rx="1.5" fill="#3A4250"/>
+<rect x="298" y="328" width="46" height="9" rx="4.5" fill="url(#u12-accent)"/>
+<circle cx="412" cy="280" r="5" fill="#3A4250"/>
+<path d="M 412 275 a 5 5 0 0 1 0 10 z" fill="#ECEFF4" stroke="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="360.0" y="386" fill="#7B8794" font-size="11" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="middle">System</text>
+<rect x="460" y="262" width="160" height="104" rx="10" fill="#FFFFFF" stroke="#E1E7EF" stroke-width="1"/>
+<rect x="470" y="272" width="140" height="76" rx="6" fill="#23272F"/>
+<rect x="470" y="272" width="140" height="13" rx="4" fill="#1B1F26"/>
+<circle cx="479" cy="278.5" r="2.6" fill="#C3A6FF"/>
+<text x="487" y="281.5" fill="#ECEFF4" font-size="6.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start">openmod</text>
+<rect x="478" y="294" width="42" height="26" rx="4" fill="#2C323C"/>
+<rect x="482" y="300" width="15" height="3" rx="1.5" fill="#C3A6FF"/>
+<rect x="482" y="308" width="28" height="3" rx="1.5" fill="#3A4250"/>
+<rect x="526" y="294" width="74" height="26" rx="4" fill="#2C323C"/>
+<rect x="530" y="300" width="22" height="3" rx="1.5" fill="#3A4250"/>
+<rect x="478" y="328" width="46" height="9" rx="4.5" fill="url(#u12-accent)"/>
+<text x="540.0" y="386" fill="#7B8794" font-size="11" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="middle">Dark</text>
+<rect x="640" y="262" width="160" height="104" rx="10" fill="#FFFFFF" stroke="#7C4DFF" stroke-width="1.6"/>
+<rect x="650" y="272" width="140" height="76" rx="6" fill="#F2F5F9"/>
+<rect x="650" y="272" width="140" height="13" rx="4" fill="#FFFFFF"/>
+<circle cx="659" cy="278.5" r="2.6" fill="#C3A6FF"/>
+<text x="667" y="281.5" fill="#161B22" font-size="6.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start">openmod</text>
+<rect x="658" y="294" width="42" height="26" rx="4" fill="#FFFFFF"/>
+<rect x="662" y="300" width="15" height="3" rx="1.5" fill="#C3A6FF"/>
+<rect x="662" y="308" width="28" height="3" rx="1.5" fill="#DCE3EC"/>
+<rect x="706" y="294" width="74" height="26" rx="4" fill="#FFFFFF"/>
+<rect x="710" y="300" width="22" height="3" rx="1.5" fill="#DCE3EC"/>
+<rect x="658" y="328" width="46" height="9" rx="4.5" fill="url(#u12-accent)"/>
+<text x="720.0" y="386" fill="#161B22" font-size="11" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="middle">Light</text>
+<circle cx="788" cy="274" r="8" fill="#7C4DFF"/>
+<path d="M 784.64 274.00 l 2.40 2.56 l 4.48 -5.12" fill="none" stroke="#2A0E1A" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="820" y="262" width="160" height="104" rx="10" fill="#FFFFFF" stroke="#E1E7EF" stroke-width="1"/>
+<rect x="830" y="272" width="140" height="76" rx="6" fill="#000000"/>
+<rect x="830" y="272" width="140" height="13" rx="4" fill="#000000"/>
+<circle cx="839" cy="278.5" r="2.6" fill="#C3A6FF"/>
+<text x="847" y="281.5" fill="#FFFFFF" font-size="6.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start">openmod</text>
+<rect x="838" y="294" width="42" height="26" rx="4" fill="#0C0C0C"/>
+<rect x="842" y="300" width="15" height="3" rx="1.5" fill="#C3A6FF"/>
+<rect x="842" y="308" width="28" height="3" rx="1.5" fill="#262626"/>
+<rect x="886" y="294" width="74" height="26" rx="4" fill="#0C0C0C"/>
+<rect x="890" y="300" width="22" height="3" rx="1.5" fill="#262626"/>
+<rect x="838" y="328" width="46" height="9" rx="4.5" fill="url(#u12-accent)"/>
+<text x="900.0" y="386" fill="#7B8794" font-size="11" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="middle">AMOLED</text>
+<text x="280" y="434" fill="#7B8794" font-size="9" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start" letter-spacing="1.4">ACCENT</text>
+<circle cx="294" cy="472" r="13" fill="url(#u12-wz0)"/>
+<circle cx="336" cy="472" r="13" fill="url(#u12-wz1)"/>
+<circle cx="378" cy="472" r="13" fill="url(#u12-wz2)"/>
+<circle cx="420" cy="472" r="17" fill="none" stroke="#7C4DFF" stroke-width="1.6" opacity="0.9"/>
+<circle cx="420" cy="472" r="13" fill="url(#u12-wz3)"/>
+<circle cx="462" cy="472" r="13" fill="url(#u12-wz4)"/>
+<circle cx="504" cy="472" r="13" fill="url(#u12-wz5)"/>
+<circle cx="546" cy="472" r="13" fill="none" stroke="#7B8794" stroke-width="1.2" stroke-dasharray="3 3"/>
+<line x1="541.5" y1="472" x2="550.5" y2="472" stroke="#7B8794" stroke-width="1.4"/>
+<line x1="546" y1="467.5" x2="546" y2="476.5" stroke="#7B8794" stroke-width="1.4"/>
+<text x="574" y="476" fill="#A7B1BD" font-size="10" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">or any hex you like</text>
+<text x="280" y="528" fill="#7B8794" font-size="10.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">System follows your desktop's light/dark mode — and, if you let it,</text>
+<text x="280" y="544" fill="#7B8794" font-size="10.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="start">your desktop's accent colour too. Nothing here is final: it's all in Settings.</text>
+<text x="280" y="596" fill="#7B8794" font-size="9" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start" letter-spacing="1.4">LIVE PREVIEW</text>
+<rect x="280" y="612" width="232" height="54" rx="10" fill="#FFFFFF" stroke="#7C4DFF" stroke-width="1.4"/>
+<rect x="294" y="624" width="26" height="26" rx="7" fill="#C3A6FF" fill-opacity="0.2"/>
+<line x1="302.3333333333333" y1="633.85" x2="302.3333333333333" y2="640.15" stroke="#7C4DFF" stroke-width="2"/>
+<line x1="307.0" y1="630.0" x2="307.0" y2="644.0" stroke="#7C4DFF" stroke-width="2"/>
+<line x1="311.66666666666663" y1="632.45" x2="311.66666666666663" y2="641.55" stroke="#7C4DFF" stroke-width="2"/>
+<text x="330" y="634" fill="#161B22" font-size="10.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start">chipmunk</text>
+<rect x="330" y="640" width="52" height="14" rx="7.0" fill="#C3A6FF" stroke="#7C4DFF" stroke-width="1" fill-opacity="0.14" stroke-opacity="0.4"/>
+<text x="356" y="650.5" fill="#7C4DFF" font-size="7.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="middle">pitch +7</text>
+<rect x="528" y="622" width="150" height="34" rx="17" fill="url(#u12-accent)"/>
+<text x="596" y="643" fill="#2A0E1A" font-size="9.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="middle" letter-spacing="1.1">VOICE ON</text>
+<circle cx="546" cy="639" r="3.4" fill="#2A0E1A"/>
+<text x="700" y="632" fill="#7B8794" font-size="8.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="end">OUT</text>
+<rect x="708" y="626" width="272" height="6" rx="3" fill="#DCE3EC"/>
+<rect x="708" y="626" width="179.52" height="6" rx="3" fill="url(#u12-meter)"/>
+<text x="708" y="652" fill="#A7B1BD" font-size="9" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">every one of these is the same token pair</text>
+</g>
+</svg>

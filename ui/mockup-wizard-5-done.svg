@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+<defs>
+    <linearGradient id="u11-accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FF99CC"/><stop offset="1" stop-color="#E91E63"/>
+    </linearGradient>
+    <linearGradient id="u11-meter" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FF99CC"/><stop offset="1" stop-color="#E91E63"/>
+    </linearGradient>
+    <filter id="u11-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="u11-win"><rect x="0" y="0" width="1280" height="800" rx="12"/></clipPath>
+    
+  </defs>
+<g clip-path="url(#u11-win)">
+<rect x="0" y="0" width="1280" height="800" rx="0" fill="#23272F"/>
+<rect x="40" y="34" width="28" height="28" rx="8" fill="url(#u11-accent)"/>
+<rect x="47.0" y="44.0" width="2.6" height="8" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<rect x="52.5" y="41.0" width="2.6" height="14" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<rect x="58.0" y="43.0" width="2.6" height="10" rx="1.3" fill="#2A0E1A" opacity="0.85"/>
+<text x="78" y="55" font-size="16" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600"><tspan fill="#ECEFF4">open</tspan><tspan fill="#FF99CC">mod</tspan></text>
+<line x1="40" y1="690" x2="1240" y2="690" stroke="#333B47" stroke-width="1"/>
+<circle cx="607" cy="725.5" r="2.6" fill="#FF99CC"/>
+<circle cx="625" cy="725.5" r="2.6" fill="#FF99CC"/>
+<circle cx="643" cy="725.5" r="2.6" fill="#FF99CC"/>
+<circle cx="661" cy="725.5" r="2.6" fill="#FF99CC"/>
+<rect x="669" y="723" width="20" height="5" rx="2.5" fill="#FF99CC"/>
+<circle cx="640" cy="214" r="104" fill="#FF99CC" opacity="0.05"/>
+<rect x="608" y="182" width="64" height="64" rx="32" fill="url(#u11-accent)" filter="url(#u11-glow)"/>
+<path d="M 628.24 214.00 l 8.40 8.96 l 15.68 -17.92" fill="none" stroke="#2A0E1A" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="640" y="356" fill="#ECEFF4" font-size="38" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="middle">you're live</text>
+<text x="640" y="390" fill="#6E7A8A" font-size="13" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="middle">your voice is on openmod_vmic — pick it as the mic wherever you talk.</text>
+<rect x="340" y="426" width="600" height="96" rx="12" fill="#2C323C" stroke="#333B47" stroke-width="1"/>
+<text x="364" y="458" fill="#6E7A8A" font-size="9" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="600" text-anchor="start" letter-spacing="1.2">in games and apps</text>
+<text x="364" y="482" fill="#ECEFF4" font-size="11" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">openmod_vmic</text>
+<text x="364" y="504" fill="#4E5764" font-size="9.5" font-family="DejaVu Sans Mono, monospace" font-weight="400" text-anchor="start">hear yourself (optional)  ·  openmod_vmic.monitor</text>
+<rect x="856" y="442" width="64" height="20" rx="10.0" fill="#FF99CC" stroke="#FF99CC" stroke-width="1" fill-opacity="0.16" stroke-opacity="0.4"/>
+<text x="888" y="456" fill="#FF99CC" font-size="8.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="middle" letter-spacing="1">LIVE</text>
+<rect x="430" y="548" width="180" height="44" rx="11" fill="url(#u11-accent)"/>
+<text x="520" y="576" fill="#2A0E1A" font-size="11.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="700" text-anchor="middle">Open openmod</text>
+<rect x="626" y="548" width="180" height="44" rx="11" fill="none" stroke="#333B47" stroke-width="1"/>
+<text x="716" y="576" fill="#AEB8C6" font-size="10.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="500" text-anchor="middle">read the README</text>
+<text x="640" y="632" fill="#4E5764" font-size="9.5" font-family="Cantarell, DejaVu Sans, sans-serif" font-weight="400" text-anchor="middle">this wizard lives in Settings → setup, and never shows up again unless you ask</text>
+</g>
+</svg>
