@@ -112,7 +112,7 @@ Bundled: `passthrough`, `chipmunk`, `deep-voice`.
 - [x] **First-launch wizard** — welcome → theme + accent (3-up live preview: dark / light / AMOLED) → virtual mic → import → done. Linux shows `openmod_vmic` ready; Windows offers an **optional one-press VB-CABLE install** (ALVR-style, newest package scraped from vb-audio.com, visible installer, always skippable). Re-runnable from Settings → setup
 - [ ] **UI** — Soundboard page (library is ready)
 - [ ] **Suggestions** — optional, off-by-default, local-only tagging of your own clips (sound effect / voice line / music + pitch range) to suggest hotkeys, effect chains, duplicates and trims. Never uploads, never applies without asking, dismissal remembered per file hash. Spec in `ui/README.md`
-- [ ] **Community** — browse community sounds/presets and **export them in a format you pick** (wav / mp3 / flac; encoders, not decoders, are the limit)
+- [ ] **Community** — browse community sounds/presets and **export them in a format you pick** (wav / mp3 / flac; encoders, not decoders, are the limit). Adding your own clip offers **private (default) or publish-as-PR**, with **hashtags** (`#game`, `#sfx`, …) and one search syntax for both local and community (`#tag` scopes to tags, plain text hits titles + tags)
 - [ ] **Community `for you`** — search plus a locally-ranked recommendation view. Content-based over the community manifest against your likes, on your machine: no account, no profiling, no "people like you" — and it says so
 - [ ] **Layout** — drag panels around and resize them, with presets (Voicemod-familiar / Zen / Compact)
 - [ ] **Modules** — composable widgets (media player, heart rate, chatbox)

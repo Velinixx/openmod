@@ -313,6 +313,51 @@ vector (suggestions → tags, community → manifest tags, `for you` → ranking
 small shared data shape, three features — worth designing that shape once,
 properly, when the soundboard page lands.
 
+**Publishing your own sounds, and hashtags.** Adding a clip offers to share it.
+This is the one place in openmod where data can leave the machine, so the rules
+are written down before the button exists.
+
+Visibility:
+
+- **Private by default, per clip, forever.** A clip you add stays local unless
+  you opt in for that clip. Same rule as suggestions: nothing implicit.
+- **"Upload to the community" means opening a PR**, because there is no server
+  to upload to. Three routes, in order of friction:
+  1. `gh` CLI present → the app writes the entry + file and offers to open the
+     PR for you.
+  2. Otherwise → it writes a ready-to-submit folder (`sound.wav` +
+     `entry.json`) and opens GitHub's web upload page. Drag, drop, done.
+  3. Copy the entry JSON to the clipboard, for people who already have a fork.
+- **What "public" actually means, said before the click:** a git repo is
+  mirrored and forked within seconds, so **publishing is permanent — you cannot
+  un-publish.** That sentence goes in the dialog, not in a FAQ.
+- **A published sound is a copy, not a link.** Editing your local clip later
+  doesn't mutate the community entry; changing it publicly means a second PR. No
+  surprise mutation in either direction.
+- **License is a choice, never a blanket clause.** CC0 or CC-BY, per sound, and
+  it travels in the manifest entry. No "by publishing you agree to…" fine print
+  granting us rights we don't need.
+- Since nothing can be unpublished, the community page needs a **"your public
+  sounds"** view — matched against your author handle in the manifest — so you
+  can at least *see* everything of yours that's out there.
+
+Hashtags:
+
+- Tags live in a sidecar next to the clip (`<clip>.openmod.json`), so your audio
+  files stay plain audio and the metadata moves with them on rename.
+- **Canonical tags with aliases**, because tag soup destroys search. A curated
+  list (`#game`, `#sfx`, `#voiceline`, `#music`, `#meme`, `#anime`, `#airhorn`,
+  …) plus alias mapping so `#soundeffect` / `#effect` / `#sfx` all resolve to one
+  tag. Free-form tags are allowed but normalized: lowercased, spaces → `-`,
+  deduped, capped at 8.
+- **The tagger proposes, you confirm.** With suggestions on, tier-1 kind and
+  tier-2 fingerprints arrive as tag chips you accept or delete *before* anything
+  is published. Auto-tags never attach silently to a public entry.
+- **One search syntax, local and community:** `#tag` scopes to tags only, plain
+  text matches title + tags, and multiple tags AND together (`#game #sfx`).
+  Prefix matching, so `#voi` finds `#voiceline` — which is the point of tags:
+  browsing a whole category without knowing a single title.
+
 ## Notes for implementation (Avalonia)
 
 - One `ResourceDictionary` per palette (`Dark.axaml`, `Light.axaml`,
