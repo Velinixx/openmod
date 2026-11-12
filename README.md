@@ -19,6 +19,14 @@ and treat your soundboard like rented land. openmod is:
 - ✅ **Yours** — no account, no phone-home, no upsell screen on launch
 - ✅ **Low-latency** — real-time DSP in Rust, no garbage collector pauses
 
+### The gap this fills
+
+Voicemod ships Windows, macOS, iOS and Android — **there is no Linux client**,
+and no serious open alternative either. On Linux, openmod doesn't even need a
+driver: PipeWire null sinks give you a virtual microphone for free, no
+elevation, no reboot. Windows gets the same result through an optional
+one-press virtual-cable install in the first-run wizard.
+
 ## How it works
 
 ```
@@ -101,9 +109,11 @@ Bundled: `passthrough`, `chipmunk`, `deep-voice`.
 - [x] **Virtual device** — `openmod run --vmic` (PipeWire null-sink fake mic, auto-created + routed); Windows virtual cable later
 - [x] **UI foundation** — Avalonia main window: voice grid, effect chain, virtual-mic status, theme + accent tokens (dark / light / AMOLED, 6 accent presets, custom)
 - [x] **Settings page** — theme picker (System / Light / Dark / AMOLED), 6 accent presets + custom hex, follow-desktop-accent via the XDG portal, audio rows, live preview column; every change writes `~/.config/openmod/settings.json` immediately
+- [x] **First-launch wizard** — welcome → theme + accent (3-up live preview: dark / light / AMOLED) → virtual mic → import → done. Linux shows `openmod_vmic` ready; Windows offers an **optional one-press VB-CABLE install** (ALVR-style, newest package scraped from vb-audio.com, visible installer, always skippable). Re-runnable from Settings → setup
 - [ ] **UI** — Soundboard page (library is ready)
-- [ ] **First-launch wizard** — mockup done (`ui/mockup-wizard-*.svg`): welcome → theme + accent → virtual mic → import → done, with an **optional one-press VB-CABLE install on Windows** (ALVR-style) and nothing to install on Linux
+- [ ] **Suggestions** — optional, off-by-default, local-only tagging of your own clips (sound effect / voice line / music + pitch range) to suggest hotkeys, effect chains, duplicates and trims. Never uploads, never applies without asking, dismissal remembered per file hash. Spec in `ui/README.md`
 - [ ] **Community** — browse community sounds/presets and **export them in a format you pick** (wav / mp3 / flac; encoders, not decoders, are the limit)
+- [ ] **Community `for you`** — search plus a locally-ranked recommendation view. Content-based over the community manifest against your likes, on your machine: no account, no profiling, no "people like you" — and it says so
 - [ ] **Layout** — drag panels around and resize them, with presets (Voicemod-familiar / Zen / Compact)
 - [ ] **Modules** — composable widgets (media player, heart rate, chatbox)
 - [ ] **Windows port** — cpal already supports WASAPI; same core, new backend

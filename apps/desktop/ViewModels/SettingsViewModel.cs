@@ -270,6 +270,16 @@ public partial class SettingsViewModel : ViewModelBase
         MonitorChanged?.Invoke(value);
     }
 
+    /// <summary>
+    /// Re-opens the first-launch wizard. The wizard's own footnote promises
+    /// "this lives in Settings → setup", so this is that promise kept.
+    /// </summary>
+    [RelayCommand]
+    private void RunSetup() => SetupRequested?.Invoke();
+
+    /// <summary>Lets the shell open the wizard window.</summary>
+    public event Action? SetupRequested;
+
     /// <summary>Lets the shell mirror the monitor toggle in the bottom bar.</summary>
     public event Action<bool>? MonitorChanged;
 }

@@ -81,6 +81,9 @@ public partial class MainViewModel : ViewModelBase
 
     public SettingsViewModel Settings { get; }
 
+    /// <summary>The live settings object, so the shell can hand it to the wizard.</summary>
+    public AppSettings AppSettings { get; }
+
     public string SoundboardPath { get; } = Path.Combine(PresetLibrary.RepoRoot, "soundboards");
 
     public MainViewModel() : this(AppSettings.Load())
@@ -89,6 +92,7 @@ public partial class MainViewModel : ViewModelBase
 
     public MainViewModel(AppSettings settings)
     {
+        AppSettings = settings;
         Settings = new SettingsViewModel(settings);
         Settings.MonitorChanged += _ =>
         {

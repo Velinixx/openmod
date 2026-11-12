@@ -157,9 +157,13 @@ step just reports `openmod_vmic` as ready and offers `Test it` / `Recreate`.
 On **Windows** a virtual cable is a real driver, and openmod cannot be a
 microphone without one. So the step offers to do it *for* you, once, opt-in:
 
-- **Primary:** `Install it for me` — downloads the **official** installer from
-  `vb-audio.com` at runtime and runs it with the flags VB-Audio documents.
-  Nothing is bundled in our repo, nothing is patched, no repackaging.
+- **Primary:** `Install it for me` — scrapes `vb-audio.com/Cable/` for the
+  **newest** `VBCABLE_Driver_Pack<n>.zip` (never a pinned version — theirs moved
+  Pack43 → Pack46), extracts it, finds the `*Setup*.exe` (x64 preferred) and
+  launches it **elevated**. Nothing is bundled in our repo, nothing is patched,
+  no repackaging.
+  VB-Audio documents **no silent flags**, so the installer runs visibly and the
+  user clicks through it — we do not pretend to be unattended.
 - **Secondary:** `open vb-audio.com` — the do-it-yourself path, for people who
   don't want an app downloading an installer.
 - **Alternatives:** `I already have a virtual cable` (detect it — VoiceMeeter,
@@ -208,6 +212,106 @@ roomy window. Don't hand-roll a docking framework:
 - Default layout must stay identical to today's screenshots, and this ships
   *after* onboarding — a wizard that ends in "now rearrange everything" is not
   calm.
+
+**Optional suggestions (sound auto-tagging).** Once a soundboard has clips, the
+app can *notice* things about them and offer to do something useful. This is the
+one feature where the brand has to be defended explicitly, because "we looked at
+your files" is exactly the thing openmod exists as an alternative to. So the rule
+is three parts: **local, opt-in, and it proposes — it never applies.**
+
+What it actually is: local classification of each clip, plus an accept/dismiss
+surface. Two separate pieces of work, and the cheap one is the classification.
+
+| Tier | What it detects | How | Cost |
+|------|-----------------|-----|------|
+| 0 | hints from filename / folder / extension | string matching, no decode | free |
+| 1 | **kind** — sound effect vs. voice line vs. music vs. noise — and **median pitch** | spectral centroid, envelope shape, zero-crossing rate, silence ratio, duration; pitch via autocorrelation | microseconds per clip, no ML dependency |
+| 2 | **game / pack** | `sha256` of the file → lookup in `community/fingerprints.json` (name, sha256, game/pack, license), same manifest model as the community index | one opt-in manifest download |
+| — | **speaker identity** | *deliberately not built* | — |
+
+Speaker identity is where this stops. "This is a voice line" is honest and
+useful; "this is *whose* voice" is unreliable, creepy, and a privacy liability.
+The useful version of the voice case is pitch-based advice: *"this line sits
+around 95 Hz — `deep-voice -5` would land it nicer."* Suggest an effect, not a
+person.
+
+Tier 2 has a hard dependency worth stating: **an empty fingerprint table detects
+nothing.** Tier 1 works on day one for anyone; tier 2 only becomes useful once
+the community contributes hashes, so it must degrade silently to tier 1 rather
+than look broken.
+
+The suggestions themselves — the part users actually see:
+
+1. **hotkey slot** — "this is an SFX, it wants a key" → pre-select the next free
+   `NUMPAD` slot
+2. **effect chain** — pitch range → a preset that fits it
+3. **near-duplicates** — identical hash, or same duration ±2% with near-identical
+   features → "you have 3 airhorns, one is 4 dB quieter"
+4. **level / trim** — "peaks at −1 dB, 1.2 s of leading silence"
+5. **grouping** — "7 clips look like game SFX — make a folder?"
+
+UI rules, non-negotiable:
+
+- **Off by default.** Default `false` in `settings.json`, and nothing is read
+  from disk while it's off — not even filenames.
+- **The toggle says exactly what it reads.** Not a vague privacy line:
+  *"reads your soundboard folder, on this machine, nothing leaves it."*
+- **Dismiss is permanent, keyed by `sha256` of the content** — not the path, so
+  moving or renaming a clip doesn't resurrect the nag. Stored in
+  `suggestions-dismissed.json`, with a `reset dismissed suggestions` link in
+  Settings as the escape hatch.
+- **No counts, no badges, no "3 suggestions!"** At most 3 visible at a time, and
+  silence is the normal state.
+- **Exactly two places to turn it on**, writing the same settings key so they
+  can't disagree: the wizard's import step (a `checkrow` — *"suggest things for
+  my sounds"* / *"tags your clips on this machine to suggest hotkeys and
+  presets. off by default, nothing is uploaded."*) and Settings → a
+  `suggestions` card.
+- Accuracy is heuristic, so it **will** be wrong sometimes. That's why every
+  suggestion is dismissible and why it's off by default — a wrong tag you can
+  silence is fine; a wrong tag applied for you is not.
+
+Not built yet. Ships after the soundboard page has real clips, since a
+suggestion engine with nothing to look at is a toggle for a feature that does
+nothing.
+
+**Community search + `for you` (local recommendations).** The soundboard page
+gets a community browser: a search field, and beside it a `for you` view ranked
+from what the user actually likes. The catch is that openmod has **no server and
+no telemetry**, which makes most recommendation designs impossible — and the
+honest redesign is better anyway:
+
+- **Likes are local.** A heart on any clip — yours or community — appends to a
+  taste file. Nothing about what you like is uploaded. No account, no profile,
+  no server-side recommender.
+- **So `for you` is content-based, not collaborative** — it ranks the community
+  manifest *on your machine* against your likes. It is **not** "people like you
+  also liked this", and the UI says so in one line rather than implying
+  otherwise. That distinction is the whole reason openmod exists.
+- **It reuses the tag vectors from the suggestions work above.** Community items
+  already carry their tags in the manifest (kind, pitch band, game/pack,
+  duration bucket, free-form tags), so `for you` **never needs to read your local
+  files at all** — the only local data is the list of things you liked. That
+  resolves the privacy question cleanly instead of hand-waving it.
+- **Ranking is a pure function**: taste profile = liked tag vectors with a
+  recency weight; candidates scored by cosine similarity, plus a small novelty
+  penalty so `for you` doesn't become twelve airhorns in a row. No ML
+  dependency, deterministic, unit-testable against fixtures.
+- **Cold start is stated, not faked.** Under ~5 likes the tab says *"like a few
+  sounds and this fills in"* and shows curated collections instead of pretending
+  to know your taste.
+- **Where "popular" comes from with no download counters:** the manifest carries
+  human-curated `stars` and collections, maintained by PR. Aggregate signal
+  arrives through GitHub, not through the app.
+- **Search is local** — substring + tag match over the manifest metadata, no
+  round-trip. Same lazy-loading rule as everywhere: rank from metadata, fetch a
+  preview only when a row scrolls into view, and keep a plain `browse the
+  manifest on GitHub` escape hatch for anyone who doesn't trust a ranking.
+
+Note the dependency chain: this is the third feature built on the same tag
+vector (suggestions → tags, community → manifest tags, `for you` → ranking). One
+small shared data shape, three features — worth designing that shape once,
+properly, when the soundboard page lands.
 
 ## Notes for implementation (Avalonia)
 

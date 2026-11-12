@@ -187,6 +187,26 @@
                     </StackPanel>
                 </Border>
 
+                <!-- ========================== SETUP ========================== -->
+                <Border CornerRadius="12" Padding="20" Margin="0,16,0,0"
+                        Background="{DynamicResource CardBrush}"
+                        BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
+                    <StackPanel>
+                        <TextBlock Text="SETUP" Classes="section" />
+
+                        <Grid ColumnDefinitions="*,Auto" Margin="0,16,0,0">
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="Run the first-run setup again" FontSize="13.5" FontWeight="SemiBold" />
+                                <TextBlock Text="theme, virtual mic and importing — nothing is reset"
+                                           FontSize="10.5" Classes="muted" Margin="0,4,0,0" />
+                            </StackPanel>
+
+                            <Button Grid.Column="1" Classes="outline" Content="Run setup"
+                                    Command="{Binding RunSetupCommand}" VerticalAlignment="Center" />
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
                 <TextBlock Text="{Binding SettingsPath}" Classes="mono" FontSize="9" Classes.faint="True"
                            Margin="4,16,0,0" />
             </StackPanel>

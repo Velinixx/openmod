@@ -37,6 +37,10 @@ public sealed class AppSettings
     [JsonPropertyName("firstRunComplete")]
     public bool FirstRunComplete { get; set; }
 
+    /// <summary>Set by the wizard's import step; null means "use the default folder".</summary>
+    [JsonPropertyName("soundboardDir")]
+    public string? SoundboardDir { get; set; }
+
     private static readonly JsonSerializerOptions Json = new()
     {
         WriteIndented = true,

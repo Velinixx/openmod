@@ -18,14 +18,16 @@ sealed class Program
             return;
         }
 
-        // `--screenshot <path> [theme] [accent] [page]` renders offscreen
+        // `--screenshot <path> [theme] [accent] [page] [height]` renders offscreen
+        // (height lets long pages like Settings be captured in one frame)
         if (args.Length >= 2 && args[0] == "--screenshot")
         {
             Screenshot.Capture(
                 args[1],
                 args.Length >= 3 ? args[2] : null,
                 args.Length >= 4 ? args[3] : null,
-                args.Length >= 5 ? args[4] : null);
+                args.Length >= 5 ? args[4] : null,
+                args.Length >= 6 && int.TryParse(args[5], out var h) ? h : 800);
             return;
         }
 

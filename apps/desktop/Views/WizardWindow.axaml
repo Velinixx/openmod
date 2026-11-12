@@ -1,0 +1,678 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:OpenMod.Desktop.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="800"
+        x:Class="OpenMod.Desktop.Views.WizardWindow"
+        x:DataType="vm:WizardViewModel"
+        Title="openmod — setup"
+        Width="1280" Height="800"
+        MinWidth="1000" MinHeight="660"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource BgBrush}"
+        FontFamily="{DynamicResource UiFont}">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <!-- ============================ HEADER ============================ -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" Margin="40,26,40,0">
+            <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                <Border Width="28" Height="28" CornerRadius="8"
+                        Background="{DynamicResource AccentGradientBrush}">
+                    <StackPanel Orientation="Horizontal" Spacing="2" HorizontalAlignment="Center"
+                                VerticalAlignment="Center">
+                        <Border Width="2.5" Height="8" CornerRadius="1.2" Background="{DynamicResource OnAccentBrush}" Opacity="0.85" />
+                        <Border Width="2.5" Height="14" CornerRadius="1.2" Background="{DynamicResource OnAccentBrush}" Opacity="0.85" />
+                        <Border Width="2.5" Height="10" CornerRadius="1.2" Background="{DynamicResource OnAccentBrush}" Opacity="0.85" />
+                    </StackPanel>
+                </Border>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="open" FontSize="17" FontWeight="SemiBold" VerticalAlignment="Center" />
+                    <TextBlock Text="mod" FontSize="17" FontWeight="SemiBold" VerticalAlignment="Center"
+                               Foreground="{DynamicResource AccentTextBrush}" />
+                </StackPanel>
+            </StackPanel>
+
+            <Button Grid.Column="2" Classes="link" Content="skip for now"
+                    Command="{Binding SkipCommand}"
+                    IsVisible="{Binding ShowSkip}"
+                    VerticalAlignment="Center"
+                    ToolTip.Tip="openmod still works — the wizard lives in Settings → setup" />
+        </Grid>
+
+        <!-- ============================= STEPS ============================= -->
+        <!-- PageTransition is null on purpose: headless captures have to be
+             deterministic, and the steps are calm enough without a slide. -->
+        <Carousel Grid.Row="1" SelectedIndex="{Binding StepIndex, Mode=OneWay}"
+                  PageTransition="{x:Null}">
+
+            <!-- =============== 1 · welcome =============== -->
+            <Grid>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,26">
+
+                    <Grid Width="300" Height="230" HorizontalAlignment="Center">
+                        <Ellipse Width="300" Height="230" Fill="{DynamicResource AccentBrush}" Opacity="0.05" />
+                        <Ellipse Width="192" Height="150" Fill="{DynamicResource AccentBrush}" Opacity="0.06" />
+                        <Border Width="72" Height="72" CornerRadius="19" HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="{DynamicResource AccentGradientBrush}"
+                                BoxShadow="{DynamicResource GlowShadow}">
+                            <StackPanel Orientation="Horizontal" Spacing="7" HorizontalAlignment="Center"
+                                        VerticalAlignment="Center">
+                                <Border Width="6" Height="18" CornerRadius="3" Background="{DynamicResource OnAccentBrush}" Opacity="0.88" />
+                                <Border Width="6" Height="32" CornerRadius="3" Background="{DynamicResource OnAccentBrush}" Opacity="0.88" />
+                                <Border Width="6" Height="24" CornerRadius="3" Background="{DynamicResource OnAccentBrush}" Opacity="0.88" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <TextBlock Text="welcome to openmod" Classes="display"
+                               HorizontalAlignment="Center" Margin="0,10,0,0" />
+                    <TextBlock Text="no hassle · no subscriptions · all freedom"
+                               FontSize="13.5" Classes="muted" HorizontalAlignment="Center"
+                               Margin="0,14,0,0" />
+
+                    <Button Classes="cta" Height="48" CornerRadius="24" Padding="26,0"
+                            HorizontalAlignment="Center" Margin="0,34,0,0"
+                            Command="{Binding NextCommand}">
+                        <StackPanel Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+                            <TextBlock Text="Get started" FontSize="13" FontWeight="Bold" />
+                            <Path Data="M0,7 H12 M7,2 L12,7 L7,12" Width="14" Height="14"
+                                  Stroke="{DynamicResource OnAccentBrush}" StrokeThickness="1.7"
+                                  StrokeLineCap="Round" StrokeJoin="Round" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button Classes="link" HorizontalAlignment="Center" Margin="0,18,0,0"
+                            Content="used openmod before?  import your presets instead"
+                            Command="{Binding GoToImportCommand}" />
+
+                    <!-- the three promises -->
+                    <Grid ColumnDefinitions="*,*,*" Margin="0,52,0,0" Width="740">
+                        <StackPanel Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
+                            <Grid Width="14" Height="14" VerticalAlignment="Center">
+                                <Ellipse Fill="{DynamicResource AccentSoftBrush}" />
+                                <Path Data="M3,7.5 L6,10.5 L11,4.5" Stroke="{DynamicResource AccentTextBrush}"
+                                      StrokeThickness="1.8" StrokeLineCap="Round" StrokeJoin="Round" />
+                            </Grid>
+                            <TextBlock Text="free forever, MIT licensed" FontSize="10.5" Classes="muted"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
+                            <Grid Width="14" Height="14" VerticalAlignment="Center">
+                                <Ellipse Fill="{DynamicResource AccentSoftBrush}" />
+                                <Path Data="M3,7.5 L6,10.5 L11,4.5" Stroke="{DynamicResource AccentTextBrush}"
+                                      StrokeThickness="1.8" StrokeLineCap="Round" StrokeJoin="Round" />
+                            </Grid>
+                            <TextBlock Text="runs offline, no telemetry" FontSize="10.5" Classes="muted"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" HorizontalAlignment="Center">
+                            <Grid Width="14" Height="14" VerticalAlignment="Center">
+                                <Ellipse Fill="{DynamicResource AccentSoftBrush}" />
+                                <Path Data="M3,7.5 L6,10.5 L11,4.5" Stroke="{DynamicResource AccentTextBrush}"
+                                      StrokeThickness="1.8" StrokeLineCap="Round" StrokeJoin="Round" />
+                            </Grid>
+                            <TextBlock Text="your files stay on your disk" FontSize="10.5" Classes="muted"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+
+            <!-- ============= 2 · appearance ============= -->
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                <StackPanel Width="700" HorizontalAlignment="Center" Margin="0,26,0,10">
+
+                    <TextBlock Text="make it yours" Classes="headline" />
+                    <TextBlock Classes="lead" Margin="0,8,0,0"
+                               Text="pick a theme and an accent — every screen is built from these tokens, so this is the real thing recoloring, not a preview image." />
+
+                    <!-- four theme cards, each a miniature of its own palette -->
+                    <ItemsControl ItemsSource="{Binding Themes}" Margin="0,22,0,0">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" Spacing="20" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:WizardThemeCardViewModel">
+                                <StackPanel Width="160">
+                                    <Button Classes="themecard" Classes.on="{Binding IsSelected}"
+                                            Command="{Binding SelectCommand}"
+                                            ToolTip.Tip="{Binding Label}">
+                                        <Grid>
+                                            <Border CornerRadius="6" Background="{Binding PreviewBg}" />
+
+                                            <Grid RowDefinitions="13,*">
+                                                <Border Background="{Binding PreviewPanel}" CornerRadius="4,4,0,0">
+                                                    <StackPanel Orientation="Horizontal" Spacing="4"
+                                                                Margin="6,0,0,0" VerticalAlignment="Center">
+                                                        <Ellipse Width="4" Height="4" Fill="{DynamicResource AccentBrush}" />
+                                                        <TextBlock Text="openmod" FontSize="6.5" FontWeight="SemiBold"
+                                                                   Foreground="{Binding PreviewText}" />
+                                                    </StackPanel>
+                                                </Border>
+
+                                                <Grid Grid.Row="1" Margin="7,6,7,6" ColumnDefinitions="*,8,*">
+                                                    <Border Background="{Binding PreviewCard}" CornerRadius="4" Padding="4,3">
+                                                        <StackPanel Spacing="3">
+                                                            <Border Height="3" Width="15" CornerRadius="1.5"
+                                                                    HorizontalAlignment="Left"
+                                                                    Background="{DynamicResource AccentBrush}" />
+                                                            <Border Height="3" Width="26" CornerRadius="1.5"
+                                                                    HorizontalAlignment="Left"
+                                                                    Background="{Binding PreviewTrack}" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                    <Border Grid.Column="2" Background="{Binding PreviewCard}"
+                                                            CornerRadius="4" Padding="4,3">
+                                                        <Border Height="3" Width="22" CornerRadius="1.5"
+                                                                HorizontalAlignment="Left"
+                                                                Background="{Binding PreviewTrack}" />
+                                                    </Border>
+                                                </Grid>
+                                            </Grid>
+
+                                            <!-- the accent pill, live -->
+                                            <Border Height="9" Width="46" CornerRadius="4.5"
+                                                    HorizontalAlignment="Left" VerticalAlignment="Bottom"
+                                                    Margin="7,0,0,7"
+                                                    Background="{DynamicResource AccentGradientBrush}" />
+
+                                            <!-- "System" badge: half-moon -->
+                                            <Path Data="M12,2 A6,6 0 0 1 12,14 Z" Width="14" Height="14"
+                                                  Fill="{Binding PreviewText}" IsVisible="{Binding IsSystem}"
+                                                  HorizontalAlignment="Right" VerticalAlignment="Top"
+                                                  Margin="0,5,5,0" Opacity="0.75" />
+
+                                            <Ellipse Width="16" Height="16" Fill="{DynamicResource AccentBrush}"
+                                                     IsVisible="{Binding IsSelected}"
+                                                     HorizontalAlignment="Right" VerticalAlignment="Top"
+                                                     Margin="0,4,4,0" />
+                                            <Path Data="M4,8.5 L7,11.5 L12,5" Width="16" Height="16"
+                                                  Stroke="{DynamicResource OnAccentBrush}" StrokeThickness="1.7"
+                                                  StrokeLineCap="Round" StrokeJoin="Round"
+                                                  IsVisible="{Binding IsSelected}"
+                                                  HorizontalAlignment="Right" VerticalAlignment="Top"
+                                                  Margin="0,4,4,0" />
+                                        </Grid>
+                                    </Button>
+
+                                    <TextBlock Text="{Binding Label}" FontSize="11" HorizontalAlignment="Center"
+                                               Margin="0,8,0,0" Classes="cardlabel"
+                                               Classes.on="{Binding IsSelected}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- accent swatches -->
+                    <TextBlock Text="ACCENT" Classes="section" Margin="0,24,0,0" />
+                    <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,12,0,0">
+                        <ItemsControl ItemsSource="{Binding Accents}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" Spacing="8" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate x:DataType="vm:AccentSwatchViewModel">
+                                    <Button Classes="swatch" Command="{Binding SelectCommand}"
+                                            ToolTip.Tip="{Binding Name}">
+                                        <Grid Width="34" Height="34">
+                                            <Ellipse Width="33" Height="33" Stroke="{Binding DeepBrush}"
+                                                     StrokeThickness="1.6" IsVisible="{Binding IsSelected}" />
+                                            <Ellipse Width="23" Height="23" Fill="{Binding Swatch}" />
+                                        </Grid>
+                                    </Button>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <!-- "any hex you like" -->
+                        <Button Classes="swatch" Command="{Binding ToggleHexInputCommand}"
+                                ToolTip.Tip="type any hex colour">
+                            <Grid Width="34" Height="34">
+                                <Ellipse Width="26" Height="26" Stroke="{DynamicResource MutedBrush}"
+                                         StrokeThickness="1.2" StrokeDashArray="3,3" />
+                                <Path Data="M0,6 H12 M6,0 V12" Width="12" Height="12"
+                                      Stroke="{DynamicResource MutedBrush}" StrokeThickness="1.4"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Grid>
+                        </Button>
+
+                        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center"
+                                    IsVisible="{Binding ShowHexInput}">
+                            <TextBox Width="104" Height="34" Watermark="#FF99CC"
+                                     Text="{Binding CustomHex, Mode=TwoWay}" />
+                            <Button Classes="outline" Content="Set" Height="34" Padding="14,0" CornerRadius="8"
+                                    Command="{Binding UseCustomAccentCommand}" />
+                        </StackPanel>
+                        <TextBlock Text="or any hex you like" FontSize="10" Classes="faint"
+                                   VerticalAlignment="Center" IsVisible="{Binding !ShowHexInput}" />
+                    </StackPanel>
+
+                    <TextBlock Text="{Binding AccentNote}" FontSize="10" Classes="accent" Margin="0,10,0,0"
+                               IsVisible="{Binding HasAccentNote}" />
+
+                    <TextBlock Classes="muted" FontSize="10.5" Margin="0,16,0,0" LineHeight="17"
+                               Text="System follows your desktop's light/dark mode — and, if you let it, your desktop's accent colour too. Nothing here is final: it's all in Settings." />
+
+                    <!-- the accent on all three palettes at once -->
+                    <TextBlock Text="YOUR ACCENT, EVERYWHERE" Classes="section" Margin="0,22,0,0" />
+                    <ItemsControl ItemsSource="{Binding AccentPreviews}" Margin="0,10,0,0">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" Spacing="12" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate x:DataType="vm:WizardAccentPreviewViewModel">
+                                <Border Width="225" Height="104" CornerRadius="10" Padding="10"
+                                        Background="{Binding Surface}"
+                                        BorderBrush="{Binding Track}" BorderThickness="1">
+                                    <Grid RowDefinitions="Auto,*">
+                                        <Grid ColumnDefinitions="*,Auto">
+                                            <TextBlock Text="{Binding Label}" FontSize="8.5"
+                                                       FontFamily="{DynamicResource MonoFont}"
+                                                       Foreground="{Binding Muted}" />
+                                            <TextBlock Grid.Column="1" Text="{Binding Hex}" FontSize="8"
+                                                       FontFamily="{DynamicResource MonoFont}"
+                                                       Foreground="{Binding AccentText}" />
+                                        </Grid>
+
+                                        <Grid Grid.Row="1" Margin="0,7,0,0" RowDefinitions="Auto,Auto">
+                                            <!-- mini voice card, accent border + accent text -->
+                                            <Border CornerRadius="7" Padding="6,5" Background="{Binding Card}"
+                                                    BorderBrush="{Binding AccentBorder}" BorderThickness="1.4">
+                                                <Grid ColumnDefinitions="Auto,*">
+                                                    <Border Width="18" Height="18" CornerRadius="5"
+                                                            Background="{Binding AccentSoft}">
+                                                        <StackPanel Orientation="Horizontal" Spacing="1.5"
+                                                                    HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                            <Border Width="1.5" Height="4" CornerRadius="1" Background="{Binding AccentText}" />
+                                                            <Border Width="1.5" Height="8" CornerRadius="1" Background="{Binding AccentText}" />
+                                                            <Border Width="1.5" Height="6" CornerRadius="1" Background="{Binding AccentText}" />
+                                                        </StackPanel>
+                                                    </Border>
+                                                    <StackPanel Grid.Column="1" Margin="7,0,0,0" Spacing="2"
+                                                                VerticalAlignment="Center">
+                                                        <TextBlock Text="chipmunk" FontSize="8.5" FontWeight="SemiBold"
+                                                                   Foreground="{Binding Text}" />
+                                                        <TextBlock Text="pitch +7" FontSize="7"
+                                                                   FontFamily="{DynamicResource MonoFont}"
+                                                                   Foreground="{Binding AccentText}" />
+                                                    </StackPanel>
+                                                </Grid>
+                                            </Border>
+
+                                            <!-- the pill and the meter, in the same accent -->
+                                            <Grid Grid.Row="1" ColumnDefinitions="Auto,*" Margin="0,7,0,0">
+                                                <Border Height="16" CornerRadius="8" Padding="8,0"
+                                                        Background="{Binding Gradient}">
+                                                    <TextBlock Text="VOICE ON" FontSize="6.5" FontWeight="Bold"
+                                                               LetterSpacing="0.8" VerticalAlignment="Center"
+                                                               Foreground="{Binding OnAccent}" />
+                                                </Border>
+                                                <Grid Grid.Column="1" ColumnDefinitions="Auto,*" Margin="8,0,0,0">
+                                                    <TextBlock Text="OUT" FontSize="6.5" VerticalAlignment="Center"
+                                                               FontFamily="{DynamicResource MonoFont}"
+                                                               Foreground="{Binding Muted}" />
+                                                    <Grid Grid.Column="1" Height="4" Margin="5,0,0,0"
+                                                          VerticalAlignment="Center">
+                                                        <Border CornerRadius="2" Background="{Binding Track}" />
+                                                        <Border CornerRadius="2" Width="70" HorizontalAlignment="Left"
+                                                                Background="{Binding Gradient}" />
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <TextBlock Text="one token pair — accent + accentDeep — drawn three ways. On light, accent-coloured text flips to the deep tone so it stays readable."
+                               FontSize="9" FontFamily="{DynamicResource MonoFont}"
+                               Classes="faint" TextWrapping="Wrap" LineHeight="14" Margin="0,10,0,0" />
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- ============ 3 · virtual mic ============ -->
+            <Grid>
+                <StackPanel Width="700" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10">
+
+                    <!-- linux: nothing to install -->
+                    <StackPanel IsVisible="{Binding IsLinuxMic}">
+                        <TextBlock Text="your virtual mic is already here" Classes="headline" />
+                        <TextBlock Classes="lead" Margin="0,8,0,0"
+                                   Text="PipeWire makes this for you, so there's nothing to install on Linux — openmod created the sink on first run and will keep it alive." />
+
+                        <Border CornerRadius="12" Padding="22,20" Margin="0,22,0,0"
+                                Background="{DynamicResource CardBrush}"
+                                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
+                            <Grid ColumnDefinitions="Auto,*,Auto">
+                                <Border Width="40" Height="40" CornerRadius="11"
+                                        Background="{DynamicResource AccentSoftBrush}" VerticalAlignment="Top">
+                                    <Path Data="M6,11 L10,15 L17,7" Width="24" Height="24"
+                                          Stroke="{DynamicResource AccentTextBrush}" StrokeThickness="2.4"
+                                          StrokeLineCap="Round" StrokeJoin="Round"
+                                          HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+
+                                <StackPanel Grid.Column="1" Margin="18,0,0,0" Spacing="5" VerticalAlignment="Top">
+                                    <TextBlock Text="{Binding MicName}" FontSize="13.5" FontWeight="SemiBold"
+                                               FontFamily="{DynamicResource MonoFont}" />
+                                    <TextBlock Text="{Binding MicDetail}" FontSize="10" Classes="muted" />
+                                </StackPanel>
+
+                                <Border Grid.Column="2" Classes="pill" Classes.on="{Binding MicReady}"
+                                        VerticalAlignment="Top">
+                                    <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                        <Ellipse Width="6.5" Height="6.5" />
+                                        <TextBlock Text="{Binding MicLabel}" VerticalAlignment="Center" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+
+                        <TextBlock Text="pick this as your microphone:" FontSize="10" Classes="soft" Margin="0,20,0,0" />
+                        <Grid ColumnDefinitions="*,Auto" Margin="0,8,0,0">
+                            <Border Height="34" CornerRadius="8" Padding="14,0"
+                                    Background="{DynamicResource DeepBrush}"
+                                    BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
+                                <TextBlock Text="{Binding MicName}" FontSize="10.5" VerticalAlignment="Center"
+                                           FontFamily="{DynamicResource MonoFont}" />
+                            </Border>
+                            <Button Grid.Column="1" Classes="outline" Content="copy" Height="34" Padding="16,0"
+                                    CornerRadius="8" Margin="8,0,0,0"
+                                    Command="{Binding CopyMicNameCommand}" />
+                        </Grid>
+
+                        <StackPanel Orientation="Horizontal" Spacing="6" Margin="0,14,0,0">
+                            <TextBlock Text="hear yourself (optional):" FontSize="10" Classes="soft" />
+                            <TextBlock Text="{Binding MicMonitor}" FontSize="10.5" Classes="muted"
+                                       FontFamily="{DynamicResource MonoFont}" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Spacing="10" Margin="0,20,0,0">
+                            <Button Classes="ghost" Content="Test it" Height="38" Width="120" CornerRadius="9"
+                                    Command="{Binding TestMicCommand}"
+                                    ToolTip.Tip="plays a 440 Hz tone into openmod_vmic" />
+                            <Button Classes="ghost" Content="Recreate the sink" Height="38" Width="150"
+                                    CornerRadius="9" Command="{Binding RecreateMicCommand}"
+                                    ToolTip.Tip="runs pactl load-module module-null-sink" />
+                        </StackPanel>
+
+                        <TextBlock Text="{Binding MicStatusMessage}" FontSize="10" Classes="accent"
+                                   Margin="0,14,0,0" TextWrapping="Wrap"
+                                   IsVisible="{Binding HasMicStatus}" />
+
+                        <Border Height="1" Background="{DynamicResource BorderBrush}" Margin="0,26,0,18" />
+                        <TextBlock Classes="muted" FontSize="10" LineHeight="16"
+                                   Text="On Windows this same step offers to install VB-CABLE with one button — Linux gets the equivalent for free from PipeWire, so we skip the install." />
+                    </StackPanel>
+
+                    <!-- windows: an optional driver -->
+                    <StackPanel IsVisible="{Binding IsWindowsBranch}">
+                        <TextBlock Text="one thing games need: a virtual mic" Classes="headline" />
+                        <TextBlock Classes="lead" Margin="0,8,0,0"
+                                   Text="Games listen to a microphone, not to an app. openmod needs a virtual audio device to show up as one — this is the only extra piece it needs." />
+
+                        <Border CornerRadius="12" Padding="22,20" Margin="0,22,0,0"
+                                Background="{DynamicResource CardBrush}"
+                                BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
+                            <Grid RowDefinitions="Auto,Auto">
+                                <Grid ColumnDefinitions="Auto,*,Auto">
+                                    <Border Width="40" Height="40" CornerRadius="11"
+                                            Background="{DynamicResource AccentSoftBrush}" VerticalAlignment="Top">
+                                        <Path Data="M7,7 H15 V15 H7 Z M9,7 V2 M13,7 V2 M11,15 V20" Width="24" Height="24"
+                                              Stroke="{DynamicResource AccentTextBrush}" StrokeThickness="1.6"
+                                              StrokeLineCap="Round" StrokeJoin="Round"
+                                              HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+
+                                    <StackPanel Grid.Column="1" Margin="18,0,0,0" Spacing="5" VerticalAlignment="Top">
+                                        <TextBlock Text="VB-CABLE virtual audio device" FontSize="13.5"
+                                                   FontWeight="SemiBold" />
+                                        <TextBlock Text="free · donationware · by VB-Audio — the cable Voicemod and OBS users install"
+                                                   FontSize="10" Classes="muted" />
+                                    </StackPanel>
+
+                                    <Border Grid.Column="2" Classes="pill" Classes.on="{Binding CableDetected}"
+                                            VerticalAlignment="Top">
+                                        <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                            <Ellipse Width="6.5" Height="6.5" />
+                                            <TextBlock Text="{Binding MicLabel}" VerticalAlignment="Center" />
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+
+                                <StackPanel Grid.Row="1" Margin="0,16,0,0" Spacing="3">
+                                    <TextBlock FontSize="10" Classes="soft"
+                                               Text="openmod downloads the official installer from vb-audio.com and starts it" />
+                                    <TextBlock FontSize="10" Classes="soft"
+                                               Text="for you. Nothing is bundled in our repo and nothing is patched." />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <StackPanel Orientation="Horizontal" Spacing="12" Margin="0,16,0,0">
+                            <Button Classes="cta" Height="40" Command="{Binding InstallCableCommand}"
+                                    IsEnabled="{Binding !CableBusy}">
+                                <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                                    <Path Data="M8,2 V11 M4.5,7.5 L8,11 L11.5,7.5 M3,14 H13" Width="16" Height="16"
+                                          Stroke="{DynamicResource OnAccentBrush}" StrokeThickness="1.6"
+                                          StrokeLineCap="Round" StrokeJoin="Round" VerticalAlignment="Center" />
+                                    <TextBlock Text="Install it for me" FontSize="11" FontWeight="Bold" />
+                                </StackPanel>
+                            </Button>
+                            <Button Classes="ghost" Content="open vb-audio.com" Height="40" Width="172"
+                                    CornerRadius="9" Command="{Binding OpenVbAudioCommand}" />
+                            <TextBlock Text="asks for your admin password once" FontSize="9.5" Classes="faint"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+
+                        <TextBlock Text="{Binding CableMessage}" FontSize="10" Classes="accent" Margin="0,12,0,0"
+                                   TextWrapping="Wrap" IsVisible="{Binding HasCableMessage}" />
+
+                        <Button Classes="optrow" Margin="0,16,0,0" Command="{Binding UseExistingCableCommand}">
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Ellipse Width="14" Height="14" Stroke="{DynamicResource MutedBrush}"
+                                         StrokeThickness="1.4" VerticalAlignment="Center" />
+                                <StackPanel Grid.Column="1" Margin="14,0,0,0" Spacing="2" VerticalAlignment="Center">
+                                    <TextBlock Text="I already have a virtual cable" FontSize="11.5" />
+                                    <TextBlock Classes="note" Text="detect it and use that instead" FontSize="9.5" />
+                                </StackPanel>
+                            </Grid>
+                        </Button>
+
+                        <Button Classes="optrow" Margin="0,10,0,0" Background="Transparent"
+                                Command="{Binding NextCommand}">
+                            <Grid ColumnDefinitions="Auto,*">
+                                <Ellipse Width="14" Height="14" Stroke="{DynamicResource MutedBrush}"
+                                         StrokeThickness="1.4" VerticalAlignment="Center" />
+                                <StackPanel Grid.Column="1" Margin="14,0,0,0" Spacing="2" VerticalAlignment="Center">
+                                    <TextBlock Text="skip this for now" FontSize="11.5" Classes="soft" />
+                                    <TextBlock Classes="note" Text="openmod still runs; you just won't be a mic yet"
+                                               FontSize="9.5" />
+                                </StackPanel>
+                            </Grid>
+                        </Button>
+
+                        <Border Height="1" Background="{DynamicResource BorderBrush}" Margin="0,24,0,16" />
+                        <TextBlock Classes="muted" FontSize="10" LineHeight="16"
+                                   Text="Why not just ship a cable? Because drivers need a signed installer and a reboot, and openmod has no business doing that behind your back. Opt-in only." />
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <!-- ================= 4 · import ================= -->
+            <StackPanel Width="700" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,10">
+                <TextBlock Text="bring your stuff with you" Classes="headline" />
+                <TextBlock Classes="lead" Margin="0,8,0,0"
+                           Text="openmod only indexes file names up front and reads a file when you use it, so pointing at an existing folder is instant — nothing gets copied." />
+
+                <ItemsControl ItemsSource="{Binding ImportRows}" Margin="0,22,0,0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:ImportRowViewModel">
+                            <Button Classes="checkrow" Classes.on="{Binding IsChecked}"
+                                    Command="{Binding ToggleCommand}"
+                                    Margin="0,0,0,12" IsEnabled="{Binding IsAvailable}">
+                                <Grid ColumnDefinitions="Auto,Auto,*,Auto">
+                                    <Border Classes="box" Width="18" Height="18" CornerRadius="5"
+                                            BorderThickness="1.4" VerticalAlignment="Center">
+                                        <Path Classes="tick" Data="M4,9 L7,12 L12,5.5" Width="18" Height="18"
+                                              StrokeThickness="1.9" StrokeLineCap="Round" StrokeJoin="Round"
+                                              HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+
+                                    <Path Grid.Column="1" Width="20" Height="20" Margin="16,0,0,0"
+                                          VerticalAlignment="Center" StrokeThickness="1.4"
+                                          StrokeLineCap="Round" StrokeJoin="Round"
+                                          Stroke="{DynamicResource AccentTextBrush}"
+                                          Data="M2,5 H6.5 L8.5,7.5 H16 V15 H2 Z" />
+
+                                    <StackPanel Grid.Column="2" Margin="14,0,0,0" Spacing="3" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}" FontSize="12" FontWeight="SemiBold" />
+                                        <TextBlock Text="{Binding Note}" FontSize="9.5" Classes="muted" />
+                                    </StackPanel>
+
+                                    <StackPanel Grid.Column="3" Spacing="3" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Count}" FontSize="10" HorizontalAlignment="Right"
+                                                   FontFamily="{DynamicResource MonoFont}" Classes="soft" />
+                                        <TextBlock Text="{Binding Path}" FontSize="9" HorizontalAlignment="Right"
+                                                   FontFamily="{DynamicResource MonoFont}" Classes="faint" />
+                                    </StackPanel>
+                                </Grid>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <TextBlock Text="nothing is converted, copied or uploaded — openmod points at the files you already have."
+                           FontSize="10" Classes="muted" Margin="0,4,0,0" />
+
+                <Border Height="1" Background="{DynamicResource BorderBrush}" Margin="0,26,0,18" />
+                <TextBlock Classes="muted" FontSize="10" LineHeight="16"
+                           Text="a fourth row appears if you have another voice changer installed: presets we can read are imported, the rest are listed and skipped with a reason." />
+            </StackPanel>
+
+            <!-- =================== 5 · done =================== -->
+            <Grid>
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,26">
+
+                    <Grid Width="208" Height="208" HorizontalAlignment="Center">
+                        <Ellipse Width="208" Height="208" Fill="{DynamicResource AccentBrush}" Opacity="0.05" />
+                        <Border Width="64" Height="64" CornerRadius="32" HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="{DynamicResource AccentGradientBrush}"
+                                BoxShadow="{DynamicResource GlowShadow}">
+                            <Path Data="M8,15 L14,21 L24,9" Width="32" Height="32"
+                                  Stroke="{DynamicResource OnAccentBrush}" StrokeThickness="3.2"
+                                  StrokeLineCap="Round" StrokeJoin="Round"
+                                  HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </Grid>
+
+                    <TextBlock Text="you're live" FontSize="38" FontWeight="Bold"
+                               HorizontalAlignment="Center" Margin="0,4,0,0" />
+                    <TextBlock Text="your voice is on openmod_vmic — pick it as the mic wherever you talk."
+                               FontSize="13" Classes="muted" HorizontalAlignment="Center" Margin="0,14,0,0" />
+
+                    <Border CornerRadius="12" Padding="22,18" Width="600" Margin="0,26,0,0"
+                            Background="{DynamicResource CardBrush}"
+                            BorderBrush="{DynamicResource BorderBrush}" BorderThickness="1">
+                        <Grid ColumnDefinitions="*,Auto">
+                            <StackPanel Spacing="7">
+                                <TextBlock Text="in games and apps" FontSize="9" Classes="muted"
+                                           FontWeight="SemiBold" LetterSpacing="1.2" />
+                                <TextBlock Text="{Binding MicName}" FontSize="11"
+                                           FontFamily="{DynamicResource MonoFont}" />
+                                <StackPanel Orientation="Horizontal" Spacing="6">
+                                    <TextBlock Text="hear yourself (optional)  ·" FontSize="9.5" Classes="faint"
+                                               FontFamily="{DynamicResource MonoFont}" />
+                                    <TextBlock Text="{Binding MicMonitor}" FontSize="9.5" Classes="faint"
+                                               FontFamily="{DynamicResource MonoFont}" />
+                                </StackPanel>
+                            </StackPanel>
+
+                            <Border Grid.Column="1" Classes="pill" Classes.on="True" VerticalAlignment="Top">
+                                <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                    <Ellipse Width="6.5" Height="6.5" />
+                                    <TextBlock Text="LIVE" FontWeight="Bold" LetterSpacing="0.8"
+                                               VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Border>
+
+                    <StackPanel Orientation="Horizontal" Spacing="16" Margin="0,26,0,0"
+                                HorizontalAlignment="Center">
+                        <Button Classes="cta" Height="44" Width="180" Command="{Binding OpenAppCommand}">
+                            <TextBlock Text="Open openmod" FontSize="11.5" FontWeight="Bold" />
+                        </Button>
+                        <Button Classes="ghost" Content="read the README" Height="44" Width="180"
+                                CornerRadius="11" Command="{Binding ReadReadmeCommand}" />
+                    </StackPanel>
+
+                    <TextBlock Text="this wizard lives in Settings → setup, and never shows up again unless you ask"
+                               FontSize="9.5" Classes="faint" HorizontalAlignment="Center" Margin="0,34,0,0" />
+                </StackPanel>
+            </Grid>
+        </Carousel>
+
+        <!-- ============================ FOOTER ============================ -->
+        <Grid Grid.Row="2" Margin="40,0,40,22" RowDefinitions="Auto,Auto">
+            <Border Grid.Row="0" Height="1" Background="{DynamicResource BorderBrush}" />
+
+            <Grid Grid.Row="1" ColumnDefinitions="*,Auto,*" Margin="0,18,0,0">
+                <!-- progress dots -->
+                <ItemsControl Grid.Column="1" ItemsSource="{Binding Dots}" HorizontalAlignment="Center"
+                              VerticalAlignment="Center">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" Spacing="10" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate x:DataType="vm:WizardDotViewModel">
+                            <Grid Width="20" Height="6">
+                                <Border Width="20" Height="5" CornerRadius="2.5" HorizontalAlignment="Left"
+                                        Background="{DynamicResource AccentBrush}"
+                                        IsVisible="{Binding IsCurrent}" />
+                                <Ellipse Classes="dot" Classes.on="{Binding IsComplete}"
+                                         IsVisible="{Binding IsPending}" HorizontalAlignment="Center" />
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <!-- actions -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" HorizontalAlignment="Right">
+                    <Button Classes="ghost" Content="Back" Width="84" Height="42" CornerRadius="10"
+                            Command="{Binding BackCommand}"
+                            IsVisible="{Binding ShowFooterAction}" />
+
+                    <Button Classes="cta" Height="42" MinWidth="158"
+                            Command="{Binding NextCommand}"
+                            IsVisible="{Binding ShowFooterAction}">
+                        <StackPanel Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                            <TextBlock Text="{Binding NextLabel}" FontSize="11.5" FontWeight="Bold" />
+                            <Path Data="M0,7 H12 M7,2 L12,7 L7,12" Width="14" Height="14"
+                                  Stroke="{DynamicResource OnAccentBrush}" StrokeThickness="1.7"
+                                  StrokeLineCap="Round" StrokeJoin="Round" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <TextBlock Grid.Column="0" Text="{Binding StepNote}" FontSize="9.5" Classes="faint"
+                           FontFamily="{DynamicResource MonoFont}" VerticalAlignment="Center"
+                           IsVisible="{Binding HasStepNote}" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
